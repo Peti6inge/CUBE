@@ -240,7 +240,13 @@ public class Case
         else if (face.brumeClient && !byPerso.isHost)
             face.maJEmbrumage(false);
 
-        if (byPerso.isVisibleForMe(!byPerso.isHost, faceDoitEtreVisible: true, caseDoitEtreOffBrume: true))
+        if (
+            byPerso.isVisibleForMe(
+                !byPerso.isHost,
+                faceDoitEtreVisible: true,
+                caseDoitEtreOffBrume: true
+            )
+        )
             byPerso.temoinDePosition = null;
 
         if (byPerso.poudre)
@@ -887,9 +893,7 @@ public class Case
         }
     }
 
-    public bool isVisibleForMe(
-        bool isHostPlayerWatching
-    ) // DONE
+    public bool isVisibleForMe(bool isHostPlayerWatching) // DONE
     {
         bool isBrume = isHostPlayerWatching ? containsBrumeRoninjaClient : containsBrumeRoninjaHost;
         return face.faceVisible(isHostPlayerWatching) && !isBrume;
