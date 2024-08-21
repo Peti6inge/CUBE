@@ -38,3 +38,6 @@ Clairvoyance
 Feinte
 Pirouette
 Téléport
+Brume
+Attire
+Repousse

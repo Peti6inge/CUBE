@@ -1,7 +1,6 @@
 public class Brume : Attaque
 {
     // Attributs // DONE
-    private Face? face;
 
     // Constructeur // DONE
     public Brume(Perso perso)
@@ -15,26 +14,24 @@ public class Brume : Attaque
     }
 
     // Méthodes public
-
-    public void lancerAttaque(Case myCase, Object? cible)
+    
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        if (perso.isHost)
+            myCase.face.activerBrumeHost();
+        else
+            myCase.face.activerBrumeClient();
     }
 
-    public void desactiver()
+    public void desactiver() // DONE
     {
-        if (face != null)
+        foreach (Face face in Jeu.getFaces())
         {
             if (perso.isHost)
-            {
                 face.desactiverBrumeHost();
-            }
             else
-            {
                 face.desactiverBrumeClient();
-            }
-            face = null;
         }
     }
 }

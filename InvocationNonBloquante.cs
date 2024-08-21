@@ -1,30 +1,30 @@
 public class InvocationNonBloquante
 {
     //attributs
-    public string type { get; set; }
+    public int type { get; set; }
     public bool isHost { get; set; }
     public int hp { get; set; }
     public int hpMax { get; set; }
     public Case myCase { get; set; }
 
     //Constructeur // DONE
-    public InvocationNonBloquante(string type, bool isHost, Case myCase)
+    public InvocationNonBloquante(int type, bool isHost, Case myCase)
     {
         this.type = type;
         this.isHost = isHost;
         this.myCase = myCase;
         switch (type)
         {
-            case "Bombe":
+            case (int)Jeu.InvocationType.Bombe:
                 hp = hpMax = 8;
                 break;
-            case "EspritElfique":
+            case (int)Jeu.InvocationType.EspritElfique:
                 hp = hpMax = 7;
                 break;
-            case "Crapeau":
+            case (int)Jeu.InvocationType.Crapeau:
                 hp = hpMax = 5;
                 break;
-            case "Mouette":
+            case (int)Jeu.InvocationType.Mouette:
                 hp = hpMax = 1;
                 break;
         }
@@ -34,13 +34,13 @@ public class InvocationNonBloquante
     {
         switch (type)
         {
-            case "Bombe":
+            case (int)Jeu.InvocationType.Bombe:
                 activerBombe();
                 break;
-            case "EspritElfique":
+            case (int)Jeu.InvocationType.EspritElfique:
                 activerEspritElfique(perso);
                 break;
-            case "Crapeau":
+            case (int)Jeu.InvocationType.Crapeau:
                 activerCrapeau(perso, crapeauHost, crapeauClient);
                 break;
         }
@@ -111,16 +111,7 @@ public class InvocationNonBloquante
             crapeauHost = true;
         else
             crapeauClient = true;
-        string direction = "";
-        //TODO : direction
-        if (perso.myCase.row < myCase.row)
-            direction = "down";
-        else if (perso.myCase.row > myCase.row)
-            direction = "up";
-        else if (perso.myCase.col < myCase.col)
-            direction = "right";
-        else if (perso.myCase.col > myCase.col)
-            direction = "left";
+        int direction = perso.myCase.directionTo(myCase);
         perso.moveDirection(
             direction,
             attiranceCrapeau: true,
@@ -164,29 +155,29 @@ public class InvocationNonBloquante
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
-            ((Altruisme)elfeeAlliee.attaques["Altruisme"]).desactiver();
+            ((Altruisme)elfeeAlliee.attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
         }
 
         Perso proprietaire;
         switch (type)
         {
-            case "Bombe":
+            case (int)Jeu.InvocationType.Bombe:
                 proprietaire = isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
-                ((Bombe)proprietaire.attaques["Bombe"]).setBombeNull();
+                ((Bombe)proprietaire.attaques[(int)Jeu.AttaqueType.bombe]).setBombeNull();
                 if (bombeExplose)
                     activerBombe();
                 break;
-            case "EspritElfique":
+            case (int)Jeu.InvocationType.EspritElfique:
                 proprietaire = isHost ? Jeu.elfeeHost : Jeu.elfeeClient;
-                ((EspritElfique)proprietaire.attaques["EspritElfique"]).setEspritElfiqueNull();
+                ((EspritElfique)proprietaire.attaques[(int)Jeu.AttaqueType.espritElfique]).setEspritElfiqueNull();
                 break;
-            case "Mouette":
+            case (int)Jeu.InvocationType.Mouette:
                 proprietaire = isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
-                ((Mouette)proprietaire.attaques["Mouette"]).setMouetteNull();
+                ((Mouette)proprietaire.attaques[(int)Jeu.AttaqueType.mouette]).setMouetteNull();
                 break;
-            case "Crapeau":
+            case (int)Jeu.InvocationType.Crapeau:
                 proprietaire = isHost ? Jeu.fantomageHost : Jeu.fantomageClient;
-                ((Crapeau)proprietaire.attaques["Crapeau"]).setCrapeauNull();
+                ((Crapeau)proprietaire.attaques[(int)Jeu.AttaqueType.crapeau]).setCrapeauNull();
                 break;
         }
     }
@@ -205,12 +196,12 @@ public class InvocationNonBloquante
     {
         if (
            (
-               Jeu.elfeeClient.attaques.ContainsKey("Altruisme")
-               && ((Altruisme)Jeu.elfeeClient.attaques["Altruisme"]).getTarget() == this
+               Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+               && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
            )
            || (
-               Jeu.elfeeHost.attaques.ContainsKey("Altruisme")
-               && ((Altruisme)Jeu.elfeeHost.attaques["Altruisme"]).getTarget() == this
+               Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+               && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
            )
        )
             return true;

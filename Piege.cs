@@ -1,13 +1,13 @@
 public class Piege
 {
     // Attributs
-    private string type;
+    private int type;
     private bool isHost;
     Case myCase;
     Case? myCaseFinale;
 
     // Constructeur // DONE
-    public Piege(string type, bool isHost, Case myCase, Case? myCaseFinale = null)
+    public Piege(int type, bool isHost, Case myCase, Case? myCaseFinale = null)
     {
         this.type = type;
         this.isHost = isHost;
@@ -26,14 +26,12 @@ public class Piege
                 myCaseFinale.piegeHost = this;
                 foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
                     c.piegeHost = this;
-
             }
             else
             {
                 myCaseFinale.piegeClient = this;
                 foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
                     c.piegeClient = this;
-
             }
         }
     }
@@ -43,13 +41,13 @@ public class Piege
     {
         switch (type)
         {
-            case "PiegeLineaire":
+            case (int)Jeu.PiegeType.PiegeLineaire:
                 activerPiegeLineaire(cible);
                 break;
-            case "PiegeALoup":
+            case (int)Jeu.PiegeType.PiegeALoup:
                 activerPiegeALoup(cible);
                 break;
-            case "CaseTerrifiante":
+            case (int)Jeu.PiegeType.CaseTerrifiante:
                 activerCaseTerrifiante(cible);
                 break;
         }
@@ -102,10 +100,8 @@ public class Piege
 
         if (isHost)
             myCase.piegeHost = null;
-
         else
             myCase.piegeClient = null;
-
     }
 
     public void estDetruit() // DONE
@@ -122,14 +118,12 @@ public class Piege
                 myCaseFinale.piegeHost = null;
                 foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
                     c.piegeHost = null;
-
             }
             else
             {
                 myCaseFinale.piegeClient = null;
                 foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
                     c.piegeClient = null;
-
             }
         }
     }

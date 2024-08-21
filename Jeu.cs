@@ -39,34 +39,229 @@ public class Jeu
     public static bool pierrelumierehostobtenue { get; set; }
     public static bool pierrelumiereclientobtenue { get; set; }
 
+    public enum CibleType
+    {
+        DragNDrop,
+        InvocationNonBloquante,
+        InvocationSimpleBloquante,
+        InvocationDoubleBloquante,
+        FreeOnPerso,
+        Miniaturisation,
+        Teleport,
+        FreeOnCase,
+        FreeOnFace,
+        Etincelle,
+        Ancre,
+        AttireRepousse,
+        PersoFriendly,
+        PersoEnnemy,
+        Soin,
+        Altruisme,
+        PersoEtInvocEnnemy,
+        FrappeDuPirate,
+        FrappeDuTitan,
+        TonneauOuClone,
+        PorterDeposer,
+        Planche,
+        Gravite,
+        ChargeDuTitan,
+        HautesHerbes,
+        Reanimation,
+        FlecheDeLumiere,
+        DerobadeDeLOmbre,
+        PiegeSimple,
+        PiegeLineaire,
+        Acide,
+        Derobade,
+        Transposition,
+        Inversion,
+        PoseGlissante,
+        FeuFollet,
+        Rappel,
+        CaseDeRapatriement,
+        Memoire,
+        EnvolAtterissage,
+        Esquive,
+        SortDeProtection
+    }
+
+    public enum DirectionType
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
+    public enum SpawnType
+    {
+        Roninja,
+        Elfee,
+        Fantomage,
+        Piratitan
+    }
+
+    public enum CaseType
+    {
+        Vide,
+        SimpleObstacle,
+        Table,
+        DoubleObstacleHaut,
+        DoubleObstacleBas,
+        DoubleObstacleGauche,
+        DoubleObstacleDroite,
+        Trou,
+        Camouflage,
+        Glissante
+    }
+
+    public enum FaceType
+    {
+        Host,
+        Client,
+        North,
+        South,
+        East,
+        West
+    }
+
+    public enum InvocationType
+    {
+        Carosse,
+        Bombe,
+        EspritElfique,
+        Crapeau,
+        Mouette,
+        Tonneau,
+        Coffre,
+        Clone,
+        GrossePotion
+    }
+
+    public enum PiegeType
+    {
+        PiegeLineaire,
+        PiegeALoup,
+        CaseTerrifiante
+    }
+
+    public enum PersoType
+    {
+        Roninja,
+        Elfee,
+        Fantomage,
+        Piratitan
+    }
+
+    public enum AttaqueType
+    {
+        carosse,
+        bombe,
+        espritElfique,
+        crapeau,
+        mouette,
+        tonneau,
+        coffre,
+        clone,
+        dragAndDrop,
+        ancre,
+        bondDuTitan,
+        chargeDuTitan,
+        coupDeFeu,
+        etincelle,
+        flaque,
+        frappeDuPirate,
+        frappeDuTitan,
+        harpon,
+        invincibilite,
+        longueVue,
+        planche,
+        porterDeposer,
+        poudre,
+        sabre,
+        altruisme,
+        coupDeBaguette,
+        derniereVolontee,
+        elixirAgressif,
+        envolAtterissage,
+        esquive,
+        fleche,
+        flecheDeLumiere,
+        flechePatiente,
+        hautesHerbes,
+        miniaturisation,
+        petitSoin,
+        poudreBienfaisante,
+        poudreSoporifique,
+        poudreStimulante,
+        reanimation,
+        soinTotal,
+        acide,
+        attire,
+        brume,
+        couteauDeLancee,
+        derobadeDeLOmbre,
+        derobade,
+        entrave,
+        feinte,
+        invisibilite,
+        katana,
+        kunai,
+        memoire,
+        piegeALoup,
+        piegeLineaire,
+        pirouette,
+        poison,
+        repousse,
+        teleport,
+        bouleDeFeu,
+        bouletFantomatique,
+        buff,
+        caseDeRapatriement,
+        caseTerrifiante,
+        clairvoyance,
+        coupDeBaton,
+        eauVaseuse,
+        feuFollet,
+        gravite,
+        inversion,
+        jouvence,
+        mainsMaudites,
+        malediction,
+        rappel,
+        sortDeProtection,
+        transposition,
+        voileDInvisibilite
+    }
+
     // Méthodes public
 
     public static void InitJeu() // TODO : Récupérer les attaques des personnages
     {
-        List<string>? roninjaHostAttaques = new List<string> { "DragNDrop" };
-        List<string>? elfeeHostAttaques = new List<string> { "DragNDrop" };
-        List<string>? fantomageHostAttaques = new List<string> { "DragNDrop" };
-        List<string>? piratitanHostAttaques = new List<string> { "DragNDrop" };
-        List<string>? roninjaClientAttaques = new List<string> { "DragNDrop" };
-        List<string>? elfeeClientAttaques = new List<string> { "DragNDrop" };
-        List<string>? fantomageClientAttaques = new List<string> { "DragNDrop" };
-        List<string>? piratitanClientAttaques = new List<string> { "DragNDrop" };
+        List<int>? roninjaHostAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? elfeeHostAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? fantomageHostAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? piratitanHostAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? roninjaClientAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? elfeeClientAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? fantomageClientAttaques = new List<int> { AttaqueType.dragAndDrop };
+        List<int>? piratitanClientAttaques = new List<int> { AttaqueType.dragAndDrop };
 
-        north = new Face("North");
-        south = new Face("South");
-        east = new Face("East");
-        west = new Face("West");
-        host = new Face("Host");
-        client = new Face("Client");
+        north = new Face(FaceType.North);
+        south = new Face(FaceType.South);
+        east = new Face(FaceType.East);
+        west = new Face(FaceType.West);
+        host = new Face(FaceType.Host);
+        client = new Face(FaceType.Client);
 
-        roninjaHost = new Perso("Roninja", true, roninjaHostAttaques);
-        elfeeHost = new Perso("Elfee", true, elfeeHostAttaques);
-        fantomageHost = new Perso("Fantomage", true, fantomageHostAttaques);
-        piratitanHost = new Perso("Piratitan", true, piratitanHostAttaques);
-        roninjaClient = new Perso("Roninja", false, roninjaClientAttaques);
-        elfeeClient = new Perso("Elfee", false, elfeeClientAttaques);
-        fantomageClient = new Perso("Fantomage", false, fantomageClientAttaques);
-        piratitanClient = new Perso("Piratitan", false, piratitanClientAttaques);
+        roninjaHost = new Perso(PersoType.Roninja, true, roninjaHostAttaques);
+        elfeeHost = new Perso(PersoType.Elfee, true, elfeeHostAttaques);
+        fantomageHost = new Perso(PersoType.Fantomage, true, fantomageHostAttaques);
+        piratitanHost = new Perso(PersoType.Piratitan, true, piratitanHostAttaques);
+        roninjaClient = new Perso(PersoType.Roninja, false, roninjaClientAttaques);
+        elfeeClient = new Perso(PersoType.Elfee, false, elfeeClientAttaques);
+        fantomageClient = new Perso(PersoType.Fantomage, false, fantomageClientAttaques);
+        piratitanClient = new Perso(PersoType.Piratitan, false, piratitanClientAttaques);
 
         pierrelumierehost = new Pierre(true, true);
         pierrelumiereclient = new Pierre(true, false);
@@ -74,7 +269,7 @@ public class Jeu
         pierreombreclient = new Pierre(false, false);
 
         nbTours = 0;
-        
+
         pierrelumiereclientobtenue = false;
         pierrelumierehostobtenue = false;
     }
@@ -149,72 +344,76 @@ public class Jeu
 
         InvocationNonBloquante? candidate;
 
-        if (piratitanHost.attaques.ContainsKey("Bombe"))
+        if (piratitanHost.attaques.ContainsKey(InvocationType.Bombe))
         {
-            candidate = ((Bombe)piratitanHost.attaques["Bombe"]).getBombe();
+            candidate = ((Bombe)piratitanHost.attaques[InvocationType.Bombe]).getBombe();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (piratitanClient.attaques.ContainsKey("Bombe"))
+        if (piratitanClient.attaques.ContainsKey(InvocationType.Bombe))
         {
-            candidate = ((Bombe)piratitanClient.attaques["Bombe"]).getBombe();
+            candidate = ((Bombe)piratitanClient.attaques[InvocationType.Bombe]).getBombe();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (elfeeHost.attaques.ContainsKey("EspritElfique"))
+        if (elfeeHost.attaques.ContainsKey(InvocationType.EspritElfique))
         {
-            candidate = ((EspritElfique)elfeeHost.attaques["EspritElfique"]).getEspritElfique();
+            candidate = (
+                (EspritElfique)elfeeHost.attaques[InvocationType.EspritElfique]
+            ).getEspritElfique();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (elfeeClient.attaques.ContainsKey("EspritElfique"))
+        if (elfeeClient.attaques.ContainsKey(InvocationType.EspritElfique))
         {
-            candidate = ((EspritElfique)elfeeClient.attaques["EspritElfique"]).getEspritElfique();
+            candidate = (
+                (EspritElfique)elfeeClient.attaques[InvocationType.EspritElfique]
+            ).getEspritElfique();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (piratitanHost.attaques.ContainsKey("Mouette"))
+        if (piratitanHost.attaques.ContainsKey(InvocationType.Mouette))
         {
-            candidate = ((Mouette)piratitanHost.attaques["Mouette"]).getMouette();
+            candidate = ((Mouette)piratitanHost.attaques[InvocationType.Mouette]).getMouette();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (piratitanClient.attaques.ContainsKey("Mouette"))
+        if (piratitanClient.attaques.ContainsKey(InvocationType.Mouette))
         {
-            candidate = ((Mouette)piratitanClient.attaques["Mouette"]).getMouette();
+            candidate = ((Mouette)piratitanClient.attaques[InvocationType.Mouette]).getMouette();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (fantomageHost.attaques.ContainsKey("Crapeau"))
+        if (fantomageHost.attaques.ContainsKey(InvocationType.Crapeau))
         {
-            candidate = ((Crapeau)fantomageHost.attaques["Crapeau"]).getCrapeau();
+            candidate = ((Crapeau)fantomageHost.attaques[InvocationType.Crapeau]).getCrapeau();
             if (candidate != null)
             {
                 res.Add(candidate);
             }
         }
 
-        if (fantomageClient.attaques.ContainsKey("Crapeau"))
+        if (fantomageClient.attaques.ContainsKey(InvocationType.Crapeau))
         {
-            candidate = ((Crapeau)fantomageClient.attaques["Crapeau"]).getCrapeau();
+            candidate = ((Crapeau)fantomageClient.attaques[InvocationType.Crapeau]).getCrapeau();
             if (candidate != null)
             {
                 res.Add(candidate);
@@ -268,6 +467,11 @@ public class Jeu
                 // win host
             }
         }
+    }
+
+    public static List<Face> getFaces() // DONE
+    {
+        return new List<Face> { north, south, east, west, host, client };
     }
 
     // Méthodes private

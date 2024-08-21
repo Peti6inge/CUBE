@@ -1,7 +1,7 @@
 public class Perso
 {
     // Attributs // DONE
-    public string type { get; set; }
+    public int type { get; set; }
     public bool isHost { get; set; }
     public int hp { get; set; }
     public int hpMax { get; set; }
@@ -29,90 +29,90 @@ public class Perso
     public bool miniaturisation { get; set; }
     public Case? myCase { get; set; }
     public Case? temoinDePosition { get; set; }
-    public Dictionary<string, Attaque> attaques { get; set; }
-    private static readonly Dictionary<string, Type> attaqueTypes = new Dictionary<string, Type>
+    public Dictionary<int, Attaque> attaques { get; set; }
+    private static readonly Dictionary<int, Type> attaqueTypes = new Dictionary<int, Type>
     {
-        { "DragNDrop", typeof(DragNDrop) },
-        { "Ancre", typeof(Ancre) },
-        { "Bombe", typeof(Bombe) },
-        { "BondDuTitan", typeof(BondDuTitan) },
-        { "ChargeDuTitan", typeof(ChargeDuTitan) },
-        { "Coffre", typeof(Coffre) },
-        { "CoupDeFeu", typeof(CoupDeFeu) },
-        { "Etincelle", typeof(Etincelle) },
-        { "Flaque", typeof(Flaque) },
-        { "FrappeDuPirate", typeof(FrappeDuPirate) },
-        { "FrappeDuTitan", typeof(FrappeDuTitan) },
-        { "Harpon", typeof(Harpon) },
-        { "Invincibilite", typeof(Invincibilite) },
-        { "LongueVue", typeof(LongueVue) },
-        { "Mouette", typeof(Mouette) },
-        { "Planche", typeof(Planche) },
-        { "PorterDeposer", typeof(PorterDeposer) },
-        { "Poudre", typeof(Poudre) },
-        { "Sabre", typeof(Sabre) },
-        { "Tonneau", typeof(Tonneau) },
-        { "Altruisme", typeof(Altruisme) },
-        { "Carosse", typeof(Carosse) },
-        { "CoupDeBaguette", typeof(CoupDeBaguette) },
-        { "DerniereVolonte", typeof(DerniereVolonte) },
-        { "ElixirAgressif", typeof(ElixirAgressif) },
-        { "EnvolAtterissage", typeof(EnvolAtterissage) },
-        { "EspritElfique", typeof(EspritElfique) },
-        { "Esquive", typeof(Esquive) },
-        { "Fleche", typeof(Fleche) },
-        { "FlecheDeLumiere", typeof(FlecheDeLumiere) },
-        { "FlechePatiente", typeof(FlechePatiente) },
-        { "HautesHerbes", typeof(HautesHerbes) },
-        { "Miniaturisation", typeof(Miniaturisation) },
-        { "PetitSoin", typeof(PetitSoin) },
-        { "PoudreBienfaisante", typeof(PoudreBienfaisante) },
-        { "PoudreSoporifique", typeof(PoudreSoporifique) },
-        { "PoudreStimulante", typeof(PoudreStimulante) },
-        { "Reanimation", typeof(Reanimation) },
-        { "SoinTotal", typeof(SoinTotal) },
-        { "Acide", typeof(Acide) },
-        { "Attire", typeof(Attire) },
-        { "Brume", typeof(Brume) },
-        { "Clone", typeof(Clone) },
-        { "CouteauDeLancee", typeof(CouteauDeLancee) },
-        { "DerobadeDeLOmbre", typeof(DerobadeDeLOmbre) },
-        { "Derobade", typeof(Derobade) },
-        { "Entrave", typeof(Entrave) },
-        { "Feinte", typeof(Feinte) },
-        { "Invisibilite", typeof(Invisibilite) },
-        { "Katana", typeof(Katana) },
-        { "Kunai", typeof(Kunai) },
-        { "Memoire", typeof(Memoire) },
-        { "PiegeALoup", typeof(PiegeALoup) },
-        { "PiegeLineaire", typeof(PiegeLineaire) },
-        { "Pirouette", typeof(Pirouette) },
-        { "Poison", typeof(Poison) },
-        { "Repousse", typeof(Repousse) },
-        { "Teleport", typeof(Teleport) },
-        { "BouleDeFeu", typeof(BouleDeFeu) },
-        { "BouletFantomatique", typeof(BouletFantomatique) },
-        { "Buff", typeof(Buff) },
-        { "CaseDeRapatriement", typeof(CaseDeRapatriement) },
-        { "CaseTerrifiante", typeof(CaseTerrifiante) },
-        { "Clairvoyance", typeof(Clairvoyance) },
-        { "CoupDeBaton", typeof(CoupDeBaton) },
-        { "Crapeau", typeof(Crapeau) },
-        { "EauVaseuse", typeof(EauVaseuse) },
-        { "FeuFollet", typeof(FeuFollet) },
-        { "Gravite", typeof(Gravite) },
-        { "Inversion", typeof(Inversion) },
-        { "Jouvence", typeof(Jouvence) },
-        { "MainsMaudites", typeof(MainsMaudites) },
-        { "Malediction", typeof(Malediction) },
-        { "Rappel", typeof(Rappel) },
-        { "SortDeProtection", typeof(SortDeProtection) },
-        { "Transposition", typeof(Transposition) },
-        { "VoileDInvisibilite", typeof(VoileDInvisibilite) }
+        { (int)Jeu.AttaqueType.dragAndDrop, typeof(DragNDrop) },
+        { (int)Jeu.AttaqueType.ancre, typeof(Ancre) },
+        { (int)Jeu.AttaqueType.bombe, typeof(Bombe) },
+        { (int)Jeu.AttaqueType.bondDuTitan, typeof(BondDuTitan) },
+        { (int)Jeu.AttaqueType.chargeDuTitan, typeof(ChargeDuTitan) },
+        { (int)Jeu.AttaqueType.coffre, typeof(Coffre) },
+        { (int)Jeu.AttaqueType.coupDeFeu, typeof(CoupDeFeu) },
+        { (int)Jeu.AttaqueType.etincelle, typeof(Etincelle) },
+        { (int)Jeu.AttaqueType.flaque, typeof(Flaque) },
+        { (int)Jeu.AttaqueType.frappeDuPirate, typeof(FrappeDuPirate) },
+        { (int)Jeu.AttaqueType.frappeDuTitan, typeof(FrappeDuTitan) },
+        { (int)Jeu.AttaqueType.harpon, typeof(Harpon) },
+        { (int)Jeu.AttaqueType.invincibilite, typeof(Invincibilite) },
+        { (int)Jeu.AttaqueType.longueVue, typeof(LongueVue) },
+        { (int)Jeu.AttaqueType.mouette, typeof(Mouette) },
+        { (int)Jeu.AttaqueType.planche, typeof(Planche) },
+        { (int)Jeu.AttaqueType.porterDeposer, typeof(PorterDeposer) },
+        { (int)Jeu.AttaqueType.poudre, typeof(Poudre) },
+        { (int)Jeu.AttaqueType.sabre, typeof(Sabre) },
+        { (int)Jeu.AttaqueType.tonneau, typeof(Tonneau) },
+        { (int)Jeu.AttaqueType.altruisme, typeof(Altruisme) },
+        { (int)Jeu.AttaqueType.carosse, typeof(Carosse) },
+        { (int)Jeu.AttaqueType.coupDeBaguette, typeof(CoupDeBaguette) },
+        { (int)Jeu.AttaqueType.derniereVolontee, typeof(DerniereVolonte) },
+        { (int)Jeu.AttaqueType.elixirAgressif, typeof(ElixirAgressif) },
+        { (int)Jeu.AttaqueType.envolAtterissage, typeof(EnvolAtterissage) },
+        { (int)Jeu.AttaqueType.espritElfique, typeof(EspritElfique) },
+        { (int)Jeu.AttaqueType.esquive, typeof(Esquive) },
+        { (int)Jeu.AttaqueType.fleche, typeof(Fleche) },
+        { (int)Jeu.AttaqueType.flecheDeLumiere, typeof(FlecheDeLumiere) },
+        { (int)Jeu.AttaqueType.flechePatiente, typeof(FlechePatiente) },
+        { (int)Jeu.AttaqueType.hautesHerbes, typeof(HautesHerbes) },
+        { (int)Jeu.AttaqueType.miniaturisation, typeof(Miniaturisation) },
+        { (int)Jeu.AttaqueType.petitSoin, typeof(PetitSoin) },
+        { (int)Jeu.AttaqueType.poudreBienfaisante, typeof(PoudreBienfaisante) },
+        { (int)Jeu.AttaqueType.poudreSoporifique, typeof(PoudreSoporifique) },
+        { (int)Jeu.AttaqueType.poudreStimulante, typeof(PoudreStimulante) },
+        { (int)Jeu.AttaqueType.reanimation, typeof(Reanimation) },
+        { (int)Jeu.AttaqueType.soinTotal, typeof(SoinTotal) },
+        { (int)Jeu.AttaqueType.acide, typeof(Acide) },
+        { (int)Jeu.AttaqueType.attire, typeof(Attire) },
+        { (int)Jeu.AttaqueType.brume, typeof(Brume) },
+        { (int)Jeu.AttaqueType.clone, typeof(Clone) },
+        { (int)Jeu.AttaqueType.couteauDeLancee, typeof(CouteauDeLancee) },
+        { (int)Jeu.AttaqueType.derobadeDeLOmbre, typeof(DerobadeDeLOmbre) },
+        { (int)Jeu.AttaqueType.derobade, typeof(Derobade) },
+        { (int)Jeu.AttaqueType.entrave, typeof(Entrave) },
+        { (int)Jeu.AttaqueType.feinte, typeof(Feinte) },
+        { (int)Jeu.AttaqueType.invisibilite, typeof(Invisibilite) },
+        { (int)Jeu.AttaqueType.katana, typeof(Katana) },
+        { (int)Jeu.AttaqueType.kunai, typeof(Kunai) },
+        { (int)Jeu.AttaqueType.memoire, typeof(Memoire) },
+        { (int)Jeu.AttaqueType.piegeALoup, typeof(PiegeALoup) },
+        { (int)Jeu.AttaqueType.piegeLineaire, typeof(PiegeLineaire) },
+        { (int)Jeu.AttaqueType.pirouette, typeof(Pirouette) },
+        { (int)Jeu.AttaqueType.poison, typeof(Poison) },
+        { (int)Jeu.AttaqueType.repousse, typeof(Repousse) },
+        { (int)Jeu.AttaqueType.teleport, typeof(Teleport) },
+        { (int)Jeu.AttaqueType.bouleDeFeu, typeof(BouleDeFeu) },
+        { (int)Jeu.AttaqueType.bouletFantomatique, typeof(BouletFantomatique) },
+        { (int)Jeu.AttaqueType.buff, typeof(Buff) },
+        { (int)Jeu.AttaqueType.caseDeRapatriement, typeof(CaseDeRapatriement) },
+        { (int)Jeu.AttaqueType.caseTerrifiante, typeof(CaseTerrifiante) },
+        { (int)Jeu.AttaqueType.clairvoyance, typeof(Clairvoyance) },
+        { (int)Jeu.AttaqueType.coupDeBaton, typeof(CoupDeBaton) },
+        { (int)Jeu.AttaqueType.crapeau, typeof(Crapeau) },
+        { (int)Jeu.AttaqueType.eauVaseuse, typeof(EauVaseuse) },
+        { (int)Jeu.AttaqueType.feuFollet, typeof(FeuFollet) },
+        { (int)Jeu.AttaqueType.gravite, typeof(Gravite) },
+        { (int)Jeu.AttaqueType.inversion, typeof(Inversion) },
+        { (int)Jeu.AttaqueType.jouvence, typeof(Jouvence) },
+        { (int)Jeu.AttaqueType.mainsMaudites, typeof(MainsMaudites) },
+        { (int)Jeu.AttaqueType.malediction, typeof(Malediction) },
+        { (int)Jeu.AttaqueType.rappel, typeof(Rappel) },
+        { (int)Jeu.AttaqueType.sortDeProtection, typeof(SortDeProtection) },
+        { (int)Jeu.AttaqueType.transposition, typeof(Transposition) },
+        { (int)Jeu.AttaqueType.voileDInvisibilite, typeof(VoileDInvisibilite) }
     };
 
     // Constructeur // DONE
-    public Perso(String type, bool isHost, List<string> attaques)
+    public Perso(int type, bool isHost, List<int> attaques)
     {
         this.type = type;
         this.isHost = isHost;
@@ -142,24 +142,24 @@ public class Perso
         miniaturisation = false;
         switch (type)
         {
-            case "Roninja":
+            case (int)Jeu.PersoType.Roninja:
                 myCase = isHost ? Jeu.host.grid[2, 2] : Jeu.client.grid[2, 2];
                 break;
-            case "Elfee":
+            case (int)Jeu.PersoType.Elfee:
                 myCase = isHost ? Jeu.host.grid[2, 5] : Jeu.client.grid[2, 5];
                 break;
-            case "Fantomage":
+            case (int)Jeu.PersoType.Fantomage:
                 myCase = isHost ? Jeu.host.grid[5, 2] : Jeu.client.grid[5, 2];
                 break;
-            case "Piratitan":
+            case (int)Jeu.PersoType.Piratitan:
                 myCase = isHost ? Jeu.host.grid[5, 5] : Jeu.client.grid[5, 5];
                 break;
             default:
                 break;
         }
         temoinDePosition = null;
-        this.attaques = new Dictionary<string, Attaque>();
-        foreach (string attaque in attaques)
+        this.attaques = new Dictionary<int, Attaque>();
+        foreach (int attaque in attaques)
         {
             if (attaqueTypes.TryGetValue(attaque, out Type? myType))
             {
@@ -211,44 +211,44 @@ public class Perso
 
         desactiverDerniereVolonte();
 
-        if (attaques.ContainsKey("ElixirAgressif"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.elixirAgressif))
         {
-            ((ElixirAgressif)attaques["ElixirAgressif"]).debutTour();
+            ((ElixirAgressif)attaques[(int)Jeu.AttaqueType.elixirAgressif]).debutTour();
         }
 
-        if (attaques.ContainsKey("Harpon"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.harpon))
         {
-            ((Harpon)attaques["Harpon"]).desactiver();
+            ((Harpon)attaques[(int)Jeu.AttaqueType.harpon]).desactiver();
         }
 
-        if (attaques.ContainsKey("Ancre"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.ancre))
         {
-            ((Ancre)attaques["Ancre"]).debutTour();
+            ((Ancre)attaques[(int)Jeu.AttaqueType.ancre]).debutTour();
         }
 
-        if (attaques.ContainsKey("Altruisme"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.altruisme))
         {
-            ((Altruisme)attaques["Altruisme"]).debutTour();
+            ((Altruisme)attaques[(int)Jeu.AttaqueType.altruisme]).debutTour();
         }
 
-        if (attaques.ContainsKey("Brume"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.brume))
         {
-            ((Brume)attaques["Brume"]).desactiver();
+            ((Brume)attaques[(int)Jeu.AttaqueType.brume]).desactiver();
         }
 
-        if (attaques.ContainsKey("Invisibilite"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.invisibilite))
         {
-            ((Invisibilite)attaques["Invisibilite"]).desactiver();
+            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invisibilite]).desactiver();
         }
 
-        if (attaques.ContainsKey("VoileDInvisibilite"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.voileDInvisibilite))
         {
-            ((VoileDInvisibilite)attaques["VoileDInvisibilite"]).desactiver();
+            ((VoileDInvisibilite)attaques[(int)Jeu.AttaqueType.voileDInvisibilite]).desactiver();
         }
 
-        if (attaques.ContainsKey("Malediction"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.malediction))
         {
-            ((Malediction)attaques["Malediction"]).desactiver();
+            ((Malediction)attaques[(int)Jeu.AttaqueType.malediction]).desactiver();
         }
 
         if (buffHp.ContainsKey(1))
@@ -313,9 +313,9 @@ public class Perso
 
         desactivermainsMaudites();
 
-        if (attaques.ContainsKey("LongueVue"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.longueVue))
         {
-            ((LongueVue)attaques["LongueVue"]).desactiver();
+            ((LongueVue)attaques[(int)Jeu.AttaqueType.longueVue]).desactiver();
         }
 
         foreach (InvocationSimpleBloquante potion in grossesPotionsAActiver())
@@ -341,9 +341,9 @@ public class Perso
         hp = 0;
         hpMax = 10;
         miniaturisation = false;
-        if (attaques.ContainsKey("LongueVue"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.longueVue))
         {
-            ((LongueVue)attaques["LongueVue"]).desactiver();
+            ((LongueVue)attaques[(int)Jeu.AttaqueType.longueVue]).desactiver();
         }
 
         desactiverPoudre();
@@ -360,9 +360,9 @@ public class Perso
 
         reveal();
 
-        if (attaques.ContainsKey("Altruisme"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.altruisme))
         {
-            ((Altruisme)attaques["Altruisme"]).desactiver();
+            ((Altruisme)attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
         }
 
         if (sousAltruisme())
@@ -373,7 +373,7 @@ public class Perso
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
-            ((Altruisme)elfeeAlliee.attaques["Altruisme"]).desactiver();
+            ((Altruisme)elfeeAlliee.attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
         }
 
         desactiverElixirAgressifIfOnMe();
@@ -397,7 +397,7 @@ public class Perso
             else
                 fantomageAdverse = Jeu.fantomageHost;
 
-            ((Malediction)fantomageAdverse.attaques["Malediction"]).desactiver();
+            ((Malediction)fantomageAdverse.attaques[(int)Jeu.AttaqueType.malediction]).desactiver();
         }
 
         buffEnergie.Clear();
@@ -457,25 +457,25 @@ public class Perso
         miniaturisation = false;
         switch (type)
         {
-            case "Roninja":
+            case (int)Jeu.PersoType.Roninja:
                 if (isHost)
                     Jeu.host.grid[2, 2].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[2, 2].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case "Elfee":
+            case (int)Jeu.PersoType.Elfee:
                 if (isHost)
                     Jeu.host.grid[2, 5].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[2, 5].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case "Fantomage":
+            case (int)Jeu.PersoType.Fantomage:
                 if (isHost)
                     Jeu.host.grid[5, 2].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[5, 2].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case "Piratitan":
+            case (int)Jeu.PersoType.Piratitan:
                 if (isHost)
                     Jeu.host.grid[5, 5].persoEnterCase(this, newFace: true, respawn: true);
                 else
@@ -581,7 +581,7 @@ public class Perso
         if (!ignoreFeinte && feinte && !getAncre() && estPortePar() != null)
         {
             recoitDegats(degats, ignoreFeinte: true);
-            ((Feinte)attaques["Feinte"]).activerFeinte();
+            ((Feinte)attaques[(int)Jeu.AttaqueType.feinte]).activerFeinte();
             return;
         }
 
@@ -618,7 +618,7 @@ public class Perso
         hp = Math.Min(hpMax, hp + soin);
     }
 
-    public Object? nextObstacleDirection(string direction) // DONE
+    public Object? nextObstacleDirection(int direction) // DONE
     // Renvoie null si rien OU si obstacle non invoqué, InvocationSimpleBloquante si ISB, InvocationDoubleBloquante si IDB, Perso si perso
     {
         if (myCase == null)
@@ -632,7 +632,7 @@ public class Perso
             || c.containsDoubleObstacle
             || c.containsTableClient
             || c.containsTableHost
-            || c.obstacleSpawn != ""
+            || c.obstacleSpawn != -1
         )
             return null;
 
@@ -648,7 +648,7 @@ public class Perso
         return null;
     }
 
-    public bool canTryMoveDirection(string direction) // DONE
+    public bool canTryMoveDirection(int direction) // DONE
     {
         if (myCase == null)
             return false;
@@ -657,7 +657,7 @@ public class Perso
         return c != null && (!c.face.faceVisible(isHost) || c.seemsWalkable(this));
     }
 
-    public bool canMoveDirection(string direction) // DONE
+    public bool canMoveDirection(int direction) // DONE
     {
         if (myCase == null)
             return false;
@@ -666,7 +666,7 @@ public class Perso
         return c != null && c.isWalkable(this);
     }
 
-    public void tryMoveDirection(string direction) // DONE
+    public void tryMoveDirection(int direction) // DONE
     {
         energieActive--;
         if (canMoveDirection(direction))
@@ -678,18 +678,25 @@ public class Perso
     }
 
     public void moveDirection(
-        string direction,
+        int direction,
         bool glissade = false,
         bool attiranceCrapeau = false,
         bool chargeDuTitan = false,
         bool bondDuTitan = false,
         bool porterDeposer = false,
+        bool attire = false,
+        bool repousse = false,
         bool crapeauHost = false,
         bool crapeauClient = false
     ) // DONE
     {
         if (myCase == null)
             return;
+
+        Case? c = myCase.nextCaseDirection(direction);
+
+        Face facePrecedente = myCase.face;
+        Face nouvelleFace = c.face;
 
         myCase.persoLeaveCase(this);
 
@@ -700,307 +707,12 @@ public class Perso
         if (persoPorteur != null)
             persoPorteur.porte = null;
 
-        switch (direction)
-        {
-            case "up":
-                if (myCase.row == 0)
-                {
-                    switch (myCase.face.name)
-                    {
-                        case "north":
-                            Jeu.client.grid[0, 7 - myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "south":
-                            Jeu.client.grid[7, myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "east":
-                            Jeu.client.grid[myCase.col, 0]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "west":
-                            Jeu.client.grid[7 - myCase.col, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "host":
-                            Jeu.north.grid[7, myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "client":
-                            Jeu.north.grid[0, 7 - myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    myCase
-                        .face.grid[myCase.row - 1, myCase.col]
-                        .persoEnterCase(
-                            this,
-                            crapeauHost: crapeauHost,
-                            crapeauClient: crapeauClient
-                        );
-                }
-                break;
-            case "down":
-                if (myCase.row == 7)
-                {
-                    switch (myCase.face.name)
-                    {
-                        case "north":
-                            Jeu.host.grid[0, myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "south":
-                            Jeu.host.grid[7, 7 - myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "east":
-                            Jeu.host.grid[myCase.col, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "west":
-                            Jeu.host.grid[0, 7 - myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "host":
-                            Jeu.south.grid[7, 7 - myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "client":
-                            Jeu.south.grid[0, myCase.col]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    myCase
-                        .face.grid[myCase.row + 1, myCase.col]
-                        .persoEnterCase(
-                            this,
-                            crapeauHost: crapeauHost,
-                            crapeauClient: crapeauClient
-                        );
-                }
-                break;
-            case "left":
-                if (myCase.col == 0)
-                {
-                    switch (myCase.face.name)
-                    {
-                        case "north":
-                            Jeu.west.grid[myCase.row, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "south":
-                            Jeu.east.grid[myCase.row, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "east":
-                            Jeu.north.grid[myCase.row, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "west":
-                            Jeu.south.grid[myCase.row, 7]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "host":
-                            Jeu.west.grid[7, 7 - myCase.row]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "client":
-                            Jeu.east.grid[0, myCase.row]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    myCase
-                        .face.grid[myCase.row, myCase.col - 1]
-                        .persoEnterCase(
-                            this,
-                            crapeauHost: crapeauHost,
-                            crapeauClient: crapeauClient
-                        );
-                }
-                break;
-            case "right":
-                if (myCase.col == 7)
-                {
-                    switch (myCase.face.name)
-                    {
-                        case "north":
-                            Jeu.east.grid[myCase.row, 0]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "south":
-                            Jeu.west.grid[myCase.row, 0]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "east":
-                            Jeu.south.grid[myCase.row, 0]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "west":
-                            Jeu.north.grid[myCase.row, 0]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "host":
-                            Jeu.east.grid[7, myCase.row]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        case "client":
-                            Jeu.west.grid[0, 7 - myCase.row]
-                                .persoEnterCase(
-                                    this,
-                                    newFace: true,
-                                    crapeauHost: crapeauHost,
-                                    crapeauClient: crapeauClient
-                                );
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    myCase
-                        .face.grid[myCase.row, myCase.col + 1]
-                        .persoEnterCase(
-                            this,
-                            crapeauHost: crapeauHost,
-                            crapeauClient: crapeauClient
-                        );
-                }
-                break;
-            default:
-                break;
-        }
+        c.persoEnterCase(
+            this,
+            newFace: facePrecedente != nouvelleFace,
+            crapeauHost: crapeauHost,
+            crapeauClient: crapeauClient
+        );
     }
 
     public Dictionary<Case, List<Object?>> ciblesByAttaque(Attaque attaque) // DONE : Renvoie les cibles possibles pour une attaque donnée
@@ -1101,7 +813,7 @@ public class Perso
         {
             dropPierre();
             pirouette = false;
-            ((Pirouette)attaques["Pirouette"]).activer();
+            ((Pirouette)attaques[(int)Jeu.AttaqueType.pirouette]).activer();
         }
         else
         {
@@ -1109,44 +821,44 @@ public class Perso
         }
     }
 
-    public Dictionary<string, InvocationNonBloquante> entitesInvoquees() // DONE
+    public Dictionary<int, InvocationNonBloquante> entitesInvoquees() // DONE
     {
-        Dictionary<string, InvocationNonBloquante> entitesInvoquees =
-            new Dictionary<string, InvocationNonBloquante>();
+        Dictionary<int, InvocationNonBloquante> entitesInvoquees =
+            new Dictionary<int, InvocationNonBloquante>();
         InvocationNonBloquante? candidate;
-        if (attaques.ContainsKey("Bombe"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.bombe))
         {
-            candidate = ((Bombe)attaques["Bombe"]).getBombe();
+            candidate = ((Bombe)attaques[(int)Jeu.AttaqueType.bombe]).getBombe();
             if (candidate != null)
             {
-                entitesInvoquees.Add("Bombe", candidate);
+                entitesInvoquees.Add((int)Jeu.InvocationType.Bombe, candidate);
             }
         }
 
-        if (attaques.ContainsKey("EspritElfique"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.espritElfique))
         {
-            candidate = ((EspritElfique)attaques["EspritElfique"]).getEspritElfique();
+            candidate = ((EspritElfique)attaques[(int)Jeu.AttaqueType.espritElfique]).getEspritElfique();
             if (candidate != null)
             {
-                entitesInvoquees.Add("EspritElfique", candidate);
+                entitesInvoquees.Add((int)Jeu.InvocationType.EspritElfique, candidate);
             }
         }
 
-        if (attaques.ContainsKey("Mouette"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.mouette))
         {
-            candidate = ((Mouette)attaques["Mouette"]).getMouette();
+            candidate = ((Mouette)attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
             if (candidate != null)
             {
-                entitesInvoquees.Add("Mouette", candidate);
+                entitesInvoquees.Add((int)Jeu.InvocationType.Mouette, candidate);
             }
         }
 
-        if (attaques.ContainsKey("Crapeau"))
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.crapeau))
         {
-            candidate = ((Crapeau)attaques["Crapeau"]).getCrapeau();
+            candidate = ((Crapeau)attaques[(int)Jeu.AttaqueType.crapeau]).getCrapeau();
             if (candidate != null)
             {
-                entitesInvoquees.Add("Crapeau", candidate);
+                entitesInvoquees.Add((int)Jeu.InvocationType.Crapeau, candidate);
             }
         }
 
@@ -1207,12 +919,12 @@ public class Perso
     {
         if (
             (
-                Jeu.piratitanClient.attaques.ContainsKey("Ancre")
-                && ((Ancre)Jeu.piratitanClient.attaques["Ancre"]).getTargets().Contains(this)
+                Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
+                && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
             )
             || (
-                Jeu.piratitanHost.attaques.ContainsKey("Ancre")
-                && ((Ancre)Jeu.piratitanHost.attaques["Ancre"]).getTargets().Contains(this)
+                Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
+                && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
             )
         )
             return true;
@@ -1223,12 +935,12 @@ public class Perso
     {
         if (
             (
-                Jeu.elfeeClient.attaques.ContainsKey("Altruisme")
-                && ((Altruisme)Jeu.elfeeClient.attaques["Altruisme"]).getTarget() == this
+                Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
             )
             || (
-                Jeu.elfeeHost.attaques.ContainsKey("Altruisme")
-                && ((Altruisme)Jeu.elfeeHost.attaques["Altruisme"]).getTarget() == this
+                Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
             )
         )
             return true;
@@ -1261,8 +973,8 @@ public class Perso
 
     private bool sousInvisibilite() // DONE
     {
-        if (attaques.ContainsKey("Invisibilite"))
-            return ((Invisibilite)attaques["Invisibilite"]).estActif();
+        if (attaques.ContainsKey((int)Jeu.AttaqueType.invisibilite))
+            return ((Invisibilite)attaques[(int)Jeu.AttaqueType.invisibilite]).estActif();
 
         return false;
     }
@@ -1270,7 +982,7 @@ public class Perso
     private void desactiverInvisibiliteIfOnMe(bool revealPerso = true) // DONE
     {
         if (sousInvisibilite())
-            ((Invisibilite)attaques["Invisibilite"]).desactiver(reveal: revealPerso);
+            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invincibilite]).desactiver(reveal: revealPerso);
     }
 
     private bool sousVoileDInvisibilite() // DONE
@@ -1281,9 +993,9 @@ public class Perso
         else
             candidatVoileDInvisibilite = Jeu.fantomageClient;
 
-        return candidatVoileDInvisibilite.attaques.ContainsKey("VoileDInvisibilite")
+        return candidatVoileDInvisibilite.attaques.ContainsKey((int)Jeu.AttaqueType.voileDInvisibilite)
             && (
-                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques["VoileDInvisibilite"]
+                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
             ).getPersoCible() == this;
     }
 
@@ -1298,7 +1010,7 @@ public class Perso
                 candidatVoileDInvisibilite = Jeu.fantomageClient;
 
             (
-                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques["VoileDInvisibilite"]
+                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
             ).desactiver(reveal: revealPerso);
         }
     }
@@ -1310,8 +1022,8 @@ public class Perso
             candidatElixirAgressif = Jeu.elfeeHost;
         else
             candidatElixirAgressif = Jeu.elfeeClient;
-        if (candidatElixirAgressif.attaques.ContainsKey("ElixirAgressif"))
-            ((ElixirAgressif)candidatElixirAgressif.attaques["ElixirAgressif"]).desactiver(this);
+        if (candidatElixirAgressif.attaques.ContainsKey((int)Jeu.AttaqueType.elixirAgressif))
+            ((ElixirAgressif)candidatElixirAgressif.attaques[(int)Jeu.AttaqueType.elixirAgressif]).desactiver(this);
     }
 
     private List<InvocationSimpleBloquante> grossesPotionsAActiver() // DONE
@@ -1544,15 +1256,15 @@ public class Perso
     private void desactiverAncre() // DONE
     {
         if (
-            Jeu.piratitanClient.attaques.ContainsKey("Ancre")
-            && ((Ancre)Jeu.piratitanClient.attaques["Ancre"]).getTargets().Contains(this)
+            Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
+            && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
         )
-            ((Ancre)Jeu.piratitanClient.attaques["Ancre"]).desactiverAncre(this);
+            ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
         if (
-            Jeu.piratitanHost.attaques.ContainsKey("Ancre")
-            && ((Ancre)Jeu.piratitanHost.attaques["Ancre"]).getTargets().Contains(this)
+            Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
+            && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
         )
-            ((Ancre)Jeu.piratitanHost.attaques["Ancre"]).desactiverAncre(this);
+            ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
     }
 
     private void desactiverEsquive() // DONE

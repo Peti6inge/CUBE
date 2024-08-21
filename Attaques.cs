@@ -256,11 +256,15 @@ public class Attaque
                     return false;
                 return true;
             case "ancre": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+
                 if (
                     (cible is bool && !(bool)cible)
                     || (
                         cible is InvocationSimpleBloquante
                         && ((InvocationSimpleBloquante)cible).type == "Clone"
+                        && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
                     )
                 )
                     return true;
@@ -277,11 +281,15 @@ public class Attaque
                 }
                 return false;
             case "attireRepousse": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (
                     cible is bool
                     || (
                         cible is InvocationSimpleBloquante
                         && ((InvocationSimpleBloquante)cible).type == "Clone"
+                        && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
                     ) // cas : Cible est un clone ou on tente d'atteindre un perso invisible
                 )
                     return true;
@@ -300,6 +308,9 @@ public class Attaque
                     return true;
                 return false;
             case "persoEnnemy": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (
                     (cible is Perso && ((Perso)cible).isHost == !perso.isHost)
                     || cible is bool
@@ -358,6 +369,9 @@ public class Attaque
                     return true;
                 return false;
             case "persoEtInvocEnnemy": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (
                     (cible is Perso && ((Perso)cible).isHost == !perso.isHost)
                     || cible is bool
@@ -644,6 +658,9 @@ public class Attaque
 
                 return false;
             case "derobade": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (cible is Pierre)
                 {
                     Pierre pierre = (Pierre)cible;
@@ -692,6 +709,9 @@ public class Attaque
 
                 return false;
             case "inversion": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (perso.getAncre()) // Je suis ancré
                     return false;
                 if (cible is Perso)
@@ -739,6 +759,9 @@ public class Attaque
                     return false;
                 return true;
             case "feuFollet": // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+                    
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;

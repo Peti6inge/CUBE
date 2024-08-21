@@ -4,8 +4,6 @@ Poudre stimulante
 Réanimation
 Soin total
 Acide
-Attire
-Brume
 Clone
 Couteau de lancée
 Dérobade de l'ombre
@@ -17,7 +15,6 @@ Mémoire
 Piège à loup
 Piège linéaire
 Poison
-Repousse
 Boule de feu
 Boulet fantomatique
 Buff

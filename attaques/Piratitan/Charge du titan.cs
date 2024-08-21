@@ -85,19 +85,10 @@ public class ChargeDuTitan : Attaque
         uses();
         if (!missAndReveal(myCase))
         {
-            string direction;
-
             if (perso.myCase == null)
                 return;
 
-            if (perso.myCase.row == myCase.row - 1)
-                direction = "down";
-            else if (perso.myCase.row == myCase.row + 1)
-                direction = "up";
-            else if (perso.myCase.col == myCase.col - 1)
-                direction = "right";
-            else
-                direction = "left";
+            string direction = perso.myCase.directionTo(myCase);
 
             string absoluteDirection = getAbsoluteDirection(direction);
             int casesParcourues = 0;

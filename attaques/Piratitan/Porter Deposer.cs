@@ -18,15 +18,7 @@ public class PorterDeposer : Attaque
         uses();
         if (perso.porte != null && perso.porte.myCase != null) // Déposer
         {
-            string direction;
-            if (perso.porte.myCase.row == myCase.row - 1)
-                direction = "down";
-            else if (perso.porte.myCase.row == myCase.row + 1)
-                direction = "up";
-            else if (perso.porte.myCase.col == myCase.col - 1)
-                direction = "right";
-            else
-                direction = "left";
+            string direction = perso.porte.myCase.directionTo(myCase);
 
             perso.porte.moveDirection(direction, porterDeposer: true);
         }

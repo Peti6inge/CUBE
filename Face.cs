@@ -1,7 +1,7 @@
 public class Face
 {
     // Attributs // DONE
-    public string name { get; set; }
+    public int name { get; set; }
     public Case[,] grid { get; set; }
     public bool longueVueHost { get; set; }
     public bool longueVueClient { get; set; }
@@ -11,12 +11,12 @@ public class Face
     public bool brumeClient { get; set; }
 
     // Constructeur // DONE
-    public Face(string name)
+    public Face(int name)
     {
         this.name = name;
         grid = new Case[8, 8];
 
-        if (name == "Host" || name == "Client")
+        if (name == (int)Jeu.FaceType.Host || name == (int)Jeu.FaceType.Client)
         {
             for (int row = 0; row < 8; row++)
             {
@@ -24,31 +24,31 @@ public class Face
                 {
                     if ((row == 1 || row == 6) && (col == 1 || col == 6))
                     {
-                        grid[row, col] = new Case("SimpleObstacle", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.CaseType.SimpleObstacle, this, row, col);
                     }
                     else if ((row == 3 || row == 4) && (col == 3 || col == 4))
                     {
-                        grid[row, col] = new Case("Table", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.CaseType.Table, this, row, col);
                     }
                     else if (row == 2 && col == 2)
                     {
-                        grid[row, col] = new Case("Roninja", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.SpawnType.Roninja, this, row, col);
                     }
                     else if (row == 2 && col == 5)
                     {
-                        grid[row, col] = new Case("Elfee", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.SpawnType.Elfee, this, row, col);
                     }
                     else if (row == 5 && col == 2)
                     {
-                        grid[row, col] = new Case("Fantomage", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.SpawnType.Fantomage, this, row, col);
                     }
                     else if (row == 5 && col == 5)
                     {
-                        grid[row, col] = new Case("Piratitan", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.SpawnType.Piratitan, this, row, col);
                     }
                     else
                     {
-                        grid[row, col] = new Case("Vide", this, row, col);
+                        grid[row, col] = new Case((int)Jeu.CaseType.Vide, this, row, col);
                     }
                 }
             }
@@ -69,31 +69,31 @@ public class Face
                     switch (values[col])
                     {
                         case "0":
-                            grid[row, col] = new Case("Vide", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.Vide, this, row, col);
                             break;
                         case "1":
-                            grid[row, col] = new Case("SimpleObstacle", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.SimpleObstacle, this, row, col);
                             break;
                         case "2H":
-                            grid[row, col] = new Case("DoubleObstacleHaut", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleHaut, this, row, col);
                             break;
                         case "2B":
-                            grid[row, col] = new Case("DoubleObstacleBas", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleBas, this, row, col);
                             break;
                         case "2G":
-                            grid[row, col] = new Case("DoubleObstacleGauche", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleGauche, this, row, col);
                             break;
                         case "2D":
-                            grid[row, col] = new Case("DoubleObstacleDroite", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleDroite, this, row, col);
                             break;
                         case "3":
-                            grid[row, col] = new Case("Trou", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.Trou, this, row, col);
                             break;
                         case "4":
-                            grid[row, col] = new Case("Camouflage", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.Camouflage, this, row, col);
                             break;
                         case "5":
-                            grid[row, col] = new Case("Glissante", this, row, col);
+                            grid[row, col] = new Case((int)Jeu.CaseType.Glissante, this, row, col);
                             break;
                     }
                 }
@@ -119,11 +119,11 @@ public class Face
         InvocationNonBloquante? mouetteCandidate = null;
         if (isHost && mouetteHost())
         {
-            mouetteCandidate = ((Mouette)Jeu.piratitanHost.attaques["Mouette"]).getMouette();
+            mouetteCandidate = ((Mouette)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
         }
         if (!isHost && mouetteClient())
         {
-            mouetteCandidate = ((Mouette)Jeu.piratitanClient.attaques["Mouette"]).getMouette();
+            mouetteCandidate = ((Mouette)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
         }
 
         bool[,] bools = new bool[8, 8];
@@ -210,10 +210,10 @@ public class Face
 
     public bool mouetteHost() // DONE
     {
-        if (Jeu.piratitanHost.attaques.ContainsKey("Mouette"))
+        if (Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.mouette))
         {
             InvocationNonBloquante? mouetteCandidate = (
-                (Mouette)Jeu.piratitanHost.attaques["Mouette"]
+                (Mouette)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.mouette]
             ).getMouette();
             if (mouetteCandidate != null && mouetteCandidate.myCase.face == this)
             {
@@ -225,10 +225,10 @@ public class Face
 
     public bool mouetteClient() // DONE
     {
-        if (Jeu.piratitanClient.attaques.ContainsKey("Mouette"))
+        if (Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.mouette))
         {
             InvocationNonBloquante? mouetteCandidate = (
-                (Mouette)Jeu.piratitanClient.attaques["Mouette"]
+                (Mouette)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.mouette]
             ).getMouette();
             if (mouetteCandidate != null && mouetteCandidate.myCase.face == this)
             {
@@ -238,30 +238,48 @@ public class Face
         return false;
     }
 
+    public void activerBrumeHost() // DONE
+    {
+        brumeHost = true;
+        maJEmbrumage(true);
+    }
+
+    public void activerBrumeClient() // DONE
+    {
+        brumeClient = true;
+        maJEmbrumage(false);
+    }
+
     public void desactiverBrumeHost() // DONE
     {
-        brumeHost = false;
-        foreach (Case case_ in grid)
+        if (brumeHost)
         {
-            case_.containsBrumeRoninjaHost = false;
+            brumeHost = false;
+            foreach (Case case_ in grid)
+            {
+                case_.containsBrumeRoninjaHost = false;
+            }
         }
     }
 
     public void desactiverBrumeClient() // DONE
     {
-        brumeClient = false;
-        foreach (Case case_ in grid)
+        if (brumeClient)
         {
-            case_.containsBrumeRoninjaClient = false;
+            brumeClient = false;
+            foreach (Case case_ in grid)
+            {
+                case_.containsBrumeRoninjaClient = false;
+            }
         }
     }
 
     public InvocationNonBloquante? espritElfiqueHost() // DONE
     {
-        if (Jeu.elfeeHost.attaques.ContainsKey("EspritElfique"))
+        if (Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.espritElfique))
         {
             InvocationNonBloquante? espritElfiqueCandidat = (
-                (EspritElfique)Jeu.elfeeHost.attaques["EspritElfique"]
+                (EspritElfique)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.espritElfique]
             ).getEspritElfique();
             if (espritElfiqueCandidat != null && espritElfiqueCandidat.myCase.face == this)
             {
@@ -273,10 +291,10 @@ public class Face
 
     public InvocationNonBloquante? espritElfiqueClient() // DONE
     {
-        if (Jeu.elfeeClient.attaques.ContainsKey("EspritElfique"))
+        if (Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.espritElfique))
         {
             InvocationNonBloquante? espritElfiqueCandidat = (
-                (EspritElfique)Jeu.elfeeClient.attaques["EspritElfique"]
+                (EspritElfique)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.espritElfique]
             ).getEspritElfique();
             if (espritElfiqueCandidat != null && espritElfiqueCandidat.myCase.face == this)
             {
@@ -291,7 +309,7 @@ public class Face
         List<InvocationSimpleBloquante> coffres = new List<InvocationSimpleBloquante>();
         foreach (Case c in grid)
         {
-            if (c.invocationSimpleBloquante != null && c.invocationSimpleBloquante.type == "Coffre")
+            if (c.invocationSimpleBloquante != null && c.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Coffre)
             {
                 coffres.Add(c.invocationSimpleBloquante);
             }
