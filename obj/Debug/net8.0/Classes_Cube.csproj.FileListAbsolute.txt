@@ -1,0 +1,43 @@
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfoInputs.cache
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfo.cs
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.csproj.CoreCompileInputs.cache
+C:\Users\GEL02\Documents\Classes_Cube\bin\Debug\net8.0\Classes_Cube.exe
+C:\Users\GEL02\Documents\Classes_Cube\bin\Debug\net8.0\Classes_Cube.deps.json
+C:\Users\GEL02\Documents\Classes_Cube\bin\Debug\net8.0\Classes_Cube.runtimeconfig.json
+C:\Users\GEL02\Documents\Classes_Cube\bin\Debug\net8.0\Classes_Cube.dll
+C:\Users\GEL02\Documents\Classes_Cube\bin\Debug\net8.0\Classes_Cube.pdb
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.dll
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\refint\Classes_Cube.dll
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.pdb
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\Classes_Cube.genruntimeconfig.cache
+C:\Users\GEL02\Documents\Classes_Cube\obj\Debug\net8.0\ref\Classes_Cube.dll
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\bin\Debug\net8.0\Classes_Cube.exe
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\bin\Debug\net8.0\Classes_Cube.deps.json
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\bin\Debug\net8.0\Classes_Cube.runtimeconfig.json
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\bin\Debug\net8.0\Classes_Cube.dll
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\bin\Debug\net8.0\Classes_Cube.pdb
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfoInputs.cache
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfo.cs
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.csproj.CoreCompileInputs.cache
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.dll
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\refint\Classes_Cube.dll
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.pdb
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\Classes_Cube.genruntimeconfig.cache
+C:\Users\GEL02\Documents\CUBE\Classes_Cube\obj\Debug\net8.0\ref\Classes_Cube.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.GeneratedMSBuildEditorConfig.editorconfig
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfoInputs.cache
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.AssemblyInfo.cs
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.csproj.CoreCompileInputs.cache
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.sourcelink.json
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\refint\Classes_Cube.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.pdb
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\bin\Debug\net8.0\Classes_Cube.exe
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\bin\Debug\net8.0\Classes_Cube.deps.json
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\bin\Debug\net8.0\Classes_Cube.runtimeconfig.json
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\bin\Debug\net8.0\Classes_Cube.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\bin\Debug\net8.0\Classes_Cube.pdb
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\Classes_Cube.genruntimeconfig.cache
+D:\CUBE\DOSSIER_DE_TRAVAIL\CONCEPTION DES CLASSES\Classes_Cube\obj\Debug\net8.0\ref\Classes_Cube.dll
