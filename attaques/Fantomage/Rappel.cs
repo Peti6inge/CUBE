@@ -9,7 +9,7 @@ public class Rappel : Attaque
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = "rappel";
+        typeCible = (int)Jeu.CibleType.rappel";
     }
 
     // Méthodes public

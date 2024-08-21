@@ -9,7 +9,7 @@ public class PiegeALoup : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = "piegeSimple";
+        typeCible = (int)Jeu.CibleType.piegeSimple";
     }
 
     // Méthodes public

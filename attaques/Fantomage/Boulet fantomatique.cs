@@ -10,7 +10,7 @@ public class BouletFantomatique : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = "persoEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEnnemy";
     }
 
     // Méthodes public

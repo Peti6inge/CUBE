@@ -9,7 +9,7 @@ public class Pirouette : Attaque
         porteeMin = 0;
         porteeMax = 0;
         ligneDeVue = true;
-        typeCible = "freeOnPerso";
+        typeCible = (int)Jeu.CibleType.freeOnPerso";
         limitParTour = 1;
     }
 

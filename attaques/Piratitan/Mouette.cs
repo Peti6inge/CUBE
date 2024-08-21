@@ -9,7 +9,7 @@ public class Mouette : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
         mouette = null;
     }
 

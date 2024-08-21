@@ -8,7 +8,7 @@ public class Esquive : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "esquive";
+        typeCible = (int)Jeu.CibleType.esquive";
     }
 
     // Méthodes public

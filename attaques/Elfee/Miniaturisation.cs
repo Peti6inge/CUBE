@@ -8,7 +8,7 @@ public class Miniaturisation : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "miniaturisation";
+        typeCible = (int)Jeu.CibleType.miniaturisation";
     }
 
     // Méthodes public

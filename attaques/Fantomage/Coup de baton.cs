@@ -8,7 +8,7 @@ public class CoupDeBaton : Attaque
         cout = 3;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = "persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
     }
 
     // Méthodes public

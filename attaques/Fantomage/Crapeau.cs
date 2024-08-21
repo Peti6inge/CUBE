@@ -10,7 +10,7 @@ public class Crapeau : Attaque
         porteeMin = 0;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = "invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
         crapeau = null;
     }
 

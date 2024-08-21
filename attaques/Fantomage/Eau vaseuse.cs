@@ -9,7 +9,7 @@ public class EauVaseuse : Attaque
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = false;
-        typeCible = "poseGlissante";
+        typeCible = (int)Jeu.CibleType.poseGlissante";
     }
 
     // Méthodes public

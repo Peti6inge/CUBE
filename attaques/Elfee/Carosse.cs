@@ -9,7 +9,7 @@ public class Carosse : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = "invocationDoubleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationDoubleBloquante";
     }
 
     // Méthodes public

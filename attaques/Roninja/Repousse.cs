@@ -10,7 +10,7 @@ public class Repousse : Attaque
         porteeMax = 5;
         ligneDeVue = true;
         aligne = true;
-        typeCible = "attireRepousse";
+        typeCible = (int)Jeu.CibleType.attireRepousse";
     }
 
     // Méthodes public

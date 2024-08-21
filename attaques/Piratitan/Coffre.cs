@@ -9,7 +9,7 @@ public class Coffre : Attaque
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = "invocationSimpleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante";
     }
 
     // Méthodes public

@@ -8,7 +8,7 @@ public class PorterDeposer : Attaque
         cout = 1;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = "porterDeposer";
+        typeCible = (int)Jeu.CibleType.porterDeposer";
     }
 
     // Méthodes public

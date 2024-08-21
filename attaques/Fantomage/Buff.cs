@@ -10,7 +10,7 @@ public class Buff : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = "persoFriendly";
+        typeCible = (int)Jeu.CibleType.persoFriendly";
     }
 
     // Méthodes public

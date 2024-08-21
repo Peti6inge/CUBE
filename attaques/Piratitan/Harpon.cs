@@ -12,7 +12,7 @@ public class Harpon : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = "persoEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEnnemy";
     }
 
     // Méthodes public

@@ -9,7 +9,7 @@ public class CoupDeBaguette : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = "invocationSimpleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante";
     }
 
     // Méthodes public

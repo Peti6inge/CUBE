@@ -9,7 +9,7 @@ public class MainsMaudites : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = false;
-        typeCible = "persoEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEnnemy";
     }
 
     // Méthodes public

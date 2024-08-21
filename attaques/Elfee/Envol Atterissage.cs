@@ -8,7 +8,7 @@ public class EnvolAtterissage : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "envolAtterissage";
+        typeCible = (int)Jeu.CibleType.envolAtterissage";
     }
 
     // Méthodes public

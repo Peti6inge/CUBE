@@ -10,7 +10,7 @@ public class Invisibilite : Attaque
         cout = 2;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "freeOnPerso";
+        typeCible = (int)Jeu.CibleType.freeOnPerso";
         actif = false;
         limitParTour = 1;
     }

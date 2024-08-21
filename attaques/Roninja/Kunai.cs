@@ -9,7 +9,7 @@ public class Kunai : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = "persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
     }
 
     // Méthodes public

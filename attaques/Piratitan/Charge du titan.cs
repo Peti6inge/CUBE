@@ -10,7 +10,7 @@ public class ChargeDuTitan : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = "chargeDuTitan";
+        typeCible = (int)Jeu.CibleType.chargeDuTitan";
         directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<string, string>>()
         {
             {

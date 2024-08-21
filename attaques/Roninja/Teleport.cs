@@ -8,7 +8,7 @@ public class Teleport : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "teleport";
+        typeCible = (int)Jeu.CibleType.teleport";
     }
 
     // Méthodes public

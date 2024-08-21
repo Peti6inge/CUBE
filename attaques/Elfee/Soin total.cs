@@ -9,7 +9,7 @@ public class SoinTotal : Attaque
         porteeMin = 0;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = "soin";
+        typeCible = (int)Jeu.CibleType.soin";
     }
 
     // Méthodes public

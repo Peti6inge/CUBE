@@ -9,7 +9,7 @@ public class Gravite : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = "gravite";
+        typeCible = (int)Jeu.CibleType.gravite";
     }
 
     // Méthodes public

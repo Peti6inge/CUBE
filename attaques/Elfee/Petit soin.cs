@@ -9,7 +9,7 @@ public class PetitSoin : Attaque
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = "soin";
+        typeCible = (int)Jeu.CibleType.soin";
     }
 
     // Méthodes public

@@ -9,7 +9,7 @@ public class Memoire : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "memoire";
+        typeCible = (int)Jeu.CibleType.memoire";
         tp = null;
     }
 

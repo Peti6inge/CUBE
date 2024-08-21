@@ -9,7 +9,7 @@ public class Bombe : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = "invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
         bombe = null;
     }
 

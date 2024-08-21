@@ -9,7 +9,7 @@ public class Inversion : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;
-        typeCible = "inversion";
+        typeCible = (int)Jeu.CibleType.inversion";
     }
 
     // Méthodes public

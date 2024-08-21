@@ -9,7 +9,7 @@ public class Tonneau : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = true;
-        typeCible = "tonneauOuClone";
+        typeCible = (int)Jeu.CibleType.tonneauOuClone";
     }
 
     // Méthodes public

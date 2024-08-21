@@ -9,7 +9,7 @@ public class HautesHerbes : Attaque
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = "hautesHerbes";
+        typeCible = (int)Jeu.CibleType.hautesHerbes";
     }
 
     // Méthodes public

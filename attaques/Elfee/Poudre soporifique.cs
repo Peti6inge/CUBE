@@ -8,7 +8,7 @@ public class PoudreSoporifique : Attaque
         cout = 7;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = "persoEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEnnemy";
     }
 
     // Méthodes public

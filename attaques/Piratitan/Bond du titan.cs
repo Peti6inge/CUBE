@@ -9,7 +9,7 @@ public class BondDuTitan : Attaque
         cout = 4;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "freeOnCase";
+        typeCible = (int)Jeu.CibleType.freeOnCase";
     }
 
     // Méthodes public

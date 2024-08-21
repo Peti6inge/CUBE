@@ -10,7 +10,7 @@ public class PiegeLineaire : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = "piegeLineaire";
+        typeCible = (int)Jeu.CibleType.piegeLineaire";
     }
 
     // Méthodes public

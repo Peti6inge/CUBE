@@ -8,7 +8,7 @@ public class Poudre : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = "freeOnPerso";
+        typeCible = (int)Jeu.CibleType.freeOnPerso";
         limitParTour = 1;
     }
 

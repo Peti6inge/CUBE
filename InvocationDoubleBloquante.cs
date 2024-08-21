@@ -1,7 +1,7 @@
 public class InvocationDoubleBloquante
 {
     // attributs
-    public string type { get; set; }
+    public int type { get; set; }
     public bool isHost { get; set; }
     public int hp { get; set; }
     public int hpMax { get; set; }
@@ -9,7 +9,7 @@ public class InvocationDoubleBloquante
     public Case myCase2 { get; set; }
 
     // Constructeur // DONE
-    public InvocationDoubleBloquante(string type, bool isHost, Case myCase1, Case myCase2)
+    public InvocationDoubleBloquante(int type, bool isHost, Case myCase1, Case myCase2)
     {
         this.type = type;
         this.isHost = isHost;
@@ -17,7 +17,7 @@ public class InvocationDoubleBloquante
         this.myCase2 = myCase2;
         switch (type)
         {
-            case "Carosse":
+            case (int)Jeu.InvocationType.Carosse:
                 hp = hpMax = 10;
                 break;
         }
@@ -27,7 +27,7 @@ public class InvocationDoubleBloquante
     {
         switch (type)
         {
-            case "Carosse":
+            case (int)Jeu.InvocationType.Carosse:
                 activerCarosse(perso);
                 break;
         }
@@ -73,11 +73,10 @@ public class InvocationDoubleBloquante
             Perso elfeeAlliee;
             if (isHost)
                 elfeeAlliee = Jeu.elfeeHost;
-
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
-            ((Altruisme)elfeeAlliee.attaques["Altruisme"]).desactiver();
+            ((Altruisme)elfeeAlliee.attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
         }
         myCase1.invocationDoubleBloquante = null;
         myCase2.invocationDoubleBloquante = null;
@@ -86,15 +85,17 @@ public class InvocationDoubleBloquante
     public bool sousAltruisme() // DONE
     {
         if (
-           (
-               Jeu.elfeeClient.attaques.ContainsKey("Altruisme")
-               && ((Altruisme)Jeu.elfeeClient.attaques["Altruisme"]).getTarget() == this
-           )
-           || (
-               Jeu.elfeeHost.attaques.ContainsKey("Altruisme")
-               && ((Altruisme)Jeu.elfeeHost.attaques["Altruisme"]).getTarget() == this
-           )
-       )
+            (
+                Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
+            )
+            || (
+                Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
+            )
+        )
             return true;
         return false;
     }

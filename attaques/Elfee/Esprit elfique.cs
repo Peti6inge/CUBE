@@ -10,7 +10,7 @@ public class EspritElfique : Attaque
         cout = 5;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = "invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
         espritElfique = null;
     }
 

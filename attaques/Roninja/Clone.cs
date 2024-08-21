@@ -9,7 +9,7 @@ public class Clone : Attaque
         cout = 3;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = "tonneauOuClone";
+        typeCible = (int)Jeu.CibleType.tonneauOuClone";
         myClone = null;
     }
 

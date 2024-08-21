@@ -10,7 +10,7 @@ public class BouleDeFeu : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = "persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
     }
     
     // Méthodes public

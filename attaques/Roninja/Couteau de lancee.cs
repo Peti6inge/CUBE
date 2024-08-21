@@ -10,7 +10,7 @@ public class CouteauDeLancee : Attaque
         porteeMax = 100;
         ligneDeVue = true;
         aligne = true;
-        typeCible = "persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
     }
 
     // Méthodes public

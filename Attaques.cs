@@ -14,7 +14,7 @@ public class Attaque
     public bool ligneDeVue { get; set; }
     public bool aligne { get; set; }
     public List<Face> facesLances { get; set; }
-    public string? typeCible { get; set; }
+    public int typeCible { get; set; }
 
     /*
     CIBLE :
@@ -76,7 +76,7 @@ public class Attaque
     public bool isUsable(Case myCase, Object? cible) // DONE
     {
         { // Conditions génériques
-            if (perso.porte != null && typeCible != "porterDeposer")
+            if (perso.porte != null && typeCible != (int)Jeu.CibleType.PorterDeposer)
                 return false;
 
             if (perso.myCase == null)
@@ -127,7 +127,7 @@ public class Attaque
 
         switch (typeCible) // Conditions spécifiques
         {
-            case "dragNDrop": // DONE
+            case (int)Jeu.CibleType.DragNDrop: // DONE
                 if (perso.mainsMaudites) // cas : Mains maudites
                     return false;
                 if (perso.pierre != null) // cas : Il possède une pierre
@@ -141,7 +141,7 @@ public class Attaque
                     if (
                         myCase.containsDoubleObstacle
                         || myCase.containsSimpleObstacle
-                        || myCase.obstacleSpawn != ""
+                        || myCase.obstacleSpawn != -1
                     ) // cas : La case contient un obstacle
                     {
                         return false;
@@ -164,7 +164,7 @@ public class Attaque
                     }
                     return false;
                 }
-            case "invocationNonBloquante": // DONE
+            case (int)Jeu.CibleType.InvocationNonBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (
@@ -174,43 +174,43 @@ public class Attaque
                     || myCase.invocationsNonBloquantes().Count == 4
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 )
                 {
                     return false;
                 }
                 return true;
-            case "invocationSimpleBloquante": // DONE
+            case (int)Jeu.CibleType.InvocationSimpleBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (myCase.containsSimpleObstacle)
                     return true;
                 return false;
-            case "invocationDoubleBloquante": // DONE
+            case (int)Jeu.CibleType.InvocationDoubleBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (myCase.containsDoubleObstacle)
                     return true;
                 return false;
-            case "freeOnPerso": // DONE
+            case (int)Jeu.CibleType.FreeOnPerso: // DONE
                 if (cible is Perso && (Perso)cible == perso)
                     return true;
                 return false;
-            case "miniaturisation": // DONE
+            case (int)Jeu.CibleType.Miniaturisation: // DONE
                 if (cible is Perso && (Perso)cible == perso && !perso.miniaturisation)
                     return true;
                 return false;
-            case "teleport": // DONE
+            case (int)Jeu.CibleType.Teleport: // DONE
                 if (perso.getAncre())
                     return false;
 
                 if (
                     cible is Perso
                     && (Perso)cible == perso
-                    && perso.attaques.ContainsKey("Memoire")
+                    && perso.attaques.ContainsKey((int)Jeu.AttaqueType.memoire)
                 )
                 {
-                    Case? caseMemoire = ((Memoire)perso.attaques["Memoire"]).getTp();
+                    Case? caseMemoire = ((Memoire)perso.attaques[(int)Jeu.AttaqueType.memoire]).getTp();
                     if (caseMemoire != null)
                     // cas : Le perso a posé un TP
                     {
@@ -233,7 +233,7 @@ public class Attaque
                                 || myCase.invocationDoubleBloquante != null
                                 || myCase.containsTableClient
                                 || myCase.containsTableHost
-                                || myCase.obstacleSpawn != ""
+                                || myCase.obstacleSpawn != -1
                             )
                         ) // cas : La case est visible et contient un obstacle
                             return false;
@@ -241,21 +241,21 @@ public class Attaque
                     }
                 }
                 return false;
-            case "freeOnCase": // DONE
+            case (int)Jeu.CibleType.FreeOnCase: // DONE
                 if (cible == null)
                     return true;
                 return false;
-            case "freeOnFace": // DONE
+            case (int)Jeu.CibleType.FreeOnFace: // DONE
                 if (cible is Face)
                     return true;
                 return false;
-            case "etincelle": // DONE
+            case (int)Jeu.CibleType.Etincelle: // DONE
                 if (cible != null)
                     return false;
                 if (!myCase.containsPoudre)
                     return false;
                 return true;
-            case "ancre": // DONE
+            case (int)Jeu.CibleType.Ancre: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
 
@@ -263,7 +263,7 @@ public class Attaque
                     (cible is bool && !(bool)cible)
                     || (
                         cible is InvocationSimpleBloquante
-                        && ((InvocationSimpleBloquante)cible).type == "Clone"
+                        && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                         && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
                     )
                 )
@@ -280,7 +280,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "attireRepousse": // DONE
+            case (int)Jeu.CibleType.AttireRepousse: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -288,7 +288,7 @@ public class Attaque
                     cible is bool
                     || (
                         cible is InvocationSimpleBloquante
-                        && ((InvocationSimpleBloquante)cible).type == "Clone"
+                        && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                         && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
                     ) // cas : Cible est un clone ou on tente d'atteindre un perso invisible
                 )
@@ -303,11 +303,11 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "persoFriendly": // DONE
+            case (int)Jeu.CibleType.PersoFriendly: // DONE
                 if (cible is Perso && ((Perso)cible).isHost == perso.isHost)
                     return true;
                 return false;
-            case "persoEnnemy": // DONE
+            case (int)Jeu.CibleType.PersoEnnemy: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -316,13 +316,13 @@ public class Attaque
                     || cible is bool
                     || (
                         cible is InvocationSimpleBloquante
-                        && ((InvocationSimpleBloquante)cible).type == "Clone"
+                        && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                         && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
                     )
                 )
                     return true;
                 return false;
-            case "soin": // DONE
+            case (int)Jeu.CibleType.Soin: // DONE
                 if (
                     (
                         cible is Perso
@@ -350,7 +350,7 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case "altruisme": // DONE
+            case (int)Jeu.CibleType.Altruisme: // DONE
                 if (
                     (cible is Perso && ((Perso)cible).isHost == perso.isHost)
                     || (
@@ -368,7 +368,7 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case "persoEtInvocEnnemy": // DONE
+            case (int)Jeu.CibleType.PersoEtInvocEnnemy: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -390,12 +390,12 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case "frappeDuPirate": // DONE
+            case (int)Jeu.CibleType.FrappeDuPirate: // DONE
                 if (cible != null) // cas : Cible autre que la case
                     return false;
                 else if (
                     myCase.invocationSimpleBloquante != null
-                    && myCase.invocationSimpleBloquante.type == "Clone"
+                    && myCase.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Clone
                 ) // cas : La case contient un clone
                     return false;
                 else if (
@@ -413,7 +413,7 @@ public class Attaque
                     return true;
                 }
                 return false;
-            case "frappeDuTitan": // DONE
+            case (int)Jeu.CibleType.FrappeDuTitan: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -426,7 +426,7 @@ public class Attaque
                     || myCase.invocationsNonBloquantes().Count != 0
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 ) // Cas : La case contient un obstacle
                     return false;
                 else
@@ -436,7 +436,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case "tonneauOuClone": // DONE
+            case (int)Jeu.CibleType.TonneauOuClone: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -447,7 +447,7 @@ public class Attaque
                     || myCase.invocationDoubleBloquante != null
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 ) // Cas : La case contient un obstacle
                     return false;
                 else
@@ -457,7 +457,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case "porterDeposer": // DONE
+            case (int)Jeu.CibleType.PorterDeposer: // DONE
                 if (perso.porte != null) // Cas : Le perso doit déposer sur une case
                 {
                     if (cible != null) // Cas : Cible n'est pas une case
@@ -469,7 +469,7 @@ public class Attaque
                         || myCase.invocationDoubleBloquante != null
                         || myCase.containsTableClient
                         || myCase.containsTableHost
-                        || myCase.obstacleSpawn != ""
+                        || myCase.obstacleSpawn != -1
                     ) // Cas : La case contient un obstacle
                         return false;
                     else
@@ -493,13 +493,13 @@ public class Attaque
                         return true;
                     return false;
                 }
-            case "planche": // DONE
+            case (int)Jeu.CibleType.Planche: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (myCase.containsTrou || myCase.containsGlissante)
                     return true;
                 return false;
-            case "gravite": // DONE
+            case (int)Jeu.CibleType.Gravite: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
 
@@ -513,7 +513,7 @@ public class Attaque
                     return false;
 
                 return true;
-            case "chargeDuTitan": // DONE
+            case (int)Jeu.CibleType.ChargeDuTitan: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -523,7 +523,7 @@ public class Attaque
                     || myCase.invocationDoubleBloquante != null
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 ) // Cas : La case contient un obstacle
                 {
                     return false;
@@ -535,7 +535,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case "hautesHerbes": // DONE
+            case (int)Jeu.CibleType.HautesHerbes: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -545,13 +545,13 @@ public class Attaque
                     || myCase.containsTrou
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 ) // Cas : La case contient un obstacle
                 {
                     return false;
                 }
                 return true;
-            case "reanimation": // DONE
+            case (int)Jeu.CibleType.Reanimation: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
 
@@ -563,27 +563,27 @@ public class Attaque
 
                 switch (myCase.obstacleSpawn)
                 {
-                    case "": // Cas : La case n'est pas un spawn
+                    case -1: // Cas : La case n'est pas un spawn
                         return false;
-                    case "Roninja":
+                    case (int)Jeu.SpawnType.Roninja:
                         if (perso.isHost && Jeu.roninjaHost.coolDownKO == 0) // Cas : Le roninja host n'est pas KO
                             return false;
                         if (!perso.isHost && Jeu.roninjaClient.coolDownKO == 0) // Cas : Le roninja client n'est pas KO
                             return false;
                         return true;
-                    case "Fantomage":
+                    case (int)Jeu.SpawnType.Fantomage:
                         if (perso.isHost && Jeu.fantomageHost.coolDownKO == 0) // Cas : Le fantomage host n'est pas KO
                             return false;
                         if (!perso.isHost && Jeu.fantomageClient.coolDownKO == 0) // Cas : Le fantomage client n'est pas KO
                             return false;
                         return true;
-                    case "Elfee":
+                    case (int)Jeu.SpawnType.Elfee:
                         if (perso.isHost && Jeu.elfeeHost.coolDownKO == 0) // Cas : L'elfee host n'est pas KO
                             return false;
                         if (!perso.isHost && Jeu.elfeeClient.coolDownKO == 0) // Cas : L'elfee client n'est pas KO
                             return false;
                         return true;
-                    case "Piratitan":
+                    case (int)Jeu.SpawnType.Piratitan:
                         if (perso.isHost && Jeu.piratitanHost.coolDownKO == 0) // Cas : Le piratitan host n'est pas KO
                             return false;
                         if (!perso.isHost && Jeu.piratitanClient.coolDownKO == 0) // Cas : Le piratitan client n'est pas KO
@@ -592,7 +592,7 @@ public class Attaque
                     default:
                         return false;
                 }
-            case "flecheDeLumiere": // DONE
+            case (int)Jeu.CibleType.FlecheDeLumiere: // DONE
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
@@ -610,7 +610,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "derobadeDeLOmbre": // DONE
+            case (int)Jeu.CibleType.DerobadeDeLOmbre: // DONE
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
@@ -628,7 +628,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "piegeSimple": // DONE
+            case (int)Jeu.CibleType.PiegeSimple: // DONE
                 if (cible != null)
                     return false;
 
@@ -636,7 +636,7 @@ public class Attaque
                     return false;
 
                 return true;
-            case "piegeLineaire": // DONE
+            case (int)Jeu.CibleType.PiegeLineaire: // DONE
                 if (cible != null)
                     return false;
 
@@ -649,7 +649,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case "acide": // DONE
+            case (int)Jeu.CibleType.Acide: // DONE
                 if (cible != null)
                     return false;
 
@@ -657,7 +657,7 @@ public class Attaque
                     return true;
 
                 return false;
-            case "derobade": // DONE
+            case (int)Jeu.CibleType.Derobade: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -684,7 +684,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "transposition": // DONE
+            case (int)Jeu.CibleType.Transposition: // DONE
                 if (perso.getAncre()) // Je suis ancré
                     return false;
 
@@ -700,7 +700,7 @@ public class Attaque
                 }
                 else if (
                     cible is InvocationSimpleBloquante
-                    && ((InvocationSimpleBloquante)cible).type == "Clone"
+                    && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                     && ((InvocationSimpleBloquante)cible).isHost == perso.isHost
                 ) // La cible est un clone allié
                 {
@@ -708,7 +708,7 @@ public class Attaque
                 }
 
                 return false;
-            case "inversion": // DONE
+            case (int)Jeu.CibleType.Inversion: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -726,7 +726,7 @@ public class Attaque
                 }
                 else if (
                     cible is InvocationSimpleBloquante
-                    && ((InvocationSimpleBloquante)cible).type == "Clone"
+                    && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                     && ((InvocationSimpleBloquante)cible).isHost != perso.isHost
                 )
                 {
@@ -744,7 +744,7 @@ public class Attaque
                     return true;
                 }
                 return false;
-            case "poseGlissante": // DONE
+            case (int)Jeu.CibleType.PoseGlissante: // DONE
                 if (cible != null)
                     return false;
                 else if (
@@ -754,11 +754,11 @@ public class Attaque
                     || myCase.containsTrou
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 )
                     return false;
                 return true;
-            case "feuFollet": // DONE
+            case (int)Jeu.CibleType.FeuFollet: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
                     
@@ -775,7 +775,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "rappel": // DONE
+            case (int)Jeu.CibleType.Rappel: // DONE
                 if (!(cible is Perso))
                     return false;
                 else
@@ -789,7 +789,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case "caseDeRapatriement": // DONE
+            case (int)Jeu.CibleType.CaseDeRapatriement: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -800,7 +800,7 @@ public class Attaque
                     || myCase.invocationDoubleBloquante != null
                     || myCase.containsTableClient
                     || myCase.containsTableHost
-                    || myCase.obstacleSpawn != ""
+                    || myCase.obstacleSpawn != -1
                 ) // Cas : La case contient un obstacle
                     return false;
                 else if (myCase.containsCaseRappatriement()) // Cas : La case contient une case de rappatriement
@@ -812,7 +812,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case "memoire": // DONE
+            case (int)Jeu.CibleType.Memoire: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -821,7 +821,7 @@ public class Attaque
                 ) // Cas : La case contient déjà un TP Roninja
                     return false;
                 return true;
-            case "envolAtterissage": // DONE
+            case (int)Jeu.CibleType.EnvolAtterissage: // DONE
                 if (!(cible is Perso))
                     return false;
                 else
@@ -838,7 +838,7 @@ public class Attaque
                             || myCase.invocationDoubleBloquante != null
                             || myCase.containsTableClient
                             || myCase.containsTableHost
-                            || myCase.obstacleSpawn != ""
+                            || myCase.obstacleSpawn != -1
                         )
                             return false;
                         Perso? persoUnder = perso.myCase.perso();
@@ -854,11 +854,11 @@ public class Attaque
                         return true;
                     }
                 }
-            case "esquive": // DONE
+            case (int)Jeu.CibleType.Esquive: // DONE
                 if (cible is Perso && (Perso)cible == perso && !((Perso)cible).esquive)
                     return true;
                 return false;
-            case "sortDeProtection": // DONE
+            case (int)Jeu.CibleType.SortDeProtection: // DONE
                 if (
                     cible is Perso
                     && ((Perso)cible).isHost == perso.isHost
@@ -950,7 +950,7 @@ public class Attaque
             || myCase.invocationDoubleBloquante != null
             || myCase.containsTableClient
             || myCase.containsTableHost
-            || myCase.obstacleSpawn != ""
+            || myCase.obstacleSpawn != -1
         ) // Cas : La case contient un obstacle
         {
             return false;

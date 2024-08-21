@@ -9,7 +9,7 @@ public class CaseTerrifiante : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = "piegeSimple";
+        typeCible = (int)Jeu.CibleType.piegeSimple";
     }
 
     // Méthodes public
