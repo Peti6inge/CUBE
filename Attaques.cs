@@ -207,7 +207,8 @@ public class Attaque
                 if (
                     cible is Perso
                     && (Perso)cible == perso
-                    && perso.attaques.ContainsKey("Memoire"))
+                    && perso.attaques.ContainsKey("Memoire")
+                )
                 {
                     Case? caseMemoire = ((Memoire)perso.attaques["Memoire"]).getTp();
                     if (caseMemoire != null)

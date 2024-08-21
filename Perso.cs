@@ -200,7 +200,7 @@ public class Perso
         {
             attaque.debutTour();
         }
-        
+
         derniereVolonte = false;
 
         energieActive = energie;
@@ -1175,7 +1175,7 @@ public class Perso
                 else
                     res = res && myCase != null && !myCase.containsBrumeRoninjaHost;
             }
-            
+
             return res;
         }
     }
@@ -1312,7 +1312,6 @@ public class Perso
             candidatElixirAgressif = Jeu.elfeeClient;
         if (candidatElixirAgressif.attaques.ContainsKey("ElixirAgressif"))
             ((ElixirAgressif)candidatElixirAgressif.attaques["ElixirAgressif"]).desactiver(this);
-        
     }
 
     private List<InvocationSimpleBloquante> grossesPotionsAActiver() // DONE
