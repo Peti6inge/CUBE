@@ -725,7 +725,11 @@ public class Case
 
     public bool pierreAddable() // DONE
     {
-        return !containsSimpleObstacle && !containsDoubleObstacle && (obstacleSpawn != Jeu.SpawnType.none);
+        return !containsSimpleObstacle
+            && !containsDoubleObstacle
+            && (obstacleSpawn != Jeu.SpawnType.none)
+            && !containsTableHost
+            && !containsTableClient;
     }
 
     public void tryToAddAround(Pierre pierre) // DONE

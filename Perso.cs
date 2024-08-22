@@ -482,11 +482,13 @@ public class Perso
         }
     }
 
-    public void dropPierre(Case? caseCible = null) // DONE
+    public Jeu.EtatType dropPierre(Case? caseCible = null) // DONE
     {
+
+        Jeu.EtatType etat = Jeu.EtatType.normal;
         caseCible = caseCible == null ? myCase : caseCible;
         if (caseCible == null || pierre == null)
-            return;
+            return Jeu.EtatType.normal;
 
         InvocationSimpleBloquante? coffreLePlusPres = caseCible.face.coffreLePlusPres(caseCible);
 
@@ -495,14 +497,22 @@ public class Perso
             if (pierre.isHost)
                 Jeu.PierreToTable(pierre);
             else
+            {
                 Jeu.EncaissePierre(pierre);
+                if (!pierre.lumiere)
+                    etat = Jeu.EtatType.winHost;
+            }
         }
         else if (caseCible.containsTableClient)
         {
             if (pierre.isHost)
                 Jeu.EncaissePierre(pierre);
             else
+            {
                 Jeu.PierreToTable(pierre);
+                if (!pierre.lumiere)
+                    etat = Jeu.EtatType.winClient;
+            }
         }
         else if (coffreLePlusPres != null)
             coffreLePlusPres.activerCoffre(pierre);
@@ -518,6 +528,7 @@ public class Perso
             caseCible.addPierre(pierre);
 
         pierre = null;
+        return etat;
     }
 
     public void miss() // DONE
@@ -571,29 +582,31 @@ public class Perso
             infligeDegats(degats, (InvocationNonBloquante)cible);
     }
 
-    public void recoitDegats(int degats, bool ignoreFeinte = false) // DONE
+    public Jeu.EtatType recoitDegats(int degats, bool ignoreFeinte = false) // DONE
     {
+        Jeu.EtatType etatNormal = Jeu.EtatType.normal;
         if (hp <= 0)
         {
-            return;
+            return etatNormal;
         }
 
         reveal();
 
         if (!ignoreFeinte && feinte && !isAncre() && estPortePar() != null)
         {
-            recoitDegats(degats, ignoreFeinte: true);
-            ((Feinte)attaques[Jeu.AttaqueType.feinte]).activerFeinte();
-            return;
+            Jeu.EtatType etat = recoitDegats(degats, ignoreFeinte: true);
+            if (etat != Jeu.EtatType.ko)
+                ((Feinte)attaques[Jeu.AttaqueType.feinte]).activerFeinte();
+            return etat;
         }
 
         if (invincible)
-            return;
+            return etatNormal;
 
         if (esquive)
         {
             esquive = false;
-            return;
+            return etatNormal;
         }
 
         if (sousAltruisme())
@@ -602,17 +615,20 @@ public class Perso
                 Jeu.elfeeHost.recoitDegats(degats);
             else
                 Jeu.elfeeClient.recoitDegats(degats);
-
-            return;
+            return etatNormal;
         }
         hp -= Math.Min(hp, degats);
         if (hp <= 0)
+        {
             estKO();
+            return Jeu.EtatType.ko;
+        }
         else if (enVol)
         {
             enVol = false;
             elfeeTombe();
         }
+        return etatNormal;
     }
 
     public void recoitSoin(int soin) // DONE
@@ -810,17 +826,19 @@ public class Perso
         }
     }
 
-    public void tombeDansTrou() // DONE
+    public Jeu.EtatType tombeDansTrou() // DONE
     {
         if (!isAncre() && pirouette)
         {
             dropPierre();
             pirouette = false;
             ((Pirouette)attaques[Jeu.AttaqueType.pirouette]).activer();
+            return Jeu.EtatType.normal;
         }
         else
         {
             estKO(tombeDansTrou: true);
+            return Jeu.EtatType.ko;
         }
     }
 
@@ -1395,31 +1413,35 @@ public class Perso
         }
     }
 
-    private void elfeeTombe() // DONE
+    private Jeu.EtatType elfeeTombe() // DONE
     {
         if (myCase == null)
-            return;
+            return Jeu.EtatType.normal;
 
         if (myCase.containsSimpleObstacle) // cas : chute sur un simple obstacle
         {
             myCase.containsSimpleObstacle = false;
             estKO();
+            return Jeu.EtatType.ko;
         }
         else if (myCase.containsDoubleObstacle) // cas : chute sur un double obstacle
         {
             myCase.containsDoubleObstacle = false;
             myCase.getDeuxiemeCaseDoubleObstacle().containsDoubleObstacle = false;
             estKO();
+            return Jeu.EtatType.ko;
         }
         else if (myCase.invocationSimpleBloquante != null) // cas : chute sur invocation simple bloquante
         {
             myCase.invocationSimpleBloquante.estKO();
             estKO();
+            return Jeu.EtatType.ko;
         }
         else if (myCase.invocationDoubleBloquante != null) // cas : chute sur invocation double bloquante
         {
             myCase.invocationDoubleBloquante.estKO();
             estKO();
+            return Jeu.EtatType.ko;
         }
         else
         {
@@ -1428,11 +1450,14 @@ public class Perso
             {
                 perso.recoitDegats(4);
                 estKO();
+                return Jeu.EtatType.ko;
             }
             else // cas : chute sur une case vide
             {
-                recoitDegats(4);
-                myCase.persoEnterCase(this);
+                Jeu.EtatType etat = recoitDegats(4);
+                if (etat != Jeu.EtatType.ko)
+                    myCase.persoEnterCase(this);
+                return etat;
             }
         }
     }

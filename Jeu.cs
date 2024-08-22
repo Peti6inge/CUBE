@@ -249,6 +249,14 @@ public class Jeu
         none
     }
 
+    public enum EtatType
+    {
+        normal,
+        ko,
+        winClient,
+        winHost
+    }
+
     // Méthodes public
 
     public static void InitJeu() // TODO : Récupérer les attaques des personnages
@@ -460,7 +468,7 @@ public class Jeu
         }
     }
 
-    public static void EncaissePierre(Pierre pierre) // TODO : Gérer la win
+    public static void EncaissePierre(Pierre pierre) // DONE
     {
         if (pierre.isHost)
         {
@@ -468,10 +476,6 @@ public class Jeu
             {
                 pierrelumierehostobtenue = true;
                 PierreToTable(pierreombrehost);
-            }
-            else
-            {
-                // win client
             }
         }
         else
@@ -481,10 +485,6 @@ public class Jeu
                 pierrelumiereclientobtenue = true;
                 PierreToTable(pierreombreclient);
             }
-            else
-            {
-                // win host
-            }
         }
     }
 
@@ -493,7 +493,7 @@ public class Jeu
         return new List<Face> { north, south, east, west, host, client };
     }
 
-    // Méthodes private
+    // Méthodes private 
 
     private static void Shuffle<T>(List<T> list, Random rng) // DONE
     {
