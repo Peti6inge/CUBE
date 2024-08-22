@@ -1,13 +1,13 @@
 public class Piege
 {
     // Attributs
-    private int type;
+    private Jeu.PiegeType type;
     private bool isHost;
     Case myCase;
     Case? myCaseFinale;
 
     // Constructeur // DONE
-    public Piege(int type, bool isHost, Case myCase, Case? myCaseFinale = null)
+    public Piege(Jeu.PiegeType type, bool isHost, Case myCase, Case? myCaseFinale = null)
     {
         this.type = type;
         this.isHost = isHost;

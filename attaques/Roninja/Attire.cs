@@ -39,7 +39,7 @@ public class Attire : Attaque
             if (ciblePerso == null || ciblePerso.myCase == null) // Cas : Cible est absente
                 return;
 
-            int direction = ciblePerso.myCase.directionTo(perso.myCase);
+            Jeu.DirectionType direction = ciblePerso.myCase.directionTo(perso.myCase);
 
             if (ciblePerso.canMoveDirection(direction))
                 ciblePerso.moveDirection(direction, attire: true);

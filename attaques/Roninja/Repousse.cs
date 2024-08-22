@@ -38,7 +38,7 @@ public class Repousse : Attaque
             if (ciblePerso == null || ciblePerso.myCase == null) // Cas : Cible est absente
                 return;
 
-            int direction = ciblePerso.myCase.directionTo(perso.myCase, directionInverse: true);
+            Jeu.DirectionType direction = ciblePerso.myCase.directionTo(perso.myCase, directionInverse: true);
 
             if (ciblePerso.canMoveDirection(direction))
                 ciblePerso.moveDirection(direction, repousse: true);

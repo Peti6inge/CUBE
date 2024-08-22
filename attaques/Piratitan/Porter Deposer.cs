@@ -19,7 +19,7 @@ public class PorterDeposer : Attaque
         uses();
         if (perso.porte != null && perso.porte.myCase != null) // Déposer
         {
-            int direction = perso.porte.myCase.directionTo(myCase);
+            Jeu.DirectionType direction = perso.porte.myCase.directionTo(myCase);
             perso.porte.moveDirection(direction, porterDeposer: true);
         }
         else if (cible != null && perso.myCase != null) // Porter

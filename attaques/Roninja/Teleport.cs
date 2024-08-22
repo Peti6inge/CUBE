@@ -29,7 +29,7 @@ public class Teleport : Attaque
             || caseMemoire.invocationDoubleBloquante != null
             || caseMemoire.containsTableClient
             || caseMemoire.containsTableHost
-            || caseMemoire.obstacleSpawn != -1
+            || caseMemoire.obstacleSpawn != Jeu.SpawnType.none
         ) // Cas : Le tp est bloqué par un obstacle
         {
             perso.energieActive += cout - 1;

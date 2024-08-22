@@ -41,7 +41,7 @@ public class PiegeLineaire : Attaque
             return;
         }
 
-        int direction = perso.myCase.directionTo(myCase);
+        Jeu.DirectionType direction = perso.myCase.directionTo(myCase);
         Case caseNextToPerso = perso.myCase.nextCaseDirection(direction);
 
         Piege piegeAPoser = new Piege(

@@ -634,7 +634,7 @@ public class Perso
             || c.containsDoubleObstacle
             || c.containsTableClient
             || c.containsTableHost
-            || c.obstacleSpawn != -1
+            || c.obstacleSpawn != Jeu.SpawnType.none
         )
             return null;
 
@@ -826,8 +826,8 @@ public class Perso
 
     public Dictionary<Jeu.InvocationType, InvocationNonBloquante> entitesInvoquees() // DONE
     {
-        Dictionary<int, InvocationNonBloquante> entitesInvoquees =
-            new Dictionary<int, InvocationNonBloquante>();
+        Dictionary<Jeu.InvocationType, InvocationNonBloquante> entitesInvoquees =
+            new Dictionary<Jeu.InvocationType, InvocationNonBloquante>();
         InvocationNonBloquante? candidate;
         if (attaques.ContainsKey(Jeu.AttaqueType.bombe))
         {

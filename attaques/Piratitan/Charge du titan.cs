@@ -1,7 +1,7 @@
 public class ChargeDuTitan : Attaque
 {
     // Attributs // DONE
-    private Dictionary<Face, Dictionary<int, int>> directionsAbsoluesToRelatives;
+    private Dictionary<Face, Dictionary<Jeu.DirectionType, Jeu.DirectionType>> directionsAbsoluesToRelatives;
 
     // Constructeur // DONE
     public ChargeDuTitan(Perso perso)
@@ -11,11 +11,11 @@ public class ChargeDuTitan : Attaque
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.chargeDuTitan;
-        directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<int, int>>()
+        directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<Jeu.DirectionType, Jeu.DirectionType>>()
         {
             {
                 Jeu.host,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Up, Jeu.DirectionType.Up },
                     { Jeu.DirectionType.Down, Jeu.DirectionType.Down },
@@ -27,7 +27,7 @@ public class ChargeDuTitan : Attaque
             },
             {
                 Jeu.client,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Up, Jeu.DirectionType.Down },
                     { Jeu.DirectionType.Down, Jeu.DirectionType.Up },
@@ -37,7 +37,7 @@ public class ChargeDuTitan : Attaque
             },
             {
                 Jeu.north,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Up, Jeu.DirectionType.Up },
                     { Jeu.DirectionType.Down, Jeu.DirectionType.Down },
@@ -47,7 +47,7 @@ public class ChargeDuTitan : Attaque
             },
             {
                 Jeu.south,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Up, Jeu.DirectionType.Down },
                     { Jeu.DirectionType.Down, Jeu.DirectionType.Up },
@@ -57,7 +57,7 @@ public class ChargeDuTitan : Attaque
             },
             {
                 Jeu.east,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Right, Jeu.DirectionType.Up },
                     { Jeu.DirectionType.Left, Jeu.DirectionType.Down },
@@ -67,7 +67,7 @@ public class ChargeDuTitan : Attaque
             },
             {
                 Jeu.west,
-                new Dictionary<int, int>
+                new Dictionary<Jeu.DirectionType, Jeu.DirectionType>
                 {
                     { Jeu.DirectionType.Left, Jeu.DirectionType.Up },
                     { Jeu.DirectionType.Right, Jeu.DirectionType.Down },
@@ -88,13 +88,13 @@ public class ChargeDuTitan : Attaque
             if (perso.myCase == null)
                 return;
 
-            int direction = perso.myCase.directionTo(myCase);
+            Jeu.DirectionType direction = perso.myCase.directionTo(myCase);
 
-            int absoluteDirection = getAbsoluteDirection(direction);
+            Jeu.DirectionType absoluteDirection = getAbsoluteDirection(direction);
             int casesParcourues = 0;
             while (casesParcourues < 32)
             {
-                int relativeDirection = getRelativeDirection(absoluteDirection);
+                Jeu.DirectionType relativeDirection = getRelativeDirection(absoluteDirection);
 
                 if (
                     perso.harponne.Count > 0
@@ -106,7 +106,7 @@ public class ChargeDuTitan : Attaque
                 {
                     perso.moveDirection(relativeDirection, chargeDuTitan: true);
                     casesParcourues++;
-                    if (perso.myCase.obstacleSpawn == Jeu.PersoType.Piratitan)
+                    if (perso.myCase.obstacleSpawn == Jeu.SpawnType.Piratitan)
                         break;
                 }
                 else
@@ -115,7 +115,7 @@ public class ChargeDuTitan : Attaque
 
                     Object? obstacleRencontre = perso.nextObstacleDirection(relativeDirection);
                     if (obstacleRencontre != null)
-                        perso.infligeDegats((int)(casesParcourues / 2), obstacleRencontre);
+                        perso.infligeDegats(casesParcourues / 2, obstacleRencontre);
 
                     break;
                 }
@@ -125,19 +125,19 @@ public class ChargeDuTitan : Attaque
 
     // Méthodes privées
 
-    private int getRelativeDirection(int direction) // DONE
+    private Jeu.DirectionType getRelativeDirection(Jeu.DirectionType direction) // DONE
     {
         if (perso.myCase != null)
             return directionsAbsoluesToRelatives[perso.myCase.face][direction];
-        return -1;
+        return Jeu.DirectionType.none;
     }
 
-    private int getAbsoluteDirection(int direction) // DONE
+    private Jeu.DirectionType getAbsoluteDirection(Jeu.DirectionType direction) // DONE
     {
         if (perso.myCase != null)
             return directionsAbsoluesToRelatives[perso.myCase.face]
                 .FirstOrDefault(x => x.Value == direction)
                 .Key;
-        return -1;
+        return Jeu.DirectionType.none;
     }
 }

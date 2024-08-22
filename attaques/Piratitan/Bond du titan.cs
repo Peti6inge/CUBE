@@ -67,7 +67,7 @@ public class BondDuTitan : Attaque
 
     // Méthodes private
 
-    private void pousser(Perso? persoCible, int direction) // DONE
+    private void pousser(Perso? persoCible, Jeu.DirectionType direction) // DONE
     {
         if (persoCible != null && persoCible.canMoveDirection(direction) && !persoCible.isAncre())
             persoCible.moveDirection(direction, bondDuTitan: true);
