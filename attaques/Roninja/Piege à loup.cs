@@ -10,7 +10,7 @@ public class PiegeALoup : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.piegeSimple;
+        typeCible = Jeu.CibleType.piegeSimple;
     }
 
     // Méthodes public
@@ -24,9 +24,9 @@ public class PiegeALoup : Attaque
         else
         {
             if (perso.isHost)
-                myCase.piegeHost = new Piege((int)Jeu.PiegeType.PiegeALoup, perso.isHost, myCase);
+                myCase.piegeHost = new Piege(Jeu.PiegeType.PiegeALoup, perso.isHost, myCase);
             else
-                myCase.piegeClient = new Piege((int)Jeu.PiegeType.PiegeALoup, perso.isHost, myCase);
+                myCase.piegeClient = new Piege(Jeu.PiegeType.PiegeALoup, perso.isHost, myCase);
         }
     }
 }

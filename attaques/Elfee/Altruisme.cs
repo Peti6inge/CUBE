@@ -12,7 +12,7 @@ public class Altruisme : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.altruisme;
+        typeCible = Jeu.CibleType.altruisme;
         toursRestants = 0;
     }
 

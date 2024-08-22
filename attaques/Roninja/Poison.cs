@@ -11,7 +11,7 @@ public class Poison : Attaque
         porteeMax = 2;
         ligneDeVue = true;
         limitParCible = 1;
-        typeCible = (int)Jeu.CibleType.persoEnnemy;
+        typeCible = Jeu.CibleType.persoEnnemy;
     }
 
     // Méthodes public

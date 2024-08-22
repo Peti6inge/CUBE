@@ -10,7 +10,7 @@ public class CoupDeFeu : Attaque
         porteeMin = 1;
         porteeMax = 4;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy;
+        typeCible = Jeu.CibleType.persoEtInvocEnnemy;
     }
 
     // Méthodes public

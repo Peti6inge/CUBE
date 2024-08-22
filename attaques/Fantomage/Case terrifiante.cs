@@ -10,7 +10,7 @@ public class CaseTerrifiante : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.piegeSimple;
+        typeCible = Jeu.CibleType.piegeSimple;
     }
 
     // Méthodes public
@@ -25,13 +25,13 @@ public class CaseTerrifiante : Attaque
         {
             if (perso.isHost)
                 myCase.piegeHost = new Piege(
-                    (int)Jeu.PiegeType.CaseTerrifiante,
+                    Jeu.PiegeType.CaseTerrifiante,
                     perso.isHost,
                     myCase
                 );
             else
                 myCase.piegeClient = new Piege(
-                    (int)Jeu.PiegeType.CaseTerrifiante,
+                    Jeu.PiegeType.CaseTerrifiante,
                     perso.isHost,
                     myCase
                 );

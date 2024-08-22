@@ -3,7 +3,7 @@ public class Case
     // Attributs // DONE
     public bool containsSimpleObstacle { get; set; }
     public bool containsDoubleObstacle { get; set; }
-    public int orientationDoubleObstacle { get; set; }
+    public Jeu.DirectionType orientationDoubleObstacle { get; set; }
     public bool containsGlissante { get; set; }
     public bool containsCamouflage { get; set; }
     public bool containsTrou { get; set; }
@@ -18,17 +18,17 @@ public class Case
     public bool containsPoudre { get; set; }
     public bool containsTableHost { get; set; }
     public bool containsTableClient { get; set; }
-    public int obstacleSpawn { get; set; }
+    public Jeu.SpawnType obstacleSpawn { get; set; }
     public Face face { get; set; }
     public int row { get; set; }
     public int col { get; set; }
 
     // Constructeur // DONE
-    public Case(int type, Face face, int row, int col)
+    public Case(Jeu.CaseType type, Face face, int row, int col)
     {
         containsSimpleObstacle = false;
         containsDoubleObstacle = false;
-        orientationDoubleObstacle = -1;
+        orientationDoubleObstacle = Jeu.DirectionType.none;
         containsGlissante = false;
         containsCamouflage = false;
         containsTrou = false;
@@ -39,51 +39,62 @@ public class Case
         containsPoudre = false;
         containsTableHost = false;
         containsTableClient = false;
-        obstacleSpawn = -1;
+        obstacleSpawn = Jeu.SpawnType.none;
         this.face = face;
         this.row = row;
         this.col = col;
 
         switch (type)
         {
-            case (int)Jeu.CaseType.Vide:
+            case Jeu.CaseType.Vide:
                 break;
-            case (int)Jeu.CaseType.SimpleObstacle:
+            case Jeu.CaseType.SimpleObstacle:
                 containsSimpleObstacle = true;
                 break;
-            case (int)Jeu.CaseType.Table:
-                if (face.name == (int)Jeu.FaceType.Host)
+            case Jeu.CaseType.Table:
+                if (face.name == Jeu.FaceType.Host)
                     containsTableHost = true;
                 else
                     containsTableClient = true;
                 break;
-            case (int)Jeu.CaseType.DoubleObstacleHaut:
+            case Jeu.CaseType.DoubleObstacleHaut:
                 containsDoubleObstacle = true;
-                orientationDoubleObstacle = (int)Jeu.DirectionType.Up;
+                orientationDoubleObstacle = Jeu.DirectionType.Up;
                 break;
-            case (int)Jeu.CaseType.DoubleObstacleBas:
+            case Jeu.CaseType.DoubleObstacleBas:
                 containsDoubleObstacle = true;
-                orientationDoubleObstacle = (int)Jeu.DirectionType.Down;
+                orientationDoubleObstacle = Jeu.DirectionType.Down;
                 break;
-            case (int)Jeu.CaseType.DoubleObstacleGauche:
+            case Jeu.CaseType.DoubleObstacleGauche:
                 containsDoubleObstacle = true;
-                orientationDoubleObstacle = (int)Jeu.DirectionType.Left;
+                orientationDoubleObstacle = Jeu.DirectionType.Left;
                 break;
-            case (int)Jeu.CaseType.DoubleObstacleDroite:
+            case Jeu.CaseType.DoubleObstacleDroite:
                 containsDoubleObstacle = true;
-                orientationDoubleObstacle = (int)Jeu.DirectionType.Right;
+                orientationDoubleObstacle = Jeu.DirectionType.Right;
                 break;
-            case (int)Jeu.CaseType.Trou:
+            case Jeu.CaseType.Trou:
                 containsTrou = true;
                 break;
-            case (int)Jeu.CaseType.Camouflage:
+            case Jeu.CaseType.Camouflage:
                 containsCamouflage = true;
                 break;
-            case (int)Jeu.CaseType.Glissante:
+            case Jeu.CaseType.Glissante:
                 containsGlissante = true;
                 break;
+            case Jeu.CaseType.Roninja:
+                obstacleSpawn = Jeu.SpawnType.Roninja;
+                break;
+            case Jeu.CaseType.Piratitan:
+                obstacleSpawn = Jeu.SpawnType.Piratitan;
+                break;
+            case Jeu.CaseType.Fantomage:
+                obstacleSpawn = Jeu.SpawnType.Fantomage;
+                break;
+            case Jeu.CaseType.Elfee:
+                obstacleSpawn = Jeu.SpawnType.Elfee;
+                break;
             default:
-                obstacleSpawn = type;
                 break;
         }
     }
@@ -112,7 +123,7 @@ public class Case
         {
             if (
                 (persoOverCandidat != null && persoOverCandidat.isVisibleForMe(byPerso.isHost))
-                || obstacleSpawn != -1
+                || obstacleSpawn != Jeu.SpawnType.none
                 || containsTableHost
                 || containsTableClient
             )
@@ -127,7 +138,7 @@ public class Case
             || invocationDoubleBloquante != null
             || containsTableHost
             || containsTableClient
-            || obstacleSpawn != -1
+            || obstacleSpawn != Jeu.SpawnType.none
             || (persoCandidat != null && persoCandidat.isVisibleForMe(byPerso.isHost))
         )
         {
@@ -169,7 +180,7 @@ public class Case
         {
             if (
                 persoOverCandidat != null
-                || obstacleSpawn != -1
+                || obstacleSpawn != Jeu.SpawnType.none
                 || containsTableHost
                 || containsTableClient
             )
@@ -184,7 +195,7 @@ public class Case
             || invocationDoubleBloquante != null
             || containsTableHost
             || containsTableClient
-            || obstacleSpawn != -1
+            || obstacleSpawn != Jeu.SpawnType.none
             || persoCandidat != null
         )
         {
@@ -215,7 +226,7 @@ public class Case
         bool crapeauHost = false,
         bool crapeauClient = false,
         bool newFace = false,
-        int direction = -1,
+        Jeu.DirectionType direction = Jeu.DirectionType.none,
         bool respawn = false
     ) // DONE
     {
@@ -363,7 +374,7 @@ public class Case
         {
             byPerso.tombeDansTrou();
         }
-        if (containsGlissante && !byPerso.enVol && direction != -1)
+        if (containsGlissante && !byPerso.enVol && direction != Jeu.DirectionType.none)
         {
             if (!byPerso.isAncre() && byPerso.canMoveDirection(direction))
             {
@@ -392,7 +403,7 @@ public class Case
                 || c.invocationDoubleBloquante != null
                 || c.containsTableHost
                 || c.containsTableClient
-                || c.obstacleSpawn != -1
+                || c.obstacleSpawn != Jeu.SpawnType.none
             )
             {
                 return false;
@@ -430,7 +441,7 @@ public class Case
     {
         if (
             invocationSimpleBloquante != null
-            && invocationSimpleBloquante.type == (int)Jeu.InvocationType.GrossePotion
+            && invocationSimpleBloquante.type == Jeu.InvocationType.GrossePotion
         )
         {
             return invocationSimpleBloquante;
@@ -445,7 +456,7 @@ public class Case
     {
         if (
             invocationDoubleBloquante != null
-            && invocationDoubleBloquante.type == (int)Jeu.InvocationType.Carosse
+            && invocationDoubleBloquante.type == Jeu.InvocationType.Carosse
         )
         {
             return invocationDoubleBloquante;
@@ -500,10 +511,9 @@ public class Case
     public bool containsCaseRappatriementFantomageHost() // DONE
     {
         if (
-            Jeu.fantomageHost.attaques.ContainsKey((int)Jeu.AttaqueType.caseDeRapatriement)
+            Jeu.fantomageHost.attaques.ContainsKey(Jeu.AttaqueType.caseDeRapatriement)
             && (
-                (CaseDeRapatriement)
-                    Jeu.fantomageHost.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
+                (CaseDeRapatriement)Jeu.fantomageHost.attaques[Jeu.AttaqueType.caseDeRapatriement]
             ).getCase() == this
         )
         {
@@ -515,10 +525,9 @@ public class Case
     public bool containsCaseRappatriementFantomageClient() // DONE
     {
         if (
-            Jeu.fantomageClient.attaques.ContainsKey((int)Jeu.AttaqueType.caseDeRapatriement)
+            Jeu.fantomageClient.attaques.ContainsKey(Jeu.AttaqueType.caseDeRapatriement)
             && (
-                (CaseDeRapatriement)
-                    Jeu.fantomageClient.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
+                (CaseDeRapatriement)Jeu.fantomageClient.attaques[Jeu.AttaqueType.caseDeRapatriement]
             ).getCase() == this
         )
         {
@@ -538,15 +547,13 @@ public class Case
         if (containsCaseRappatriementFantomageHost())
         {
             (
-                (CaseDeRapatriement)
-                    Jeu.fantomageHost.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
+                (CaseDeRapatriement)Jeu.fantomageHost.attaques[Jeu.AttaqueType.caseDeRapatriement]
             ).detruire();
         }
         if (containsCaseRappatriementFantomageClient())
         {
             (
-                (CaseDeRapatriement)
-                    Jeu.fantomageClient.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
+                (CaseDeRapatriement)Jeu.fantomageClient.attaques[Jeu.AttaqueType.caseDeRapatriement]
             ).detruire();
         }
     }
@@ -569,7 +576,7 @@ public class Case
         List<InvocationNonBloquante> res = new List<InvocationNonBloquante>();
         foreach (InvocationNonBloquante candidate in invocationsNonBloquantes())
         {
-            if (candidate.type == (int)Jeu.InvocationType.Bombe)
+            if (candidate.type == Jeu.InvocationType.Bombe)
             {
                 res.Add(candidate);
             }
@@ -580,16 +587,16 @@ public class Case
     public bool containsTPRoninjaHost() // DONE
     {
         return (
-            Jeu.roninjaHost.attaques.ContainsKey((int)Jeu.AttaqueType.memoire)
-            && ((Memoire)Jeu.roninjaHost.attaques[(int)Jeu.AttaqueType.memoire]).getTp() == this
+            Jeu.roninjaHost.attaques.ContainsKey(Jeu.AttaqueType.memoire)
+            && ((Memoire)Jeu.roninjaHost.attaques[Jeu.AttaqueType.memoire]).getTp() == this
         );
     }
 
     public bool containsTPRoninjaClient() // DONE
     {
         return (
-            Jeu.roninjaClient.attaques.ContainsKey((int)Jeu.AttaqueType.memoire)
-            && ((Memoire)Jeu.roninjaClient.attaques[(int)Jeu.AttaqueType.memoire]).getTp() == this
+            Jeu.roninjaClient.attaques.ContainsKey(Jeu.AttaqueType.memoire)
+            && ((Memoire)Jeu.roninjaClient.attaques[Jeu.AttaqueType.memoire]).getTp() == this
         );
     }
 
@@ -602,11 +609,11 @@ public class Case
     {
         if (containsTPRoninjaHost())
         {
-            ((Memoire)Jeu.roninjaHost.attaques[(int)Jeu.AttaqueType.memoire]).detruire();
+            ((Memoire)Jeu.roninjaHost.attaques[Jeu.AttaqueType.memoire]).detruire();
         }
         if (containsTPRoninjaClient())
         {
-            ((Memoire)Jeu.roninjaClient.attaques[(int)Jeu.AttaqueType.memoire]).detruire();
+            ((Memoire)Jeu.roninjaClient.attaques[Jeu.AttaqueType.memoire]).detruire();
         }
     }
 
@@ -718,7 +725,7 @@ public class Case
 
     public bool pierreAddable() // DONE
     {
-        return !containsSimpleObstacle && !containsDoubleObstacle && (obstacleSpawn != -1);
+        return !containsSimpleObstacle && !containsDoubleObstacle && (obstacleSpawn != Jeu.SpawnType.none);
     }
 
     public void tryToAddAround(Pierre pierre) // DONE
@@ -763,13 +770,13 @@ public class Case
         {
             switch (orientationDoubleObstacle)
             {
-                case (int)Jeu.DirectionType.Up:
+                case Jeu.DirectionType.Up:
                     return face.grid[row + 1, col];
-                case (int)Jeu.DirectionType.Down:
+                case Jeu.DirectionType.Down:
                     return face.grid[row - 1, col];
-                case (int)Jeu.DirectionType.Left:
+                case Jeu.DirectionType.Left:
                     return face.grid[row, col + 1];
-                case (int)Jeu.DirectionType.Right:
+                case Jeu.DirectionType.Right:
                     return face.grid[row, col - 1];
                 default:
                     return this;
@@ -781,26 +788,26 @@ public class Case
         }
     }
 
-    public Case nextCaseDirection(int direction) // DONE
+    public Case nextCaseDirection(Jeu.DirectionType direction) // DONE
     {
         switch (direction)
         {
-            case (int)Jeu.DirectionType.Up:
+            case Jeu.DirectionType.Up:
                 if (row == 0)
                 {
                     switch (face.name)
                     {
-                        case (int)Jeu.FaceType.North:
+                        case Jeu.FaceType.North:
                             return Jeu.client.grid[0, 7 - col];
-                        case (int)Jeu.FaceType.South:
+                        case Jeu.FaceType.South:
                             return Jeu.client.grid[7, col];
-                        case (int)Jeu.FaceType.East:
+                        case Jeu.FaceType.East:
                             return Jeu.client.grid[col, 0];
-                        case (int)Jeu.FaceType.West:
+                        case Jeu.FaceType.West:
                             return Jeu.client.grid[7 - col, 7];
-                        case (int)Jeu.FaceType.Host:
+                        case Jeu.FaceType.Host:
                             return Jeu.north.grid[7, col];
-                        case (int)Jeu.FaceType.Client:
+                        case Jeu.FaceType.Client:
                             return Jeu.north.grid[0, 7 - col];
                         default:
                             return this;
@@ -810,22 +817,22 @@ public class Case
                 {
                     return face.grid[row - 1, col];
                 }
-            case (int)Jeu.DirectionType.Down:
+            case Jeu.DirectionType.Down:
                 if (row == 7)
                 {
                     switch (face.name)
                     {
-                        case (int)Jeu.FaceType.North:
+                        case Jeu.FaceType.North:
                             return Jeu.host.grid[0, col];
-                        case (int)Jeu.FaceType.South:
+                        case Jeu.FaceType.South:
                             return Jeu.host.grid[7, 7 - col];
-                        case (int)Jeu.FaceType.East:
+                        case Jeu.FaceType.East:
                             return Jeu.host.grid[col, 7];
-                        case (int)Jeu.FaceType.West:
+                        case Jeu.FaceType.West:
                             return Jeu.host.grid[0, 7 - col];
-                        case (int)Jeu.FaceType.Host:
+                        case Jeu.FaceType.Host:
                             return Jeu.south.grid[7, 7 - col];
-                        case (int)Jeu.FaceType.Client:
+                        case Jeu.FaceType.Client:
                             return Jeu.south.grid[0, col];
                         default:
                             return this;
@@ -835,22 +842,22 @@ public class Case
                 {
                     return face.grid[row + 1, col];
                 }
-            case (int)Jeu.DirectionType.Left:
+            case Jeu.DirectionType.Left:
                 if (col == 0)
                 {
                     switch (face.name)
                     {
-                        case (int)Jeu.FaceType.North:
+                        case Jeu.FaceType.North:
                             return Jeu.west.grid[row, 7];
-                        case (int)Jeu.FaceType.South:
+                        case Jeu.FaceType.South:
                             return Jeu.east.grid[row, 7];
-                        case (int)Jeu.FaceType.East:
+                        case Jeu.FaceType.East:
                             return Jeu.north.grid[row, 7];
-                        case (int)Jeu.FaceType.West:
+                        case Jeu.FaceType.West:
                             return Jeu.south.grid[row, 7];
-                        case (int)Jeu.FaceType.Host:
+                        case Jeu.FaceType.Host:
                             return Jeu.west.grid[7, 7 - row];
-                        case (int)Jeu.FaceType.Client:
+                        case Jeu.FaceType.Client:
                             return Jeu.east.grid[0, row];
                         default:
                             return this;
@@ -860,22 +867,22 @@ public class Case
                 {
                     return face.grid[row, col - 1];
                 }
-            case (int)Jeu.DirectionType.Right:
+            case Jeu.DirectionType.Right:
                 if (col == 7)
                 {
                     switch (face.name)
                     {
-                        case (int)Jeu.FaceType.North:
+                        case Jeu.FaceType.North:
                             return Jeu.east.grid[row, 0];
-                        case (int)Jeu.FaceType.South:
+                        case Jeu.FaceType.South:
                             return Jeu.west.grid[row, 0];
-                        case (int)Jeu.FaceType.East:
+                        case Jeu.FaceType.East:
                             return Jeu.south.grid[row, 0];
-                        case (int)Jeu.FaceType.West:
+                        case Jeu.FaceType.West:
                             return Jeu.north.grid[row, 0];
-                        case (int)Jeu.FaceType.Host:
+                        case Jeu.FaceType.Host:
                             return Jeu.east.grid[7, row];
-                        case (int)Jeu.FaceType.Client:
+                        case Jeu.FaceType.Client:
                             return Jeu.west.grid[0, 7 - row];
                         default:
                             return this;
@@ -894,10 +901,10 @@ public class Case
     {
         return new List<Case>()
         {
-            nextCaseDirection((int)Jeu.DirectionType.Up),
-            nextCaseDirection((int)Jeu.DirectionType.Down),
-            nextCaseDirection((int)Jeu.DirectionType.Left),
-            nextCaseDirection((int)Jeu.DirectionType.Right),
+            nextCaseDirection(Jeu.DirectionType.Up),
+            nextCaseDirection(Jeu.DirectionType.Down),
+            nextCaseDirection(Jeu.DirectionType.Left),
+            nextCaseDirection(Jeu.DirectionType.Right),
         };
     }
 
@@ -920,25 +927,21 @@ public class Case
         return face.faceVisible(isHostPlayerWatching) && !isBrume;
     }
 
-    public int directionTo(Case myCase, bool directionInverse = false) // DONE
+    public Jeu.DirectionType directionTo(Case myCase, bool directionInverse = false) // DONE
     {
         if (row == myCase.row)
         {
             if (col < myCase.col)
-                return directionInverse
-                    ? (int)Jeu.DirectionType.Left
-                    : (int)Jeu.DirectionType.Right;
+                return directionInverse ? Jeu.DirectionType.Left : Jeu.DirectionType.Right;
             else
-                return directionInverse
-                    ? (int)Jeu.DirectionType.Right
-                    : (int)Jeu.DirectionType.Left;
+                return directionInverse ? Jeu.DirectionType.Right : Jeu.DirectionType.Left;
         }
         else
         {
             if (row < myCase.row)
-                return directionInverse ? (int)Jeu.DirectionType.Up : (int)Jeu.DirectionType.Down;
+                return directionInverse ? Jeu.DirectionType.Up : Jeu.DirectionType.Down;
             else
-                return directionInverse ? (int)Jeu.DirectionType.Down : (int)Jeu.DirectionType.Up;
+                return directionInverse ? Jeu.DirectionType.Down : Jeu.DirectionType.Up;
         }
     }
 
@@ -947,7 +950,7 @@ public class Case
         if (p.myCase == null)
             return;
 
-        int direction = p.myCase.directionTo(this);
+        Jeu.DirectionType direction = p.myCase.directionTo(this);
         if (p.canMoveDirection(direction))
         {
             containsGraviteFantomageHost = false;
@@ -962,8 +965,8 @@ public class Case
     {
         Perso? fantomageCrapeau = crapeauHost ? Jeu.fantomageHost : Jeu.fantomageClient;
         if (
-            (byPerso.type == (int)Jeu.PersoType.Fantomage && byPerso.isHost == crapeauHost)
-            || !fantomageCrapeau.entitesInvoquees().ContainsKey((int)Jeu.InvocationType.Crapeau)
+            (byPerso.type == Jeu.PersoType.Fantomage && byPerso.isHost == crapeauHost)
+            || !fantomageCrapeau.entitesInvoquees().ContainsKey(Jeu.InvocationType.Crapeau)
         )
         {
             return null;
@@ -971,7 +974,7 @@ public class Case
         else
         {
             InvocationNonBloquante crapeau = fantomageCrapeau.entitesInvoquees()[
-                (int)Jeu.InvocationType.Crapeau
+                Jeu.InvocationType.Crapeau
             ];
             if (
                 byPerso.myCase != null
@@ -1044,7 +1047,7 @@ public class Case
         {
             return "T";
         }
-        else if (obstacleSpawn != -1)
+        else if (obstacleSpawn != Jeu.SpawnType.none)
         {
             return "X";
         }

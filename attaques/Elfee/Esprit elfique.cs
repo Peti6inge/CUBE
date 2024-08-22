@@ -10,7 +10,7 @@ public class EspritElfique : Attaque
         cout = 5;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.invocationNonBloquante;
+        typeCible = Jeu.CibleType.invocationNonBloquante;
         espritElfique = null;
     }
 
@@ -22,7 +22,7 @@ public class EspritElfique : Attaque
         if (espritElfique != null)
             espritElfique.estKO();
         espritElfique = new InvocationNonBloquante(
-            (int)Jeu.InvocationType.EspritElfique,
+            Jeu.InvocationType.EspritElfique,
             perso.isHost,
             myCase
         );

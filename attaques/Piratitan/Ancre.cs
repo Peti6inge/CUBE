@@ -12,7 +12,7 @@ public class Ancre : Attaque
         limitParCible = 1;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.ancre;
+        typeCible = Jeu.CibleType.ancre;
         targets = new Dictionary<Perso, int>();
     }
 

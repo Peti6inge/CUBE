@@ -11,7 +11,7 @@ public class PiegeLineaire : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.piegeLineaire;
+        typeCible = Jeu.CibleType.piegeLineaire;
     }
 
     // Méthodes public
@@ -45,7 +45,7 @@ public class PiegeLineaire : Attaque
         Case caseNextToPerso = perso.myCase.nextCaseDirection(direction);
 
         Piege piegeAPoser = new Piege(
-            (int)Jeu.PiegeType.PiegeLineaire,
+            Jeu.PiegeType.PiegeLineaire,
             perso.isHost,
             caseNextToPerso,
             myCase

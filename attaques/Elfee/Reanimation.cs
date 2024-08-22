@@ -9,7 +9,7 @@ public class Reanimation : Attaque
         cout = 8;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.reanimation;
+        typeCible = Jeu.CibleType.reanimation;
     }
 
     // Méthodes public
@@ -21,16 +21,16 @@ public class Reanimation : Attaque
         Perso? persoToReanimate = null;
         switch (myCase.obstacleSpawn)
         {
-            case (int)Jeu.SpawnType.Roninja:
+            case Jeu.SpawnType.Roninja:
                 persoToReanimate = perso.isHost ? Jeu.roninjaHost : Jeu.roninjaClient;
                 break;
-            case (int)Jeu.SpawnType.Piratitan:
+            case Jeu.SpawnType.Piratitan:
                 persoToReanimate = perso.isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
                 break;
-            case (int)Jeu.SpawnType.Elfee:
+            case Jeu.SpawnType.Elfee:
                 persoToReanimate = perso.isHost ? Jeu.elfeeHost : Jeu.elfeeClient;
                 break;
-            case (int)Jeu.SpawnType.Fantomage:
+            case Jeu.SpawnType.Fantomage:
                 persoToReanimate = perso.isHost ? Jeu.fantomageHost : Jeu.fantomageClient;
                 break;
         }

@@ -9,7 +9,7 @@ public class Fleche : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy;
+        typeCible = Jeu.CibleType.persoEtInvocEnnemy;
     }
 
     // Méthodes public

@@ -10,7 +10,7 @@ public class Transposition : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.transposition;
+        typeCible = Jeu.CibleType.transposition;
     }
 
     // Méthodes public

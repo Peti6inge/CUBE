@@ -8,7 +8,7 @@ public class Sabre : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy;
+        typeCible = Jeu.CibleType.persoEtInvocEnnemy;
     }
     
     // Méthodes public

@@ -9,7 +9,7 @@ public class Teleport : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.teleport;
+        typeCible = Jeu.CibleType.teleport;
     }
 
     // Méthodes public
@@ -17,7 +17,7 @@ public class Teleport : Attaque
     public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        Case? caseMemoire = ((Memoire)perso.attaques[(int)Jeu.AttaqueType.memoire]).getTp();
+        Case? caseMemoire = ((Memoire)perso.attaques[Jeu.AttaqueType.memoire]).getTp();
 
         if (caseMemoire == null || perso.myCase == null)
             return;
@@ -67,7 +67,7 @@ public class Teleport : Attaque
         Face facePrecedente = perso.myCase.face;
         Face nouvelleFace = caseMemoire.face;
 
-        ((Memoire)perso.attaques[(int)Jeu.AttaqueType.memoire]).setTp(perso.myCase);
+        ((Memoire)perso.attaques[Jeu.AttaqueType.memoire]).setTp(perso.myCase);
 
         perso.myCase.persoLeaveCase(perso);
         perso.desactiverHarpons(facePrecedente, nouvelleFace);

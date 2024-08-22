@@ -10,7 +10,7 @@ public class Carosse : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.invocationDoubleBloquante;
+        typeCible = Jeu.CibleType.invocationDoubleBloquante;
     }
 
     // Méthodes public
@@ -22,7 +22,7 @@ public class Carosse : Attaque
         myCase.getDeuxiemeCaseDoubleObstacle().containsDoubleObstacle = false;
 
         myCase.invocationDoubleBloquante = new InvocationDoubleBloquante(
-            (int)Jeu.InvocationType.Carosse,
+            Jeu.InvocationType.Carosse,
             perso.isHost,
             myCase,
             myCase.getDeuxiemeCaseDoubleObstacle()

@@ -9,7 +9,7 @@ public class FlecheDeLumiere : Attaque
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.flecheDeLumiere;
+        typeCible = Jeu.CibleType.flecheDeLumiere;
     }
 
     // Méthodes public

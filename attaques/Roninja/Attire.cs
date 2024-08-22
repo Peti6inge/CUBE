@@ -11,7 +11,7 @@ public class Attire : Attaque
         porteeMax = 5;
         ligneDeVue = true;
         aligne = true;
-        typeCible = (int)Jeu.CibleType.attireRepousse;
+        typeCible = Jeu.CibleType.attireRepousse;
     }
 
     // Méthodes public

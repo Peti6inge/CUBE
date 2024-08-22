@@ -11,7 +11,7 @@ public class Entrave : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.persoEnnemy;
+        typeCible = Jeu.CibleType.persoEnnemy;
     }
 
     // Méthodes public

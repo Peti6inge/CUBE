@@ -9,7 +9,7 @@ public class Acide : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.acide;
+        typeCible = Jeu.CibleType.acide;
     }
 
     // Méthodes public

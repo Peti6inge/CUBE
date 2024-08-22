@@ -10,7 +10,7 @@ public class Gravite : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.gravite;
+        typeCible = Jeu.CibleType.gravite;
     }
 
     // Méthodes public
@@ -23,25 +23,25 @@ public class Gravite : Attaque
         else
             myCase.containsGraviteFantomageClient = true;
 
-        Perso? persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Up).perso();
+        Perso? persoToAttract = myCase.nextCaseDirection(Jeu.DirectionType.Up).perso();
         if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
-        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Down).perso();
+        persoToAttract = myCase.nextCaseDirection(Jeu.DirectionType.Down).perso();
         if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
-        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Left).perso();
+        persoToAttract = myCase.nextCaseDirection(Jeu.DirectionType.Left).perso();
         if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
-        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Right).perso();
+        persoToAttract = myCase.nextCaseDirection(Jeu.DirectionType.Right).perso();
         if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
     }

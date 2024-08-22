@@ -9,7 +9,7 @@ public class FeuFollet : Attaque
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.feuFollet;
+        typeCible = Jeu.CibleType.feuFollet;
     }
 
     // Méthodes public

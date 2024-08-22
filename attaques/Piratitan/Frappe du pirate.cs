@@ -8,7 +8,7 @@ public class FrappeDuPirate : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.frappeDuPirate;
+        typeCible = Jeu.CibleType.frappeDuPirate;
     }
 
     // Méthodes public

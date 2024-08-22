@@ -10,7 +10,7 @@ public class CoupDeBaguette : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante;
+        typeCible = Jeu.CibleType.invocationSimpleBloquante;
     }
 
     // Méthodes public
@@ -20,7 +20,7 @@ public class CoupDeBaguette : Attaque
         uses();
         myCase.containsSimpleObstacle = false;
         myCase.invocationSimpleBloquante = new InvocationSimpleBloquante(
-            (int)Jeu.InvocationType.GrossePotion,
+            Jeu.InvocationType.GrossePotion,
             perso.isHost,
             myCase
         );

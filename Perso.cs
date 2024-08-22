@@ -1,7 +1,7 @@
 public class Perso
 {
     // Attributs // DONE
-    public int type { get; set; }
+    public Jeu.PersoType type { get; set; }
     public bool isHost { get; set; }
     public int hp { get; set; }
     public int hpMax { get; set; }
@@ -29,90 +29,90 @@ public class Perso
     public bool miniaturisation { get; set; }
     public Case? myCase { get; set; }
     public Case? temoinDePosition { get; set; }
-    public Dictionary<int, Attaque> attaques { get; set; }
-    private static readonly Dictionary<int, Type> attaqueTypes = new Dictionary<int, Type>
+    public Dictionary<Jeu.AttaqueType, Attaque> attaques { get; set; }
+    private static readonly Dictionary<Jeu.AttaqueType, Type> attaqueTypes = new Dictionary<Jeu.AttaqueType, Type>
     {
-        { (int)Jeu.AttaqueType.dragAndDrop, typeof(DragNDrop) },
-        { (int)Jeu.AttaqueType.ancre, typeof(Ancre) },
-        { (int)Jeu.AttaqueType.bombe, typeof(Bombe) },
-        { (int)Jeu.AttaqueType.bondDuTitan, typeof(BondDuTitan) },
-        { (int)Jeu.AttaqueType.chargeDuTitan, typeof(ChargeDuTitan) },
-        { (int)Jeu.AttaqueType.coffre, typeof(Coffre) },
-        { (int)Jeu.AttaqueType.coupDeFeu, typeof(CoupDeFeu) },
-        { (int)Jeu.AttaqueType.etincelle, typeof(Etincelle) },
-        { (int)Jeu.AttaqueType.flaque, typeof(Flaque) },
-        { (int)Jeu.AttaqueType.frappeDuPirate, typeof(FrappeDuPirate) },
-        { (int)Jeu.AttaqueType.frappeDuTitan, typeof(FrappeDuTitan) },
-        { (int)Jeu.AttaqueType.harpon, typeof(Harpon) },
-        { (int)Jeu.AttaqueType.invincibilite, typeof(Invincibilite) },
-        { (int)Jeu.AttaqueType.longueVue, typeof(LongueVue) },
-        { (int)Jeu.AttaqueType.mouette, typeof(Mouette) },
-        { (int)Jeu.AttaqueType.planche, typeof(Planche) },
-        { (int)Jeu.AttaqueType.porterDeposer, typeof(PorterDeposer) },
-        { (int)Jeu.AttaqueType.poudre, typeof(Poudre) },
-        { (int)Jeu.AttaqueType.sabre, typeof(Sabre) },
-        { (int)Jeu.AttaqueType.tonneau, typeof(Tonneau) },
-        { (int)Jeu.AttaqueType.altruisme, typeof(Altruisme) },
-        { (int)Jeu.AttaqueType.carosse, typeof(Carosse) },
-        { (int)Jeu.AttaqueType.coupDeBaguette, typeof(CoupDeBaguette) },
-        { (int)Jeu.AttaqueType.derniereVolontee, typeof(DerniereVolonte) },
-        { (int)Jeu.AttaqueType.elixirAgressif, typeof(ElixirAgressif) },
-        { (int)Jeu.AttaqueType.envolAtterissage, typeof(EnvolAtterissage) },
-        { (int)Jeu.AttaqueType.espritElfique, typeof(EspritElfique) },
-        { (int)Jeu.AttaqueType.esquive, typeof(Esquive) },
-        { (int)Jeu.AttaqueType.fleche, typeof(Fleche) },
-        { (int)Jeu.AttaqueType.flecheDeLumiere, typeof(FlecheDeLumiere) },
-        { (int)Jeu.AttaqueType.flechePatiente, typeof(FlechePatiente) },
-        { (int)Jeu.AttaqueType.hautesHerbes, typeof(HautesHerbes) },
-        { (int)Jeu.AttaqueType.miniaturisation, typeof(Miniaturisation) },
-        { (int)Jeu.AttaqueType.petitSoin, typeof(PetitSoin) },
-        { (int)Jeu.AttaqueType.poudreBienfaisante, typeof(PoudreBienfaisante) },
-        { (int)Jeu.AttaqueType.poudreSoporifique, typeof(PoudreSoporifique) },
-        { (int)Jeu.AttaqueType.poudreStimulante, typeof(PoudreStimulante) },
-        { (int)Jeu.AttaqueType.reanimation, typeof(Reanimation) },
-        { (int)Jeu.AttaqueType.soinTotal, typeof(SoinTotal) },
-        { (int)Jeu.AttaqueType.acide, typeof(Acide) },
-        { (int)Jeu.AttaqueType.attire, typeof(Attire) },
-        { (int)Jeu.AttaqueType.brume, typeof(Brume) },
-        { (int)Jeu.AttaqueType.clone, typeof(Clone) },
-        { (int)Jeu.AttaqueType.couteauDeLancee, typeof(CouteauDeLancee) },
-        { (int)Jeu.AttaqueType.derobadeDeLOmbre, typeof(DerobadeDeLOmbre) },
-        { (int)Jeu.AttaqueType.derobade, typeof(Derobade) },
-        { (int)Jeu.AttaqueType.entrave, typeof(Entrave) },
-        { (int)Jeu.AttaqueType.feinte, typeof(Feinte) },
-        { (int)Jeu.AttaqueType.invisibilite, typeof(Invisibilite) },
-        { (int)Jeu.AttaqueType.katana, typeof(Katana) },
-        { (int)Jeu.AttaqueType.kunai, typeof(Kunai) },
-        { (int)Jeu.AttaqueType.memoire, typeof(Memoire) },
-        { (int)Jeu.AttaqueType.piegeALoup, typeof(PiegeALoup) },
-        { (int)Jeu.AttaqueType.piegeLineaire, typeof(PiegeLineaire) },
-        { (int)Jeu.AttaqueType.pirouette, typeof(Pirouette) },
-        { (int)Jeu.AttaqueType.poison, typeof(Poison) },
-        { (int)Jeu.AttaqueType.repousse, typeof(Repousse) },
-        { (int)Jeu.AttaqueType.teleport, typeof(Teleport) },
-        { (int)Jeu.AttaqueType.bouleDeFeu, typeof(BouleDeFeu) },
-        { (int)Jeu.AttaqueType.bouletFantomatique, typeof(BouletFantomatique) },
-        { (int)Jeu.AttaqueType.buff, typeof(Buff) },
-        { (int)Jeu.AttaqueType.caseDeRapatriement, typeof(CaseDeRapatriement) },
-        { (int)Jeu.AttaqueType.caseTerrifiante, typeof(CaseTerrifiante) },
-        { (int)Jeu.AttaqueType.clairvoyance, typeof(Clairvoyance) },
-        { (int)Jeu.AttaqueType.coupDeBaton, typeof(CoupDeBaton) },
-        { (int)Jeu.AttaqueType.crapeau, typeof(Crapeau) },
-        { (int)Jeu.AttaqueType.eauVaseuse, typeof(EauVaseuse) },
-        { (int)Jeu.AttaqueType.feuFollet, typeof(FeuFollet) },
-        { (int)Jeu.AttaqueType.gravite, typeof(Gravite) },
-        { (int)Jeu.AttaqueType.inversion, typeof(Inversion) },
-        { (int)Jeu.AttaqueType.jouvence, typeof(Jouvence) },
-        { (int)Jeu.AttaqueType.mainsMaudites, typeof(MainsMaudites) },
-        { (int)Jeu.AttaqueType.malediction, typeof(Malediction) },
-        { (int)Jeu.AttaqueType.rappel, typeof(Rappel) },
-        { (int)Jeu.AttaqueType.sortDeProtection, typeof(SortDeProtection) },
-        { (int)Jeu.AttaqueType.transposition, typeof(Transposition) },
-        { (int)Jeu.AttaqueType.voileDInvisibilite, typeof(VoileDInvisibilite) }
+        { Jeu.AttaqueType.dragAndDrop, typeof(DragNDrop) },
+        { Jeu.AttaqueType.ancre, typeof(Ancre) },
+        { Jeu.AttaqueType.bombe, typeof(Bombe) },
+        { Jeu.AttaqueType.bondDuTitan, typeof(BondDuTitan) },
+        { Jeu.AttaqueType.chargeDuTitan, typeof(ChargeDuTitan) },
+        { Jeu.AttaqueType.coffre, typeof(Coffre) },
+        { Jeu.AttaqueType.coupDeFeu, typeof(CoupDeFeu) },
+        { Jeu.AttaqueType.etincelle, typeof(Etincelle) },
+        { Jeu.AttaqueType.flaque, typeof(Flaque) },
+        { Jeu.AttaqueType.frappeDuPirate, typeof(FrappeDuPirate) },
+        { Jeu.AttaqueType.frappeDuTitan, typeof(FrappeDuTitan) },
+        { Jeu.AttaqueType.harpon, typeof(Harpon) },
+        { Jeu.AttaqueType.invincibilite, typeof(Invincibilite) },
+        { Jeu.AttaqueType.longueVue, typeof(LongueVue) },
+        { Jeu.AttaqueType.mouette, typeof(Mouette) },
+        { Jeu.AttaqueType.planche, typeof(Planche) },
+        { Jeu.AttaqueType.porterDeposer, typeof(PorterDeposer) },
+        { Jeu.AttaqueType.poudre, typeof(Poudre) },
+        { Jeu.AttaqueType.sabre, typeof(Sabre) },
+        { Jeu.AttaqueType.tonneau, typeof(Tonneau) },
+        { Jeu.AttaqueType.altruisme, typeof(Altruisme) },
+        { Jeu.AttaqueType.carosse, typeof(Carosse) },
+        { Jeu.AttaqueType.coupDeBaguette, typeof(CoupDeBaguette) },
+        { Jeu.AttaqueType.derniereVolontee, typeof(DerniereVolonte) },
+        { Jeu.AttaqueType.elixirAgressif, typeof(ElixirAgressif) },
+        { Jeu.AttaqueType.envolAtterissage, typeof(EnvolAtterissage) },
+        { Jeu.AttaqueType.espritElfique, typeof(EspritElfique) },
+        { Jeu.AttaqueType.esquive, typeof(Esquive) },
+        { Jeu.AttaqueType.fleche, typeof(Fleche) },
+        { Jeu.AttaqueType.flecheDeLumiere, typeof(FlecheDeLumiere) },
+        { Jeu.AttaqueType.flechePatiente, typeof(FlechePatiente) },
+        { Jeu.AttaqueType.hautesHerbes, typeof(HautesHerbes) },
+        { Jeu.AttaqueType.miniaturisation, typeof(Miniaturisation) },
+        { Jeu.AttaqueType.petitSoin, typeof(PetitSoin) },
+        { Jeu.AttaqueType.poudreBienfaisante, typeof(PoudreBienfaisante) },
+        { Jeu.AttaqueType.poudreSoporifique, typeof(PoudreSoporifique) },
+        { Jeu.AttaqueType.poudreStimulante, typeof(PoudreStimulante) },
+        { Jeu.AttaqueType.reanimation, typeof(Reanimation) },
+        { Jeu.AttaqueType.soinTotal, typeof(SoinTotal) },
+        { Jeu.AttaqueType.acide, typeof(Acide) },
+        { Jeu.AttaqueType.attire, typeof(Attire) },
+        { Jeu.AttaqueType.brume, typeof(Brume) },
+        { Jeu.AttaqueType.clone, typeof(Clone) },
+        { Jeu.AttaqueType.couteauDeLancee, typeof(CouteauDeLancee) },
+        { Jeu.AttaqueType.derobadeDeLOmbre, typeof(DerobadeDeLOmbre) },
+        { Jeu.AttaqueType.derobade, typeof(Derobade) },
+        { Jeu.AttaqueType.entrave, typeof(Entrave) },
+        { Jeu.AttaqueType.feinte, typeof(Feinte) },
+        { Jeu.AttaqueType.invisibilite, typeof(Invisibilite) },
+        { Jeu.AttaqueType.katana, typeof(Katana) },
+        { Jeu.AttaqueType.kunai, typeof(Kunai) },
+        { Jeu.AttaqueType.memoire, typeof(Memoire) },
+        { Jeu.AttaqueType.piegeALoup, typeof(PiegeALoup) },
+        { Jeu.AttaqueType.piegeLineaire, typeof(PiegeLineaire) },
+        { Jeu.AttaqueType.pirouette, typeof(Pirouette) },
+        { Jeu.AttaqueType.poison, typeof(Poison) },
+        { Jeu.AttaqueType.repousse, typeof(Repousse) },
+        { Jeu.AttaqueType.teleport, typeof(Teleport) },
+        { Jeu.AttaqueType.bouleDeFeu, typeof(BouleDeFeu) },
+        { Jeu.AttaqueType.bouletFantomatique, typeof(BouletFantomatique) },
+        { Jeu.AttaqueType.buff, typeof(Buff) },
+        { Jeu.AttaqueType.caseDeRapatriement, typeof(CaseDeRapatriement) },
+        { Jeu.AttaqueType.caseTerrifiante, typeof(CaseTerrifiante) },
+        { Jeu.AttaqueType.clairvoyance, typeof(Clairvoyance) },
+        { Jeu.AttaqueType.coupDeBaton, typeof(CoupDeBaton) },
+        { Jeu.AttaqueType.crapeau, typeof(Crapeau) },
+        { Jeu.AttaqueType.eauVaseuse, typeof(EauVaseuse) },
+        { Jeu.AttaqueType.feuFollet, typeof(FeuFollet) },
+        { Jeu.AttaqueType.gravite, typeof(Gravite) },
+        { Jeu.AttaqueType.inversion, typeof(Inversion) },
+        { Jeu.AttaqueType.jouvence, typeof(Jouvence) },
+        { Jeu.AttaqueType.mainsMaudites, typeof(MainsMaudites) },
+        { Jeu.AttaqueType.malediction, typeof(Malediction) },
+        { Jeu.AttaqueType.rappel, typeof(Rappel) },
+        { Jeu.AttaqueType.sortDeProtection, typeof(SortDeProtection) },
+        { Jeu.AttaqueType.transposition, typeof(Transposition) },
+        { Jeu.AttaqueType.voileDInvisibilite, typeof(VoileDInvisibilite) }
     };
 
     // Constructeur // DONE
-    public Perso(int type, bool isHost, List<int> attaques)
+    public Perso(Jeu.PersoType type, bool isHost, List<Jeu.AttaqueType> attaques)
     {
         this.type = type;
         this.isHost = isHost;
@@ -142,24 +142,24 @@ public class Perso
         miniaturisation = false;
         switch (type)
         {
-            case (int)Jeu.PersoType.Roninja:
+            case Jeu.PersoType.Roninja:
                 myCase = isHost ? Jeu.host.grid[2, 2] : Jeu.client.grid[2, 2];
                 break;
-            case (int)Jeu.PersoType.Elfee:
+            case Jeu.PersoType.Elfee:
                 myCase = isHost ? Jeu.host.grid[2, 5] : Jeu.client.grid[2, 5];
                 break;
-            case (int)Jeu.PersoType.Fantomage:
+            case Jeu.PersoType.Fantomage:
                 myCase = isHost ? Jeu.host.grid[5, 2] : Jeu.client.grid[5, 2];
                 break;
-            case (int)Jeu.PersoType.Piratitan:
+            case Jeu.PersoType.Piratitan:
                 myCase = isHost ? Jeu.host.grid[5, 5] : Jeu.client.grid[5, 5];
                 break;
             default:
                 break;
         }
         temoinDePosition = null;
-        this.attaques = new Dictionary<int, Attaque>();
-        foreach (int attaque in attaques)
+        this.attaques = new Dictionary<Jeu.AttaqueType, Attaque>();
+        foreach (Jeu.AttaqueType attaque in attaques)
         {
             if (attaqueTypes.TryGetValue(attaque, out Type? myType))
             {
@@ -211,44 +211,44 @@ public class Perso
 
         desactiverDerniereVolonte();
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.elixirAgressif))
+        if (attaques.ContainsKey(Jeu.AttaqueType.elixirAgressif))
         {
-            ((ElixirAgressif)attaques[(int)Jeu.AttaqueType.elixirAgressif]).debutTour();
+            ((ElixirAgressif)attaques[Jeu.AttaqueType.elixirAgressif]).debutTour();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.harpon))
+        if (attaques.ContainsKey(Jeu.AttaqueType.harpon))
         {
-            ((Harpon)attaques[(int)Jeu.AttaqueType.harpon]).desactiver();
+            ((Harpon)attaques[Jeu.AttaqueType.harpon]).desactiver();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.ancre))
+        if (attaques.ContainsKey(Jeu.AttaqueType.ancre))
         {
-            ((Ancre)attaques[(int)Jeu.AttaqueType.ancre]).debutTour();
+            ((Ancre)attaques[Jeu.AttaqueType.ancre]).debutTour();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.altruisme))
+        if (attaques.ContainsKey(Jeu.AttaqueType.altruisme))
         {
-            ((Altruisme)attaques[(int)Jeu.AttaqueType.altruisme]).debutTour();
+            ((Altruisme)attaques[Jeu.AttaqueType.altruisme]).debutTour();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.brume))
+        if (attaques.ContainsKey(Jeu.AttaqueType.brume))
         {
-            ((Brume)attaques[(int)Jeu.AttaqueType.brume]).desactiver();
+            ((Brume)attaques[Jeu.AttaqueType.brume]).desactiver();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.invisibilite))
+        if (attaques.ContainsKey(Jeu.AttaqueType.invisibilite))
         {
-            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invisibilite]).desactiver();
+            ((Invisibilite)attaques[Jeu.AttaqueType.invisibilite]).desactiver();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.voileDInvisibilite))
+        if (attaques.ContainsKey(Jeu.AttaqueType.voileDInvisibilite))
         {
-            ((VoileDInvisibilite)attaques[(int)Jeu.AttaqueType.voileDInvisibilite]).desactiver();
+            ((VoileDInvisibilite)attaques[Jeu.AttaqueType.voileDInvisibilite]).desactiver();
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.malediction))
+        if (attaques.ContainsKey(Jeu.AttaqueType.malediction))
         {
-            ((Malediction)attaques[(int)Jeu.AttaqueType.malediction]).desactiver();
+            ((Malediction)attaques[Jeu.AttaqueType.malediction]).desactiver();
         }
 
         if (buffHp.ContainsKey(1))
@@ -313,9 +313,9 @@ public class Perso
 
         desactivermainsMaudites();
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.longueVue))
+        if (attaques.ContainsKey(Jeu.AttaqueType.longueVue))
         {
-            ((LongueVue)attaques[(int)Jeu.AttaqueType.longueVue]).desactiver();
+            ((LongueVue)attaques[Jeu.AttaqueType.longueVue]).desactiver();
         }
 
         foreach (InvocationSimpleBloquante potion in grossesPotionsAActiver())
@@ -342,8 +342,8 @@ public class Perso
         hpMax = 10;
         miniaturisation = false;
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.longueVue))
-            ((LongueVue)attaques[(int)Jeu.AttaqueType.longueVue]).desactiver();
+        if (attaques.ContainsKey(Jeu.AttaqueType.longueVue))
+            ((LongueVue)attaques[Jeu.AttaqueType.longueVue]).desactiver();
 
         desactiverPoudre();
 
@@ -359,8 +359,8 @@ public class Perso
 
         reveal();
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.altruisme))
-            ((Altruisme)attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
+        if (attaques.ContainsKey(Jeu.AttaqueType.altruisme))
+            ((Altruisme)attaques[Jeu.AttaqueType.altruisme]).desactiver();
 
         if (sousAltruisme())
         {
@@ -370,7 +370,7 @@ public class Perso
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
-            ((Altruisme)elfeeAlliee.attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
+            ((Altruisme)elfeeAlliee.attaques[Jeu.AttaqueType.altruisme]).desactiver();
         }
 
         desactiverElixirAgressifIfOnMe();
@@ -394,7 +394,7 @@ public class Perso
             else
                 fantomageAdverse = Jeu.fantomageHost;
 
-            ((Malediction)fantomageAdverse.attaques[(int)Jeu.AttaqueType.malediction]).desactiver();
+            ((Malediction)fantomageAdverse.attaques[Jeu.AttaqueType.malediction]).desactiver();
         }
 
         buffEnergie.Clear();
@@ -453,25 +453,25 @@ public class Perso
         miniaturisation = false;
         switch (type)
         {
-            case (int)Jeu.PersoType.Roninja:
+            case Jeu.PersoType.Roninja:
                 if (isHost)
                     Jeu.host.grid[2, 2].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[2, 2].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case (int)Jeu.PersoType.Elfee:
+            case Jeu.PersoType.Elfee:
                 if (isHost)
                     Jeu.host.grid[2, 5].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[2, 5].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case (int)Jeu.PersoType.Fantomage:
+            case Jeu.PersoType.Fantomage:
                 if (isHost)
                     Jeu.host.grid[5, 2].persoEnterCase(this, newFace: true, respawn: true);
                 else
                     Jeu.client.grid[5, 2].persoEnterCase(this, newFace: true, respawn: true);
                 break;
-            case (int)Jeu.PersoType.Piratitan:
+            case Jeu.PersoType.Piratitan:
                 if (isHost)
                     Jeu.host.grid[5, 5].persoEnterCase(this, newFace: true, respawn: true);
                 else
@@ -511,7 +511,7 @@ public class Perso
         else if (
             caseCible.containsSimpleObstacle
             || caseCible.containsDoubleObstacle
-            || caseCible.obstacleSpawn != -1
+            || caseCible.obstacleSpawn != Jeu.SpawnType.none
         )
             caseCible.tryToAddAround(pierre);
         else
@@ -583,7 +583,7 @@ public class Perso
         if (!ignoreFeinte && feinte && !isAncre() && estPortePar() != null)
         {
             recoitDegats(degats, ignoreFeinte: true);
-            ((Feinte)attaques[(int)Jeu.AttaqueType.feinte]).activerFeinte();
+            ((Feinte)attaques[Jeu.AttaqueType.feinte]).activerFeinte();
             return;
         }
 
@@ -620,7 +620,7 @@ public class Perso
         hp = Math.Min(hpMax, hp + soin);
     }
 
-    public Object? nextObstacleDirection(int direction) // DONE
+    public Object? nextObstacleDirection(Jeu.DirectionType direction) // DONE
     // Renvoie null si rien OU si obstacle non invoqué, InvocationSimpleBloquante si ISB, InvocationDoubleBloquante si IDB, Perso si perso
     {
         if (myCase == null)
@@ -650,7 +650,7 @@ public class Perso
         return null;
     }
 
-    public bool canTryMoveDirection(int direction) // DONE
+    public bool canTryMoveDirection(Jeu.DirectionType direction) // DONE
     {
         if (myCase == null)
             return false;
@@ -659,7 +659,7 @@ public class Perso
         return c != null && (!c.face.faceVisible(isHost) || c.seemsWalkable(this));
     }
 
-    public bool canMoveDirection(int direction) // DONE
+    public bool canMoveDirection(Jeu.DirectionType direction) // DONE
     {
         if (myCase == null)
             return false;
@@ -668,7 +668,7 @@ public class Perso
         return c != null && c.isWalkable(this);
     }
 
-    public void tryMoveDirection(int direction) // DONE
+    public void tryMoveDirection(Jeu.DirectionType direction) // DONE
     {
         energieActive--;
         if (canMoveDirection(direction))
@@ -680,7 +680,7 @@ public class Perso
     }
 
     public void moveDirection(
-        int direction,
+        Jeu.DirectionType direction,
         bool glissade = false,
         bool attiranceCrapeau = false,
         bool chargeDuTitan = false,
@@ -816,7 +816,7 @@ public class Perso
         {
             dropPierre();
             pirouette = false;
-            ((Pirouette)attaques[(int)Jeu.AttaqueType.pirouette]).activer();
+            ((Pirouette)attaques[Jeu.AttaqueType.pirouette]).activer();
         }
         else
         {
@@ -824,46 +824,46 @@ public class Perso
         }
     }
 
-    public Dictionary<int, InvocationNonBloquante> entitesInvoquees() // DONE
+    public Dictionary<Jeu.InvocationType, InvocationNonBloquante> entitesInvoquees() // DONE
     {
         Dictionary<int, InvocationNonBloquante> entitesInvoquees =
             new Dictionary<int, InvocationNonBloquante>();
         InvocationNonBloquante? candidate;
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.bombe))
+        if (attaques.ContainsKey(Jeu.AttaqueType.bombe))
         {
-            candidate = ((Bombe)attaques[(int)Jeu.AttaqueType.bombe]).getBombe();
+            candidate = ((Bombe)attaques[Jeu.AttaqueType.bombe]).getBombe();
             if (candidate != null)
             {
-                entitesInvoquees.Add((int)Jeu.InvocationType.Bombe, candidate);
+                entitesInvoquees.Add(Jeu.InvocationType.Bombe, candidate);
             }
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.espritElfique))
+        if (attaques.ContainsKey(Jeu.AttaqueType.espritElfique))
         {
             candidate = (
-                (EspritElfique)attaques[(int)Jeu.AttaqueType.espritElfique]
+                (EspritElfique)attaques[Jeu.AttaqueType.espritElfique]
             ).getEspritElfique();
             if (candidate != null)
             {
-                entitesInvoquees.Add((int)Jeu.InvocationType.EspritElfique, candidate);
+                entitesInvoquees.Add(Jeu.InvocationType.EspritElfique, candidate);
             }
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.mouette))
+        if (attaques.ContainsKey(Jeu.AttaqueType.mouette))
         {
-            candidate = ((Mouette)attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
+            candidate = ((Mouette)attaques[Jeu.AttaqueType.mouette]).getMouette();
             if (candidate != null)
             {
-                entitesInvoquees.Add((int)Jeu.InvocationType.Mouette, candidate);
+                entitesInvoquees.Add(Jeu.InvocationType.Mouette, candidate);
             }
         }
 
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.crapeau))
+        if (attaques.ContainsKey(Jeu.AttaqueType.crapeau))
         {
-            candidate = ((Crapeau)attaques[(int)Jeu.AttaqueType.crapeau]).getCrapeau();
+            candidate = ((Crapeau)attaques[Jeu.AttaqueType.crapeau]).getCrapeau();
             if (candidate != null)
             {
-                entitesInvoquees.Add((int)Jeu.InvocationType.Crapeau, candidate);
+                entitesInvoquees.Add(Jeu.InvocationType.Crapeau, candidate);
             }
         }
 
@@ -924,14 +924,14 @@ public class Perso
     {
         if (
             (
-                Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-                && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre])
+                Jeu.piratitanClient.attaques.ContainsKey(Jeu.AttaqueType.ancre)
+                && ((Ancre)Jeu.piratitanClient.attaques[Jeu.AttaqueType.ancre])
                     .getTargets()
                     .Contains(this)
             )
             || (
-                Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-                && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre])
+                Jeu.piratitanHost.attaques.ContainsKey(Jeu.AttaqueType.ancre)
+                && ((Ancre)Jeu.piratitanHost.attaques[Jeu.AttaqueType.ancre])
                     .getTargets()
                     .Contains(this)
             )
@@ -944,13 +944,13 @@ public class Perso
     {
         if (
             (
-                Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                Jeu.elfeeClient.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeClient.attaques[Jeu.AttaqueType.altruisme]).getTarget()
                     == this
             )
             || (
-                Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                Jeu.elfeeHost.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeHost.attaques[Jeu.AttaqueType.altruisme]).getTarget()
                     == this
             )
         )
@@ -1017,25 +1017,25 @@ public class Perso
 
         switch (type)
         {
-            case (int)Jeu.PersoType.Roninja:
+            case Jeu.PersoType.Roninja:
                 if (isHost)
                     Jeu.host.grid[2, 2].persoEnterCase(this, newFace: nouvelleFace);
                 else
                     Jeu.client.grid[2, 2].persoEnterCase(this, newFace: nouvelleFace);
                 break;
-            case (int)Jeu.PersoType.Elfee:
+            case Jeu.PersoType.Elfee:
                 if (isHost)
                     Jeu.host.grid[2, 5].persoEnterCase(this, newFace: nouvelleFace);
                 else
                     Jeu.client.grid[2, 5].persoEnterCase(this, newFace: nouvelleFace);
                 break;
-            case (int)Jeu.PersoType.Fantomage:
+            case Jeu.PersoType.Fantomage:
                 if (isHost)
                     Jeu.host.grid[5, 2].persoEnterCase(this, newFace: nouvelleFace);
                 else
                     Jeu.client.grid[5, 2].persoEnterCase(this, newFace: nouvelleFace);
                 break;
-            case (int)Jeu.PersoType.Piratitan:
+            case Jeu.PersoType.Piratitan:
                 if (isHost)
                     Jeu.host.grid[5, 5].persoEnterCase(this, newFace: nouvelleFace);
                 else
@@ -1050,8 +1050,8 @@ public class Perso
 
     private bool sousInvisibilite() // DONE
     {
-        if (attaques.ContainsKey((int)Jeu.AttaqueType.invisibilite))
-            return ((Invisibilite)attaques[(int)Jeu.AttaqueType.invisibilite]).estActif();
+        if (attaques.ContainsKey(Jeu.AttaqueType.invisibilite))
+            return ((Invisibilite)attaques[Jeu.AttaqueType.invisibilite]).estActif();
 
         return false;
     }
@@ -1059,7 +1059,7 @@ public class Perso
     private void desactiverInvisibiliteIfOnMe(bool revealPerso = true) // DONE
     {
         if (sousInvisibilite())
-            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invincibilite]).desactiver(
+            ((Invisibilite)attaques[Jeu.AttaqueType.invincibilite]).desactiver(
                 reveal: revealPerso
             );
     }
@@ -1073,11 +1073,11 @@ public class Perso
             candidatVoileDInvisibilite = Jeu.fantomageClient;
 
         return candidatVoileDInvisibilite.attaques.ContainsKey(
-                (int)Jeu.AttaqueType.voileDInvisibilite
+                Jeu.AttaqueType.voileDInvisibilite
             )
             && (
                 (VoileDInvisibilite)
-                    candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
+                    candidatVoileDInvisibilite.attaques[Jeu.AttaqueType.voileDInvisibilite]
             ).getPersoCible() == this;
     }
 
@@ -1093,7 +1093,7 @@ public class Perso
 
             (
                 (VoileDInvisibilite)
-                    candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
+                    candidatVoileDInvisibilite.attaques[Jeu.AttaqueType.voileDInvisibilite]
             ).desactiver(reveal: revealPerso);
         }
     }
@@ -1105,9 +1105,9 @@ public class Perso
             candidatElixirAgressif = Jeu.elfeeHost;
         else
             candidatElixirAgressif = Jeu.elfeeClient;
-        if (candidatElixirAgressif.attaques.ContainsKey((int)Jeu.AttaqueType.elixirAgressif))
+        if (candidatElixirAgressif.attaques.ContainsKey(Jeu.AttaqueType.elixirAgressif))
             (
-                (ElixirAgressif)candidatElixirAgressif.attaques[(int)Jeu.AttaqueType.elixirAgressif]
+                (ElixirAgressif)candidatElixirAgressif.attaques[Jeu.AttaqueType.elixirAgressif]
             ).desactiver(this);
     }
 
@@ -1341,19 +1341,19 @@ public class Perso
     private void desactiverAncre() // DONE
     {
         if (
-            Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-            && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre])
+            Jeu.piratitanClient.attaques.ContainsKey(Jeu.AttaqueType.ancre)
+            && ((Ancre)Jeu.piratitanClient.attaques[Jeu.AttaqueType.ancre])
                 .getTargets()
                 .Contains(this)
         )
-            ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
+            ((Ancre)Jeu.piratitanClient.attaques[Jeu.AttaqueType.ancre]).desactiverAncre(this);
         if (
-            Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-            && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre])
+            Jeu.piratitanHost.attaques.ContainsKey(Jeu.AttaqueType.ancre)
+            && ((Ancre)Jeu.piratitanHost.attaques[Jeu.AttaqueType.ancre])
                 .getTargets()
                 .Contains(this)
         )
-            ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
+            ((Ancre)Jeu.piratitanHost.attaques[Jeu.AttaqueType.ancre]).desactiverAncre(this);
     }
 
     private void desactiverEsquive() // DONE

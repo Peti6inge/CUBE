@@ -10,7 +10,7 @@ public class Clone : Attaque
         cout = 3;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.tonneauOuClone;
+        typeCible = Jeu.CibleType.tonneauOuClone;
         myClone = null;
     }
 
@@ -22,7 +22,7 @@ public class Clone : Attaque
         if (!missAndReveal(myCase))
         {
             myCase.invocationSimpleBloquante = new InvocationSimpleBloquante(
-                (int)Jeu.InvocationType.Clone,
+                Jeu.InvocationType.Clone,
                 perso.isHost,
                 myCase
             );

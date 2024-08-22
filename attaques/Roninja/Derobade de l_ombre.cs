@@ -10,7 +10,7 @@ public class DerobadeDeLOmbre : Attaque
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.derobadeDeLOmbre;
+        typeCible = Jeu.CibleType.derobadeDeLOmbre;
     }
 
     // Méthodes public

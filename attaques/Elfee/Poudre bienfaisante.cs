@@ -10,7 +10,7 @@ public class PoudreBienfaisante : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.persoFriendly;
+        typeCible = Jeu.CibleType.persoFriendly;
     }
 
     // Méthodes public

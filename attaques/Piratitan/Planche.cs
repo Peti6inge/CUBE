@@ -9,7 +9,7 @@ public class Planche : Attaque
         porteeMin = 0;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.planche;
+        typeCible = Jeu.CibleType.planche;
     }
 
     // Méthodes public

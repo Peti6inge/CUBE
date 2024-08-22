@@ -1,30 +1,30 @@
 public class InvocationSimpleBloquante
 {
     // attributs
-    public int type { get; set; }
+    public Jeu.InvocationType type { get; set; }
     public bool isHost { get; set; }
     public int hp { get; set; }
     public int hpMax { get; set; }
     public Case myCase { get; set; }
 
     // Constructeur // DONE
-    public InvocationSimpleBloquante(int type, bool isHost, Case myCase)
+    public InvocationSimpleBloquante(Jeu.InvocationType type, bool isHost, Case myCase)
     {
         this.type = type;
         this.isHost = isHost;
         this.myCase = myCase;
         switch (type)
         {
-            case (int)Jeu.InvocationType.Tonneau:
+            case Jeu.InvocationType.Tonneau:
                 hp = hpMax = 3;
                 break;
-            case (int)Jeu.InvocationType.Coffre:
+            case Jeu.InvocationType.Coffre:
                 hp = hpMax = 5;
                 break;
-            case (int)Jeu.InvocationType.GrossePotion:
+            case Jeu.InvocationType.GrossePotion:
                 hp = hpMax = 5;
                 break;
-            case (int)Jeu.InvocationType.Clone:
+            case Jeu.InvocationType.Clone:
                 hp = hpMax = 1;
                 break;
         }
@@ -34,10 +34,10 @@ public class InvocationSimpleBloquante
     {
         switch (type)
         {
-            case (int)Jeu.InvocationType.Coffre:
+            case Jeu.InvocationType.Coffre:
                 activerCoffre(pierre);
                 break;
-            case (int)Jeu.InvocationType.GrossePotion:
+            case Jeu.InvocationType.GrossePotion:
                 activerGrossePotion(perso);
                 break;
         }
@@ -89,7 +89,7 @@ public class InvocationSimpleBloquante
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
-            ((Altruisme)elfeeAlliee.attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
+            ((Altruisme)elfeeAlliee.attaques[Jeu.AttaqueType.altruisme]).desactiver();
         }
         myCase.invocationSimpleBloquante = null;
     }
@@ -98,12 +98,12 @@ public class InvocationSimpleBloquante
     {
         if (
             (
-                Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
+                Jeu.elfeeClient.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeClient.attaques[Jeu.AttaqueType.altruisme]).getTarget() == this
             )
             || (
-                Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
+                Jeu.elfeeHost.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeHost.attaques[Jeu.AttaqueType.altruisme]).getTarget() == this
             )
         )
             return true;

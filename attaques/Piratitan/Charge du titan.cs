@@ -10,69 +10,69 @@ public class ChargeDuTitan : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.chargeDuTitan;
+        typeCible = Jeu.CibleType.chargeDuTitan;
         directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<int, int>>()
         {
             {
                 Jeu.host,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Right },
-                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.RotLeft },
-                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.RotRight }
+                    { Jeu.DirectionType.Up, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.Down, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.Left, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.Right, Jeu.DirectionType.Right },
+                    { Jeu.DirectionType.RotLeft, Jeu.DirectionType.RotLeft },
+                    { Jeu.DirectionType.RotRight, Jeu.DirectionType.RotRight }
                 }
             },
             {
                 Jeu.client,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Right }
+                    { Jeu.DirectionType.Up, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.Down, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.Left, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.Right, Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.north,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
+                    { Jeu.DirectionType.Up, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.Down, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.RotLeft, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.RotRight, Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.south,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
+                    { Jeu.DirectionType.Up, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.Down, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.RotLeft, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.RotRight, Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.east,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
+                    { Jeu.DirectionType.Right, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.Left, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.RotLeft, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.RotRight, Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.west,
                 new Dictionary<int, int>
                 {
-                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Up },
-                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Down },
-                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
-                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
+                    { Jeu.DirectionType.Left, Jeu.DirectionType.Up },
+                    { Jeu.DirectionType.Right, Jeu.DirectionType.Down },
+                    { Jeu.DirectionType.RotLeft, Jeu.DirectionType.Left },
+                    { Jeu.DirectionType.RotRight, Jeu.DirectionType.Right }
                 }
             }
         };
@@ -106,7 +106,7 @@ public class ChargeDuTitan : Attaque
                 {
                     perso.moveDirection(relativeDirection, chargeDuTitan: true);
                     casesParcourues++;
-                    if (perso.myCase.obstacleSpawn == (int)Jeu.PersoType.Piratitan)
+                    if (perso.myCase.obstacleSpawn == Jeu.PersoType.Piratitan)
                         break;
                 }
                 else

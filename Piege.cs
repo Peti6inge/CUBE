@@ -41,13 +41,13 @@ public class Piege
     {
         switch (type)
         {
-            case (int)Jeu.PiegeType.PiegeLineaire:
+            case Jeu.PiegeType.PiegeLineaire:
                 activerPiegeLineaire(cible);
                 break;
-            case (int)Jeu.PiegeType.PiegeALoup:
+            case Jeu.PiegeType.PiegeALoup:
                 activerPiegeALoup(cible);
                 break;
-            case (int)Jeu.PiegeType.CaseTerrifiante:
+            case Jeu.PiegeType.CaseTerrifiante:
                 activerCaseTerrifiante(cible);
                 break;
         }

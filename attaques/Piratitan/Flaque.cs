@@ -9,7 +9,7 @@ public class Flaque : Attaque
         porteeMin = 0;
         porteeMax = 4;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.poseGlissante;
+        typeCible = Jeu.CibleType.poseGlissante;
     }
 
     // Méthodes public

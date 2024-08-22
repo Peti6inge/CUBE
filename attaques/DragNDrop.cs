@@ -9,7 +9,7 @@ public class DragNDrop : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.dragNDrop;
+        typeCible = Jeu.CibleType.dragNDrop;
     }
 
     // Méthodes public

@@ -10,7 +10,7 @@ public class SortDeProtection : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.sortDeProtection;
+        typeCible = Jeu.CibleType.sortDeProtection;
     }
 
     // Méthodes public

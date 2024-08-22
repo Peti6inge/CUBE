@@ -10,7 +10,7 @@ public class Jouvence : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.soin;
+        typeCible = Jeu.CibleType.soin;
     }
 
     // Méthodes public

@@ -9,7 +9,7 @@ public class BondDuTitan : Attaque
         cout = 4;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnCase;
+        typeCible = Jeu.CibleType.freeOnCase;
     }
 
     // Méthodes public
@@ -23,10 +23,10 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row - 1, myCase.col];
             persoCible = caseCible.perso();
-            pousser(persoCible, (int)Jeu.DirectionType.Up);
+            pousser(persoCible, Jeu.DirectionType.Up);
             if (
                 caseCible.invocationSimpleBloquante != null
-                && caseCible.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Clone
+                && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
                 caseCible.invocationSimpleBloquante.estKO();
         }
@@ -34,10 +34,10 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row + 1, myCase.col];
             persoCible = caseCible.perso();
-            pousser(persoCible, (int)Jeu.DirectionType.Down);
+            pousser(persoCible, Jeu.DirectionType.Down);
             if (
                 caseCible.invocationSimpleBloquante != null
-                && caseCible.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Clone
+                && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
                 caseCible.invocationSimpleBloquante.estKO();
         }
@@ -45,10 +45,10 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row, myCase.col - 1];
             persoCible = caseCible.perso();
-            pousser(persoCible, (int)Jeu.DirectionType.Left);
+            pousser(persoCible, Jeu.DirectionType.Left);
             if (
                 caseCible.invocationSimpleBloquante != null
-                && caseCible.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Clone
+                && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
                 caseCible.invocationSimpleBloquante.estKO();
         }
@@ -56,10 +56,10 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row, myCase.col + 1];
             persoCible = caseCible.perso();
-            pousser(persoCible, (int)Jeu.DirectionType.Right);
+            pousser(persoCible, Jeu.DirectionType.Right);
             if (
                 caseCible.invocationSimpleBloquante != null
-                && caseCible.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Clone
+                && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
                 caseCible.invocationSimpleBloquante.estKO();
         }

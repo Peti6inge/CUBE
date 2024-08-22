@@ -9,7 +9,7 @@ public class Feinte : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnPerso;
+        typeCible = Jeu.CibleType.freeOnPerso;
         limitParTour = 1;
     }
 
@@ -26,10 +26,10 @@ public class Feinte : Attaque
         if (perso.myCase == null)
             return;
 
-        if (perso.attaques.ContainsKey((int)Jeu.AttaqueType.clone))
+        if (perso.attaques.ContainsKey(Jeu.AttaqueType.clone))
         {
             InvocationSimpleBloquante? clone = (
-                (Clone)perso.attaques[(int)Jeu.AttaqueType.clone]
+                (Clone)perso.attaques[Jeu.AttaqueType.clone]
             ).getClone();
 
             if (clone == null)

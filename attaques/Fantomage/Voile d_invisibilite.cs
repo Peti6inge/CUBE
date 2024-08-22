@@ -12,7 +12,7 @@ public class VoileDInvisibilite : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.persoFriendly;
+        typeCible = Jeu.CibleType.persoFriendly;
         persoCible = null;
     }
 
