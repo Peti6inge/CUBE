@@ -203,18 +203,9 @@ public class Case
     public void persoLeaveCase(Perso byPerso) // DONE
     {
         if (containsCamouflage && !byPerso.enVol)
-        {
             quitteCamouflage(byPerso);
-        }
 
-        if (face.brumeHost && byPerso.isHost)
-        {
-            face.maJEmbrumage(true);
-        }
-        else if (face.brumeClient && !byPerso.isHost)
-        {
-            face.maJEmbrumage(false);
-        }
+        face.maJEmbrumage();
 
         byPerso.myCase = null;
     }
@@ -235,10 +226,7 @@ public class Case
         if (containsCamouflage && !byPerso.enVol)
             entreCamouflage(byPerso);
 
-        if (face.brumeHost && byPerso.isHost)
-            face.maJEmbrumage(true);
-        else if (face.brumeClient && !byPerso.isHost)
-            face.maJEmbrumage(false);
+        face.maJEmbrumage();
 
         if (
             byPerso.isVisibleForMe(

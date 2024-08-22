@@ -701,14 +701,14 @@ public class Perso
         Face facePrecedente = myCase.face;
         Face nouvelleFace = c.face;
 
+        Perso? persoPorteur = estPortePar();
+        if (persoPorteur != null)
+            persoPorteur.porte = null;
+
         myCase.persoLeaveCase(this);
 
         if (porte != null && porte.myCase != null)
             porte.myCase.persoLeaveCase(this);
-
-        Perso? persoPorteur = estPortePar();
-        if (persoPorteur != null)
-            persoPorteur.porte = null;
 
         c.persoEnterCase(
             this,

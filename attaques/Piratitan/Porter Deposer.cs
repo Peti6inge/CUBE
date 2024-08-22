@@ -3,7 +3,8 @@ public class PorterDeposer : Attaque
     // Attributs // DONE
 
     // Constructeur // DONE
-    public PorterDeposer(Perso perso) : base(perso)
+    public PorterDeposer(Perso perso)
+        : base(perso)
     {
         cout = 1;
         porteeMin = 1;
@@ -19,7 +20,6 @@ public class PorterDeposer : Attaque
         if (perso.porte != null && perso.porte.myCase != null) // Déposer
         {
             int direction = perso.porte.myCase.directionTo(myCase);
-
             perso.porte.moveDirection(direction, porterDeposer: true);
         }
         else if (cible != null && perso.myCase != null) // Porter
@@ -32,14 +32,13 @@ public class PorterDeposer : Attaque
                 persoToReveal.reveal();
             }
             else
-                persoMonteSurMonDos((Perso)cible);
-
+                monteSurMonDos((Perso)cible);
         }
     }
 
     // Méthodes privées
 
-    private void persoMonteSurMonDos(Perso p) // DONE
+    private void monteSurMonDos(Perso p) // DONE
     {
         if (p.myCase == null || perso.myCase == null)
             return;
@@ -51,5 +50,6 @@ public class PorterDeposer : Attaque
         if (p.myCase.containsCamouflage)
             p.invisibilite++;
 
+        p.myCase.face.maJEmbrumage();
     }
 }

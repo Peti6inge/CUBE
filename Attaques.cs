@@ -707,7 +707,8 @@ public class Attaque
                     cible is InvocationSimpleBloquante
                     && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                     && ((InvocationSimpleBloquante)cible).isHost == perso.isHost
-                ) // La cible est un clone allié
+                    && !perso.isover()
+                ) // La cible est un clone allié et je ne suis pas over
                 {
                     return true;
                 }
@@ -723,10 +724,12 @@ public class Attaque
                         persoOver != null
                         && persoOver.estPortePar() == null
                         && persoOver.isVisibleForMe(perso.isHost)
-                    ) // La case contient un perso porté visible : Il y a un porteur dessous
+                    ) // La case contient un perso porté visible : Cible est porteur
                         return false;
                 }
                 if (perso.isAncre()) // Je suis ancré
+                    return false;
+                if (perso.isover()) // Je suis over
                     return false;
                 if (cible is Perso)
                 {
@@ -735,7 +738,7 @@ public class Attaque
                         ciblePerso.isHost != perso.isHost
                         && !ciblePerso.isover()
                         && ciblePerso.pierre == null
-                    ) // La cible est un ennemi non ancré et non over
+                    ) // La cible est un ennemi non over
                         return true;
                 }
                 else if (

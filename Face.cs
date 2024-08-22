@@ -72,19 +72,44 @@ public class Face
                             grid[row, col] = new Case((int)Jeu.CaseType.Vide, this, row, col);
                             break;
                         case "1":
-                            grid[row, col] = new Case((int)Jeu.CaseType.SimpleObstacle, this, row, col);
+                            grid[row, col] = new Case(
+                                (int)Jeu.CaseType.SimpleObstacle,
+                                this,
+                                row,
+                                col
+                            );
                             break;
                         case "2H":
-                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleHaut, this, row, col);
+                            grid[row, col] = new Case(
+                                (int)Jeu.CaseType.DoubleObstacleHaut,
+                                this,
+                                row,
+                                col
+                            );
                             break;
                         case "2B":
-                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleBas, this, row, col);
+                            grid[row, col] = new Case(
+                                (int)Jeu.CaseType.DoubleObstacleBas,
+                                this,
+                                row,
+                                col
+                            );
                             break;
                         case "2G":
-                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleGauche, this, row, col);
+                            grid[row, col] = new Case(
+                                (int)Jeu.CaseType.DoubleObstacleGauche,
+                                this,
+                                row,
+                                col
+                            );
                             break;
                         case "2D":
-                            grid[row, col] = new Case((int)Jeu.CaseType.DoubleObstacleDroite, this, row, col);
+                            grid[row, col] = new Case(
+                                (int)Jeu.CaseType.DoubleObstacleDroite,
+                                this,
+                                row,
+                                col
+                            );
                             break;
                         case "3":
                             grid[row, col] = new Case((int)Jeu.CaseType.Trou, this, row, col);
@@ -119,11 +144,15 @@ public class Face
         InvocationNonBloquante? mouetteCandidate = null;
         if (isHost && mouetteHost())
         {
-            mouetteCandidate = ((Mouette)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
+            mouetteCandidate = (
+                (Mouette)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.mouette]
+            ).getMouette();
         }
         if (!isHost && mouetteClient())
         {
-            mouetteCandidate = ((Mouette)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.mouette]).getMouette();
+            mouetteCandidate = (
+                (Mouette)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.mouette]
+            ).getMouette();
         }
 
         bool[,] bools = new bool[8, 8];
@@ -132,21 +161,16 @@ public class Face
         {
             bools[mouetteCandidate.myCase.row, mouetteCandidate.myCase.col] = true;
             if (mouetteCandidate.myCase.row != 0)
-            {
                 bools[mouetteCandidate.myCase.row - 1, mouetteCandidate.myCase.col] = true;
-            }
+
             if (mouetteCandidate.myCase.row != 7)
-            {
                 bools[mouetteCandidate.myCase.row + 1, mouetteCandidate.myCase.col] = true;
-            }
+
             if (mouetteCandidate.myCase.col != 0)
-            {
                 bools[mouetteCandidate.myCase.row, mouetteCandidate.myCase.col - 1] = true;
-            }
+
             if (mouetteCandidate.myCase.col != 7)
-            {
                 bools[mouetteCandidate.myCase.row, mouetteCandidate.myCase.col + 1] = true;
-            }
         }
 
         foreach (Perso perso in isHost ? Jeu.PersosHost() : Jeu.PersosClient())
@@ -155,21 +179,16 @@ public class Face
             {
                 bools[perso.myCase.row, perso.myCase.col] = true;
                 if (perso.myCase.row != 0)
-                {
                     bools[perso.myCase.row - 1, perso.myCase.col] = true;
-                }
+
                 if (perso.myCase.row != 7)
-                {
                     bools[perso.myCase.row + 1, perso.myCase.col] = true;
-                }
+
                 if (perso.myCase.col != 0)
-                {
                     bools[perso.myCase.row, perso.myCase.col - 1] = true;
-                }
+
                 if (perso.myCase.col != 7)
-                {
                     bools[perso.myCase.row, perso.myCase.col + 1] = true;
-                }
             }
         }
         for (int row = 0; row < 8; row++)
@@ -177,15 +196,17 @@ public class Face
             for (int col = 0; col < 8; col++)
             {
                 if (isHost)
-                {
                     grid[row, col].containsBrumeRoninjaHost = bools[row, col];
-                }
                 else
-                {
                     grid[row, col].containsBrumeRoninjaClient = bools[row, col];
-                }
             }
         }
+    }
+
+    public void maJEmbrumage() // DONE
+    {
+        maJEmbrumage(true);
+        maJEmbrumage(false);
     }
 
     public bool faceVisible(bool isHost) // DONE
@@ -241,13 +262,13 @@ public class Face
     public void activerBrumeHost() // DONE
     {
         brumeHost = true;
-        maJEmbrumage(true);
+        maJEmbrumage();
     }
 
     public void activerBrumeClient() // DONE
     {
         brumeClient = true;
-        maJEmbrumage(false);
+        maJEmbrumage();
     }
 
     public void desactiverBrumeHost() // DONE
@@ -309,7 +330,10 @@ public class Face
         List<InvocationSimpleBloquante> coffres = new List<InvocationSimpleBloquante>();
         foreach (Case c in grid)
         {
-            if (c.invocationSimpleBloquante != null && c.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Coffre)
+            if (
+                c.invocationSimpleBloquante != null
+                && c.invocationSimpleBloquante.type == (int)Jeu.InvocationType.Coffre
+            )
             {
                 coffres.Add(c.invocationSimpleBloquante);
             }
