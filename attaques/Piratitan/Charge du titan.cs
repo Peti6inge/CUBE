@@ -1,7 +1,7 @@
 public class ChargeDuTitan : Attaque
 {
     // Attributs // DONE
-    private Dictionary<Face, Dictionary<string, string>> directionsAbsoluesToRelatives;
+    private Dictionary<Face, Dictionary<int, int>> directionsAbsoluesToRelatives;
 
     // Constructeur // DONE
     public ChargeDuTitan(Perso perso)
@@ -10,69 +10,69 @@ public class ChargeDuTitan : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.chargeDuTitan";
-        directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<string, string>>()
+        typeCible = (int)Jeu.CibleType.chargeDuTitan;
+        directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<int, int>>()
         {
             {
                 Jeu.host,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "up", "up" },
-                    { "down", "down" },
-                    { "left", "left" },
-                    { "right", "right" },
-                    { "rotLeft", "rotLeft" },
-                    { "rotRight", "rotRight" }
+                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Right },
+                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.RotLeft },
+                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.RotRight }
                 }
             },
             {
                 Jeu.client,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "up", "down" },
-                    { "down", "up" },
-                    { "left", "left" },
-                    { "right", "right" }
+                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.north,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "up", "up" },
-                    { "down", "down" },
-                    { "rotLeft", "left" },
-                    { "rotRight", "right" }
+                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.south,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "up", "down" },
-                    { "down", "up" },
-                    { "rotLeft", "left" },
-                    { "rotRight", "right" }
+                    { (int)Jeu.DirectionType.Up, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.Down, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.east,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "right", "up" },
-                    { "left", "down" },
-                    { "rotLeft", "left" },
-                    { "rotRight", "right" }
+                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
                 }
             },
             {
                 Jeu.west,
-                new Dictionary<string, string>
+                new Dictionary<int, int>
                 {
-                    { "left", "up" },
-                    { "right", "down" },
-                    { "rotLeft", "left" },
-                    { "rotRight", "right" }
+                    { (int)Jeu.DirectionType.Left, (int)Jeu.DirectionType.Up },
+                    { (int)Jeu.DirectionType.Right, (int)Jeu.DirectionType.Down },
+                    { (int)Jeu.DirectionType.RotLeft, (int)Jeu.DirectionType.Left },
+                    { (int)Jeu.DirectionType.RotRight, (int)Jeu.DirectionType.Right }
                 }
             }
         };
@@ -88,22 +88,25 @@ public class ChargeDuTitan : Attaque
             if (perso.myCase == null)
                 return;
 
-            string direction = perso.myCase.directionTo(myCase);
+            int direction = perso.myCase.directionTo(myCase);
 
-            string absoluteDirection = getAbsoluteDirection(direction);
+            int absoluteDirection = getAbsoluteDirection(direction);
             int casesParcourues = 0;
             while (casesParcourues < 32)
             {
-                string relativeDirection = getRelativeDirection(absoluteDirection);
+                int relativeDirection = getRelativeDirection(absoluteDirection);
 
-                if (perso.harponne.Count > 0 && perso.myCase.face != perso.myCase.nextCaseDirection(relativeDirection).face)
+                if (
+                    perso.harponne.Count > 0
+                    && perso.myCase.face != perso.myCase.nextCaseDirection(relativeDirection).face
+                )
                     break;
 
                 if (perso.canMoveDirection(relativeDirection))
                 {
                     perso.moveDirection(relativeDirection, chargeDuTitan: true);
                     casesParcourues++;
-                    if (perso.myCase.obstacleSpawn == "Piratitan")
+                    if (perso.myCase.obstacleSpawn == (int)Jeu.PersoType.Piratitan)
                         break;
                 }
                 else
@@ -122,19 +125,19 @@ public class ChargeDuTitan : Attaque
 
     // Méthodes privées
 
-    private string getRelativeDirection(string direction) // DONE
+    private int getRelativeDirection(int direction) // DONE
     {
         if (perso.myCase != null)
             return directionsAbsoluesToRelatives[perso.myCase.face][direction];
-        return "";
+        return -1;
     }
 
-    private string getAbsoluteDirection(string direction) // DONE
+    private int getAbsoluteDirection(int direction) // DONE
     {
         if (perso.myCase != null)
             return directionsAbsoluesToRelatives[perso.myCase.face]
                 .FirstOrDefault(x => x.Value == direction)
                 .Key;
-        return "";
+        return -1;
     }
 }

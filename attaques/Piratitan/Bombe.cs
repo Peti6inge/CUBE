@@ -9,7 +9,7 @@ public class Bombe : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante;
         bombe = null;
     }
 
@@ -21,7 +21,7 @@ public class Bombe : Attaque
         myCase.containsPoudre = true;
         if (bombe != null)
             bombe.estKO(bombeExplose: false);
-        bombe = new InvocationNonBloquante("Bombe", perso.isHost, myCase);
+        bombe = new InvocationNonBloquante( (int)Jeu.InvocationType.Bombe, perso.isHost, myCase);
     }
 
     public InvocationNonBloquante? getBombe() // DONE

@@ -9,7 +9,7 @@ public class Tonneau : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.tonneauOuClone";
+        typeCible = (int)Jeu.CibleType.tonneauOuClone;
     }
 
     // Méthodes public
@@ -19,7 +19,7 @@ public class Tonneau : Attaque
         uses();
         if (!missAndReveal(myCase))
         {
-            myCase.invocationSimpleBloquante = new InvocationSimpleBloquante("Tonneau", perso.isHost, myCase);
+            myCase.invocationSimpleBloquante = new InvocationSimpleBloquante((int)Jeu.InvocationType.Tonneau, perso.isHost, myCase);
             if (myCase.piegeClient != null)
                 myCase.piegeClient.activer(myCase.invocationSimpleBloquante);
 

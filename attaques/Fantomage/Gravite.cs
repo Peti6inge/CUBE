@@ -1,27 +1,48 @@
 public class Gravite : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public Gravite(Perso perso) : base(perso)
+    public Gravite(Perso perso)
+        : base(perso)
     {
         cout = 4;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.gravite";
+        typeCible = (int)Jeu.CibleType.gravite;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
-    }
+        if (perso.isHost)
+            myCase.containsGraviteFantomageHost = true;
+        else
+            myCase.containsGraviteFantomageClient = true;
 
-    public static void activer(Perso perso, Case caseTrou)
-    {
-        // TODO
+        Perso? persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Up).perso();
+        if (persoToAttract != null && !persoToAttract.getAncre())
+            myCase.activerGravite(persoToAttract);
+        if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
+            return;
+
+        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Down).perso();
+        if (persoToAttract != null && !persoToAttract.getAncre())
+            myCase.activerGravite(persoToAttract);
+        if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
+            return;
+
+        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Left).perso();
+        if (persoToAttract != null && !persoToAttract.getAncre())
+            myCase.activerGravite(persoToAttract);
+        if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
+            return;
+
+        persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Right).perso();
+        if (persoToAttract != null && !persoToAttract.getAncre())
+            myCase.activerGravite(persoToAttract);
     }
 }

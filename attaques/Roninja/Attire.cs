@@ -11,7 +11,7 @@ public class Attire : Attaque
         porteeMax = 5;
         ligneDeVue = true;
         aligne = true;
-        typeCible = (int)Jeu.CibleType.attireRepousse";
+        typeCible = (int)Jeu.CibleType.attireRepousse;
     }
 
     // Méthodes public
@@ -39,7 +39,7 @@ public class Attire : Attaque
             if (ciblePerso == null || ciblePerso.myCase == null) // Cas : Cible est absente
                 return;
 
-            string direction = ciblePerso.myCase.directionTo(perso.myCase);
+            int direction = ciblePerso.myCase.directionTo(perso.myCase);
 
             if (ciblePerso.canMoveDirection(direction))
                 ciblePerso.moveDirection(direction, attire: true);

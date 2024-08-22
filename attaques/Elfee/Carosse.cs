@@ -1,15 +1,16 @@
 public class Carosse : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public Carosse(Perso perso) : base(perso)
+    public Carosse(Perso perso)
+        : base(perso)
     {
         cout = 5;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.invocationDoubleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationDoubleBloquante;
     }
 
     // Méthodes public
@@ -19,8 +20,14 @@ public class Carosse : Attaque
         uses();
         myCase.containsDoubleObstacle = false;
         myCase.getDeuxiemeCaseDoubleObstacle().containsDoubleObstacle = false;
-        
-        myCase.invocationDoubleBloquante = new InvocationDoubleBloquante("Carosse", perso.isHost, myCase, myCase.getDeuxiemeCaseDoubleObstacle());
-        myCase.getDeuxiemeCaseDoubleObstacle().invocationDoubleBloquante = myCase.invocationDoubleBloquante;
+
+        myCase.invocationDoubleBloquante = new InvocationDoubleBloquante(
+            (int)Jeu.InvocationType.Carosse,
+            perso.isHost,
+            myCase,
+            myCase.getDeuxiemeCaseDoubleObstacle()
+        );
+        myCase.getDeuxiemeCaseDoubleObstacle().invocationDoubleBloquante =
+            myCase.invocationDoubleBloquante;
     }
 }

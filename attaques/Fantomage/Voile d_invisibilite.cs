@@ -12,16 +12,20 @@ public class VoileDInvisibilite : Attaque
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.persoFriendly";
+        typeCible = (int)Jeu.CibleType.persoFriendly;
         persoCible = null;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        persoCible = (Perso?)cible;
+        if (persoCible == null)
+            return;
+
+        persoCible.invisibilite++;
     }
 
     public void desactiver(bool reveal = true) // DONE

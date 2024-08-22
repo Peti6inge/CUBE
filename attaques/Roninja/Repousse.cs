@@ -10,7 +10,7 @@ public class Repousse : Attaque
         porteeMax = 5;
         ligneDeVue = true;
         aligne = true;
-        typeCible = (int)Jeu.CibleType.attireRepousse";
+        typeCible = (int)Jeu.CibleType.attireRepousse;
     }
 
     // Méthodes public
@@ -38,7 +38,7 @@ public class Repousse : Attaque
             if (ciblePerso == null || ciblePerso.myCase == null) // Cas : Cible est absente
                 return;
 
-            string direction = ciblePerso.myCase.directionTo(perso.myCase, directionInverse: true);
+            int direction = ciblePerso.myCase.directionTo(perso.myCase, directionInverse: true);
 
             if (ciblePerso.canMoveDirection(direction))
                 ciblePerso.moveDirection(direction, repousse: true);

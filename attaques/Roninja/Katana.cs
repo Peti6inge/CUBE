@@ -9,14 +9,14 @@ public class Katana : Attaque
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        attaqueBasiqueDegats(myCase, cible, 3);
     }
 }

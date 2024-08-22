@@ -3,12 +3,13 @@ public class Feinte : Attaque
     // Attributs // DONE
 
     // Constructeur // DONE
-    public Feinte(Perso perso) : base(perso)
+    public Feinte(Perso perso)
+        : base(perso)
     {
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnPerso";
+        typeCible = (int)Jeu.CibleType.freeOnPerso;
         limitParTour = 1;
     }
 
@@ -25,9 +26,11 @@ public class Feinte : Attaque
         if (perso.myCase == null)
             return;
 
-        if (perso.attaques.ContainsKey("Clone"))
+        if (perso.attaques.ContainsKey((int)Jeu.AttaqueType.clone))
         {
-            InvocationSimpleBloquante? clone = ((Clone)perso.attaques["Clone"]).getClone();
+            InvocationSimpleBloquante? clone = (
+                (Clone)perso.attaques[(int)Jeu.AttaqueType.clone]
+            ).getClone();
 
             if (clone == null)
                 return;

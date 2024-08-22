@@ -1,15 +1,16 @@
 public class CoupDeBaguette : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public CoupDeBaguette(Perso perso) : base(perso)
+    public CoupDeBaguette(Perso perso)
+        : base(perso)
     {
         cout = 4;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante;
     }
 
     // Méthodes public
@@ -18,6 +19,10 @@ public class CoupDeBaguette : Attaque
     {
         uses();
         myCase.containsSimpleObstacle = false;
-        myCase.invocationSimpleBloquante = new InvocationSimpleBloquante("GrossePotion",perso.isHost, myCase);
+        myCase.invocationSimpleBloquante = new InvocationSimpleBloquante(
+            (int)Jeu.InvocationType.GrossePotion,
+            perso.isHost,
+            myCase
+        );
     }
 }

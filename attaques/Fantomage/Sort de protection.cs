@@ -1,22 +1,25 @@
 public class SortDeProtection : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public SortDeProtection(Perso perso) : base(perso)
+    public SortDeProtection(Perso perso)
+        : base(perso)
     {
         cout = 3;
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.sortDeProtection";
+        typeCible = (int)Jeu.CibleType.sortDeProtection;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        Perso? persoCible = (Perso?)cible;
+        if (persoCible != null)
+            persoCible.esquive = true;
     }
 }

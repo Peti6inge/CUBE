@@ -8,7 +8,7 @@ public class Clairvoyance : Attaque
         cout = 4;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnPerso";
+        typeCible = (int)Jeu.CibleType.freeOnPerso;
         limitParTour = 1;
     }
 

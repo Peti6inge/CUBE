@@ -2,26 +2,39 @@ public class Clone : Attaque
 {
     // Attributs // DONE
     private InvocationSimpleBloquante? myClone;
-    
+
     // Constructeur // DONE
-    public Clone(Perso perso) : base(perso)
+    public Clone(Perso perso)
+        : base(perso)
     {
         cout = 3;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.tonneauOuClone";
+        typeCible = (int)Jeu.CibleType.tonneauOuClone;
         myClone = null;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO : Penser à activer les pièges
+        if (!missAndReveal(myCase))
+        {
+            myCase.invocationSimpleBloquante = new InvocationSimpleBloquante(
+                (int)Jeu.InvocationType.Clone,
+                perso.isHost,
+                myCase
+            );
+            if (myCase.piegeClient != null)
+                myCase.piegeClient.activer(myCase.invocationSimpleBloquante);
+
+            if (myCase.piegeHost != null)
+                myCase.piegeHost.activer(myCase.invocationSimpleBloquante);
+        }
     }
 
-    public InvocationSimpleBloquante? getClone()
+    public InvocationSimpleBloquante? getClone() // DONE
     {
         return myClone;
     }

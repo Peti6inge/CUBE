@@ -9,16 +9,16 @@ public class Memoire : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.memoire";
+        typeCible = (int)Jeu.CibleType.memoire;
         tp = null;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        tp = myCase;
     }
 
     public Case? getTp() // DONE

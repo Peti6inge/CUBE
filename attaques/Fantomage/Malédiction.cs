@@ -11,16 +11,19 @@ public class Malediction : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.persoEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEnnemy;
         persoCible = null;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        if (cible is Perso)
+            persoCible = (Perso)cible;
+        else if (cible is bool)
+            persoCible = (bool)cible ? myCase.persoOver() : myCase.perso();
     }
 
     public void desactiver()

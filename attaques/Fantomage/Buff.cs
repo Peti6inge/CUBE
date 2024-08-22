@@ -1,23 +1,31 @@
 public class Buff : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public Buff(Perso perso) : base(perso)
+    public Buff(Perso perso)
+        : base(perso)
     {
         cout = 2;
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.persoFriendly";
+        typeCible = (int)Jeu.CibleType.persoFriendly;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        Perso? persoCible = (Perso?)cible;
+        if (persoCible == null)
+            return;
+
+        if (persoCible.buffEnergie.ContainsKey(1))
+            persoCible.buffEnergie[1] += 4;
+        else
+            persoCible.buffEnergie.Add(1, 4);
     }
 }

@@ -10,7 +10,7 @@ public class Crapeau : Attaque
         porteeMin = 0;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante;
         crapeau = null;
     }
 
@@ -21,7 +21,7 @@ public class Crapeau : Attaque
         uses();
         if (crapeau != null)
             crapeau.estKO();
-        crapeau = new InvocationNonBloquante("Crapeau", perso.isHost, myCase);
+        crapeau = new InvocationNonBloquante( (int)Jeu.InvocationType.Crapeau, perso.isHost, myCase);
     }
 
     public InvocationNonBloquante? getCrapeau()

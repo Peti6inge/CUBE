@@ -9,14 +9,14 @@ public class SoinTotal : Attaque
         porteeMin = 0;
         porteeMax = 2;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.soin";
+        typeCible = (int)Jeu.CibleType.soin;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        attaqueBasiqueSoin(cible, 100);
     }
 }

@@ -8,7 +8,7 @@ public class PorterDeposer : Attaque
         cout = 1;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.porterDeposer";
+        typeCible = (int)Jeu.CibleType.porterDeposer;
     }
 
     // Méthodes public
@@ -18,7 +18,7 @@ public class PorterDeposer : Attaque
         uses();
         if (perso.porte != null && perso.porte.myCase != null) // Déposer
         {
-            string direction = perso.porte.myCase.directionTo(myCase);
+            int direction = perso.porte.myCase.directionTo(myCase);
 
             perso.porte.moveDirection(direction, porterDeposer: true);
         }

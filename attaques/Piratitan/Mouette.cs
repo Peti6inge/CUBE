@@ -9,7 +9,7 @@ public class Mouette : Attaque
         cout = 3;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.invocationNonBloquante";
+        typeCible = (int)Jeu.CibleType.invocationNonBloquante;
         mouette = null;
     }
 
@@ -20,7 +20,7 @@ public class Mouette : Attaque
         uses();
         if (mouette != null)
             mouette.estKO();
-        mouette = new InvocationNonBloquante("Mouette", perso.isHost, myCase);
+        mouette = new InvocationNonBloquante((int)Jeu.InvocationType.Mouette    , perso.isHost, myCase);
     }
 
     public InvocationNonBloquante? getMouette() // DONE

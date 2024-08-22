@@ -9,7 +9,7 @@ public class Brume : Attaque
         cout = 7;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnFace";
+        typeCible = (int)Jeu.CibleType.freeOnFace;
         limitParTour = 1;
     }
 

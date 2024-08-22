@@ -9,7 +9,7 @@ public class FlechePatiente : Attaque
         limitParTour = 1;
         porteeMin = 0;
         porteeMax = 0;
-        typeCible = (int)Jeu.CibleType.freeOnFace";
+        typeCible = (int)Jeu.CibleType.freeOnFace;
     }
 
     // Méthodes public

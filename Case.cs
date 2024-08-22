@@ -316,7 +316,7 @@ public class Case
             && !respawn
         )
         {
-            Gravite.activer(byPerso, face.grid[row - 1, col]);
+            face.grid[row - 1, col].activerGravite(byPerso);
         }
 
         if (
@@ -330,7 +330,7 @@ public class Case
             && !respawn
         )
         {
-            Gravite.activer(byPerso, face.grid[row + 1, col]);
+            face.grid[row + 1, col].activerGravite(byPerso);
         }
 
         if (
@@ -344,7 +344,7 @@ public class Case
             && !respawn
         )
         {
-            Gravite.activer(byPerso, face.grid[row, col - 1]);
+            face.grid[row, col - 1].activerGravite(byPerso);
         }
 
         if (
@@ -358,7 +358,7 @@ public class Case
             && !respawn
         )
         {
-            Gravite.activer(byPerso, face.grid[row, col + 1]);
+            face.grid[row, col + 1].activerGravite(byPerso);
         }
 
         if (!crapeauHost && !respawn)
@@ -461,7 +461,10 @@ public class Case
 
     public InvocationDoubleBloquante? containsCarosse() // DONE
     {
-        if (invocationDoubleBloquante != null && invocationDoubleBloquante.type == (int)Jeu.InvocationType.Carosse)
+        if (
+            invocationDoubleBloquante != null
+            && invocationDoubleBloquante.type == (int)Jeu.InvocationType.Carosse
+        )
         {
             return invocationDoubleBloquante;
         }
@@ -921,9 +924,13 @@ public class Case
         if (row == myCase.row)
         {
             if (col < myCase.col)
-                return directionInverse ? (int)Jeu.DirectionType.Left : (int)Jeu.DirectionType.Right;
+                return directionInverse
+                    ? (int)Jeu.DirectionType.Left
+                    : (int)Jeu.DirectionType.Right;
             else
-                return directionInverse ? (int)Jeu.DirectionType.Right : (int)Jeu.DirectionType.Left;
+                return directionInverse
+                    ? (int)Jeu.DirectionType.Right
+                    : (int)Jeu.DirectionType.Left;
         }
         else
         {
@@ -931,6 +938,20 @@ public class Case
                 return directionInverse ? (int)Jeu.DirectionType.Up : (int)Jeu.DirectionType.Down;
             else
                 return directionInverse ? (int)Jeu.DirectionType.Down : (int)Jeu.DirectionType.Up;
+        }
+    }
+
+    public void activerGravite(Perso p)
+    {
+        if (p.myCase == null)
+            return;
+
+        int direction = p.myCase.directionTo(this);
+        if (p.canMoveDirection(direction))
+        {
+            containsGraviteFantomageHost = false;
+            containsGraviteFantomageClient = false;
+            p.moveDirection(direction, gravite: true);
         }
     }
 
@@ -948,7 +969,9 @@ public class Case
         }
         else
         {
-            InvocationNonBloquante crapeau = fantomageCrapeau.entitesInvoquees()[(int)Jeu.InvocationType.Crapeau];
+            InvocationNonBloquante crapeau = fantomageCrapeau.entitesInvoquees()[
+                (int)Jeu.InvocationType.Crapeau
+            ];
             if (
                 byPerso.myCase != null
                 && crapeau.myCase.face == byPerso.myCase.face

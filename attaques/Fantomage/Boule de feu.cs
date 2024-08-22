@@ -10,14 +10,14 @@ public class BouleDeFeu : Attaque
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy";
+        typeCible = (int)Jeu.CibleType.persoEtInvocEnnemy;
     }
     
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        attaqueBasiqueDegats(myCase, cible, 1);
     }
 }

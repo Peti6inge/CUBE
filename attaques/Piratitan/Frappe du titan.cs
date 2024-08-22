@@ -9,7 +9,7 @@ public class FrappeDuTitan : Attaque
         cout = 8;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.frappeDuTitan";
+        typeCible = (int)Jeu.CibleType.frappeDuTitan;
     }
 
     // Méthodes public

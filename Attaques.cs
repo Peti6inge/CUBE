@@ -18,48 +18,48 @@ public class Attaque
 
     /*
     CIBLE :
-    "dragNDrop" : Drag and Drop
-    "invocationNonBloquante" : Bombe, Esprit Elfique, Mouette, Crapeau
-    "invocationSimpleBloquante" : Coffre, Coup de baguette
-    "invocationDoubleBloquante" : Carosse
-    "freeOnPerso" : Poudre, Invincibilité, Dernière volontée, Clairvoyance, Invisibilité, Feinte, Pirouette
-    "miniaturisation" : Miniaturisation
-    "teleport" : Téléport
-    "freeOnCase" :  Bond du titan
-    "freeOnFace" : Flèche patiente, Longue-vue, Brume
-    "etincelle" : Etincelle
-    "ancre" : Ancre
-    "attireRepousse" : Attire, Repousse
-    "persoFriendly" : Poudre stimulante, Poudre bienfaisante, Elixir agressif, Voile d'invisibilité, Buff
-    "persoEnnemy" : Harpon, Poudre soporifique, Poison, Entrave, Mains maudites, Malédiction, Boulet fantomatique
-    "soin" : Petit soin, Soin total, Jouvence
-    "altruisme" : Altruisme
-    "persoEtInvocEnnemy" : Sabre, Coup de feu, Flèche, Katana, Couteau de lancée, Kunaï, Coup de bâton, Boule de feu
-    "frappeDuPirate" : Frappe du pirate
-    "frappeDuTitan" : Frappe du titan
-    "tonneauOuClone" : Tonneau, Clone
-    "porterDeposer" : Porter / Déposer
-    "planche" : Planche
-    "gravite" : Gravité
-    "chargeDuTitan" : Charge du titan
-    "hautesHerbes" : Hautes herbes
-    "reanimation" : Réanimation
-    "flecheDeLumiere" : Flèche de lumière
-    "derobadeDeLOmbre" : Dérobade de l'ombre
-    "piegeSimple" : Piège à loup, Case terrifiante
-    "piegeLineaire" : Piège linéaire
-    "acide" : Acide
-    "derobade" : Dérobade
-    "transposition" : Transposition
-    "inversion" : Inversion
-    "poseGlissante" : Flaque, Eau vaseuse
-    "feuFollet" : Feu follet
-    "rappel" : Rappel
-    "caseDeRapatriement": Case de rapatriement
-    "memoire": Mémoire
-    "envolAtterissage": Envol / Atterrissage
-    "esquive" : Esquive
-    "sortDeProtection" : Sort de protection
+    dragNDrop : Drag and Drop
+    invocationNonBloquante : Bombe, Esprit Elfique, Mouette, Crapeau
+    invocationSimpleBloquante : Coffre, Coup de baguette
+    invocationDoubleBloquante : Carosse
+    freeOnPerso : Poudre, Invincibilité, Dernière volontée, Clairvoyance, Invisibilité, Feinte, Pirouette
+    miniaturisation : Miniaturisation
+    teleport : Téléport
+    freeOnCase :  Bond du titan
+    freeOnFace : Flèche patiente, Longue-vue, Brume
+    etincelle : Etincelle
+    ancre : Ancre
+    attireRepousse : Attire, Repousse
+    persoFriendly : Poudre stimulante, Poudre bienfaisante, Elixir agressif, Voile d'invisibilité, Buff
+    persoEnnemy : Harpon, Poudre soporifique, Poison, Entrave, Mains maudites, Malédiction, Boulet fantomatique
+    soin : Petit soin, Soin total, Jouvence
+    altruisme : Altruisme
+    persoEtInvocEnnemy : Sabre, Coup de feu, Flèche, Katana, Couteau de lancée, Kunaï, Coup de bâton, Boule de feu
+    frappeDuPirate : Frappe du pirate
+    frappeDuTitan : Frappe du titan
+    tonneauOuClone : Tonneau, Clone
+    porterDeposer : Porter / Déposer
+    planche : Planche
+    gravite : Gravité
+    chargeDuTitan : Charge du titan
+    hautesHerbes : Hautes herbes
+    reanimation : Réanimation
+    flecheDeLumiere : Flèche de lumière
+    derobadeDeLOmbre : Dérobade de l'ombre
+    piegeSimple : Piège à loup, Case terrifiante
+    piegeLineaire : Piège linéaire
+    acide : Acide
+    derobade : Dérobade
+    transposition : Transposition
+    inversion : Inversion
+    poseGlissante : Flaque, Eau vaseuse
+    feuFollet : Feu follet
+    rappel : Rappel
+    caseDeRapatriement: Case de rapatriement
+    memoire: Mémoire
+    envolAtterissage: Envol / Atterrissage
+    esquive : Esquive
+    sortDeProtection : Sort de protection
     */
 
     // Constructeur
@@ -76,7 +76,7 @@ public class Attaque
     public bool isUsable(Case myCase, Object? cible) // DONE
     {
         { // Conditions génériques
-            if (perso.porte != null && typeCible != (int)Jeu.CibleType.PorterDeposer)
+            if (perso.porte != null && typeCible != (int)Jeu.CibleType.porterDeposer)
                 return false;
 
             if (perso.myCase == null)
@@ -127,7 +127,7 @@ public class Attaque
 
         switch (typeCible) // Conditions spécifiques
         {
-            case (int)Jeu.CibleType.DragNDrop: // DONE
+            case (int)Jeu.CibleType.dragNDrop: // DONE
                 if (perso.mainsMaudites) // cas : Mains maudites
                     return false;
                 if (perso.pierre != null) // cas : Il possède une pierre
@@ -164,7 +164,7 @@ public class Attaque
                     }
                     return false;
                 }
-            case (int)Jeu.CibleType.InvocationNonBloquante: // DONE
+            case (int)Jeu.CibleType.invocationNonBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (
@@ -180,27 +180,27 @@ public class Attaque
                     return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.InvocationSimpleBloquante: // DONE
+            case (int)Jeu.CibleType.invocationSimpleBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (myCase.containsSimpleObstacle)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.InvocationDoubleBloquante: // DONE
+            case (int)Jeu.CibleType.invocationDoubleBloquante: // DONE
                 if (cible != null)
                     return false;
                 if (myCase.containsDoubleObstacle)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.FreeOnPerso: // DONE
+            case (int)Jeu.CibleType.freeOnPerso: // DONE
                 if (cible is Perso && (Perso)cible == perso)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Miniaturisation: // DONE
+            case (int)Jeu.CibleType.miniaturisation: // DONE
                 if (cible is Perso && (Perso)cible == perso && !perso.miniaturisation)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Teleport: // DONE
+            case (int)Jeu.CibleType.teleport: // DONE
                 if (perso.getAncre())
                     return false;
 
@@ -210,7 +210,9 @@ public class Attaque
                     && perso.attaques.ContainsKey((int)Jeu.AttaqueType.memoire)
                 )
                 {
-                    Case? caseMemoire = ((Memoire)perso.attaques[(int)Jeu.AttaqueType.memoire]).getTp();
+                    Case? caseMemoire = (
+                        (Memoire)perso.attaques[(int)Jeu.AttaqueType.memoire]
+                    ).getTp();
                     if (caseMemoire != null)
                     // cas : Le perso a posé un TP
                     {
@@ -241,21 +243,21 @@ public class Attaque
                     }
                 }
                 return false;
-            case (int)Jeu.CibleType.FreeOnCase: // DONE
+            case (int)Jeu.CibleType.freeOnCase: // DONE
                 if (cible == null)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.FreeOnFace: // DONE
+            case (int)Jeu.CibleType.freeOnFace: // DONE
                 if (cible is Face)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Etincelle: // DONE
+            case (int)Jeu.CibleType.etincelle: // DONE
                 if (cible != null)
                     return false;
                 if (!myCase.containsPoudre)
                     return false;
                 return true;
-            case (int)Jeu.CibleType.Ancre: // DONE
+            case (int)Jeu.CibleType.ancre: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
 
@@ -280,10 +282,10 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.AttireRepousse: // DONE
+            case (int)Jeu.CibleType.attireRepousse: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (
                     cible is bool
                     || (
@@ -303,14 +305,14 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.PersoFriendly: // DONE
+            case (int)Jeu.CibleType.persoFriendly: // DONE
                 if (cible is Perso && ((Perso)cible).isHost == perso.isHost)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.PersoEnnemy: // DONE
+            case (int)Jeu.CibleType.persoEnnemy: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (
                     (cible is Perso && ((Perso)cible).isHost == !perso.isHost)
                     || cible is bool
@@ -322,7 +324,7 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Soin: // DONE
+            case (int)Jeu.CibleType.soin: // DONE
                 if (
                     (
                         cible is Perso
@@ -350,7 +352,7 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Altruisme: // DONE
+            case (int)Jeu.CibleType.altruisme: // DONE
                 if (
                     (cible is Perso && ((Perso)cible).isHost == perso.isHost)
                     || (
@@ -368,10 +370,10 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case (int)Jeu.CibleType.PersoEtInvocEnnemy: // DONE
+            case (int)Jeu.CibleType.persoEtInvocEnnemy: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (
                     (cible is Perso && ((Perso)cible).isHost == !perso.isHost)
                     || cible is bool
@@ -390,7 +392,7 @@ public class Attaque
                 )
                     return true;
                 return false;
-            case (int)Jeu.CibleType.FrappeDuPirate: // DONE
+            case (int)Jeu.CibleType.frappeDuPirate: // DONE
                 if (cible != null) // cas : Cible autre que la case
                     return false;
                 else if (
@@ -413,7 +415,7 @@ public class Attaque
                     return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.FrappeDuTitan: // DONE
+            case (int)Jeu.CibleType.frappeDuTitan: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -436,7 +438,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.TonneauOuClone: // DONE
+            case (int)Jeu.CibleType.tonneauOuClone: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -457,7 +459,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.PorterDeposer: // DONE
+            case (int)Jeu.CibleType.porterDeposer: // DONE
                 if (perso.porte != null) // Cas : Le perso doit déposer sur une case
                 {
                     if (cible != null) // Cas : Cible n'est pas une case
@@ -493,13 +495,13 @@ public class Attaque
                         return true;
                     return false;
                 }
-            case (int)Jeu.CibleType.Planche: // DONE
+            case (int)Jeu.CibleType.planche: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (myCase.containsTrou || myCase.containsGlissante)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.Gravite: // DONE
+            case (int)Jeu.CibleType.gravite: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
 
@@ -513,7 +515,7 @@ public class Attaque
                     return false;
 
                 return true;
-            case (int)Jeu.CibleType.ChargeDuTitan: // DONE
+            case (int)Jeu.CibleType.chargeDuTitan: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 else if (
@@ -535,7 +537,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.HautesHerbes: // DONE
+            case (int)Jeu.CibleType.hautesHerbes: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -551,7 +553,7 @@ public class Attaque
                     return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.Reanimation: // DONE
+            case (int)Jeu.CibleType.reanimation: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
 
@@ -592,7 +594,7 @@ public class Attaque
                     default:
                         return false;
                 }
-            case (int)Jeu.CibleType.FlecheDeLumiere: // DONE
+            case (int)Jeu.CibleType.flecheDeLumiere: // DONE
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
@@ -610,7 +612,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.DerobadeDeLOmbre: // DONE
+            case (int)Jeu.CibleType.derobadeDeLOmbre: // DONE
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
@@ -628,7 +630,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.PiegeSimple: // DONE
+            case (int)Jeu.CibleType.piegeSimple: // DONE
                 if (cible != null)
                     return false;
 
@@ -636,7 +638,7 @@ public class Attaque
                     return false;
 
                 return true;
-            case (int)Jeu.CibleType.PiegeLineaire: // DONE
+            case (int)Jeu.CibleType.piegeLineaire: // DONE
                 if (cible != null)
                     return false;
 
@@ -649,7 +651,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.Acide: // DONE
+            case (int)Jeu.CibleType.acide: // DONE
                 if (cible != null)
                     return false;
 
@@ -657,10 +659,10 @@ public class Attaque
                     return true;
 
                 return false;
-            case (int)Jeu.CibleType.Derobade: // DONE
+            case (int)Jeu.CibleType.derobade: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (cible is Pierre)
                 {
                     Pierre pierre = (Pierre)cible;
@@ -684,7 +686,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.Transposition: // DONE
+            case (int)Jeu.CibleType.transposition: // DONE
                 if (perso.getAncre()) // Je suis ancré
                     return false;
 
@@ -708,10 +710,10 @@ public class Attaque
                 }
 
                 return false;
-            case (int)Jeu.CibleType.Inversion: // DONE
+            case (int)Jeu.CibleType.inversion: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (perso.getAncre()) // Je suis ancré
                     return false;
                 if (cible is Perso)
@@ -744,7 +746,7 @@ public class Attaque
                     return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.PoseGlissante: // DONE
+            case (int)Jeu.CibleType.poseGlissante: // DONE
                 if (cible != null)
                     return false;
                 else if (
@@ -758,10 +760,10 @@ public class Attaque
                 )
                     return false;
                 return true;
-            case (int)Jeu.CibleType.FeuFollet: // DONE
+            case (int)Jeu.CibleType.feuFollet: // DONE
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
-                    
+
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
@@ -775,7 +777,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.Rappel: // DONE
+            case (int)Jeu.CibleType.rappel: // DONE
                 if (!(cible is Perso))
                     return false;
                 else
@@ -789,7 +791,7 @@ public class Attaque
                         return true;
                 }
                 return false;
-            case (int)Jeu.CibleType.CaseDeRapatriement: // DONE
+            case (int)Jeu.CibleType.caseDeRapatriement: // DONE
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -812,7 +814,7 @@ public class Attaque
                         return false;
                 }
                 return true;
-            case (int)Jeu.CibleType.Memoire: // DONE
+            case (int)Jeu.CibleType.memoire: // DONE²
                 if (cible != null) // Cas : Cible autre que la case
                     return false;
                 if (
@@ -821,7 +823,7 @@ public class Attaque
                 ) // Cas : La case contient déjà un TP Roninja
                     return false;
                 return true;
-            case (int)Jeu.CibleType.EnvolAtterissage: // DONE
+            case (int)Jeu.CibleType.envolAtterissage: // DONE
                 if (!(cible is Perso))
                     return false;
                 else
@@ -854,11 +856,11 @@ public class Attaque
                         return true;
                     }
                 }
-            case (int)Jeu.CibleType.Esquive: // DONE
+            case (int)Jeu.CibleType.esquive: // DONE
                 if (cible is Perso && (Perso)cible == perso && !((Perso)cible).esquive)
                     return true;
                 return false;
-            case (int)Jeu.CibleType.SortDeProtection: // DONE
+            case (int)Jeu.CibleType.sortDeProtection: // DONE
                 if (
                     cible is Perso
                     && ((Perso)cible).isHost == perso.isHost

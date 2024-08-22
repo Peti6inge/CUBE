@@ -10,7 +10,7 @@ public class CaseDeRapatriement : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = (int)Jeu.CibleType.caseDeRapatriement";
+        typeCible = (int)Jeu.CibleType.caseDeRapatriement;
         myCase = null;
     }
 

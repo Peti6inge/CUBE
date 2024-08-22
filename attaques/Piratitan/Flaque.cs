@@ -9,12 +9,12 @@ public class Flaque : Attaque
         porteeMin = 0;
         porteeMax = 4;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.poseGlissante";
+        typeCible = (int)Jeu.CibleType.poseGlissante;
     }
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         myCase.containsGlissante = true;

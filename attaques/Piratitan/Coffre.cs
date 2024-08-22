@@ -9,7 +9,7 @@ public class Coffre : Attaque
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante";
+        typeCible = (int)Jeu.CibleType.invocationSimpleBloquante;
     }
 
     // Méthodes public
@@ -18,6 +18,6 @@ public class Coffre : Attaque
     {
         uses();
         myCase.containsSimpleObstacle = false;
-        myCase.invocationSimpleBloquante = new InvocationSimpleBloquante("Coffre",perso.isHost, myCase);
+        myCase.invocationSimpleBloquante = new InvocationSimpleBloquante((int)Jeu.InvocationType.Coffre,perso.isHost, myCase);
     }
 }

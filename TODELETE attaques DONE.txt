@@ -41,3 +41,30 @@ Téléport
 Brume
 Attire
 Repousse
+Poudre stimulante
+Poudre bienfaisante
+Voile d'invisibilité
+Buff
+Poudre soporifique
+Poison
+Entrave
+Mains maudites
+Malédiction
+Boulet fantomatique
+Soin total
+Jouvence
+Katana
+Couteau de lancée
+Kunaï
+Coup de bâton
+Boule de feu
+Eau vaseuse
+Dérobade de l'ombre
+Feu follet
+Gravité
+Piège à loup
+Case terrifiante
+Piège linéaire
+Clone
+Mémoire
+Acide

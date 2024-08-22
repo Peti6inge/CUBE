@@ -8,7 +8,7 @@ public class Etincelle : Attaque
         cout = 1;
         porteeMin = 0;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.etincelle";
+        typeCible = (int)Jeu.CibleType.etincelle;
     }
 
     // Méthodes public

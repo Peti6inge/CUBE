@@ -8,7 +8,7 @@ public class Derobade : Attaque
         cout = 4;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.derobade";
+        typeCible = (int)Jeu.CibleType.derobade;
     }
 
     // Méthodes public

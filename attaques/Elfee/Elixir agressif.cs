@@ -11,7 +11,7 @@ public class ElixirAgressif : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = true;
-        typeCible = (int)Jeu.CibleType.persoFriendly";
+        typeCible = (int)Jeu.CibleType.persoFriendly;
         persosCibles = new List<Tuple<Perso, int>>();
     }
 

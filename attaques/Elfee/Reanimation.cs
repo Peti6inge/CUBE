@@ -8,7 +8,7 @@ public class Reanimation : Attaque
         cout = 8;
         porteeMin = 1;
         porteeMax = 1;
-        typeCible = (int)Jeu.CibleType.reanimation";
+        typeCible = (int)Jeu.CibleType.reanimation;
     }
 
     // Méthodes public
