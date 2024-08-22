@@ -201,7 +201,7 @@ public class Attaque
                     return true;
                 return false;
             case (int)Jeu.CibleType.teleport: // DONE
-                if (perso.getAncre())
+                if (perso.getAncre()) // cas : Le perso est ancré
                     return false;
 
                 if (
@@ -216,6 +216,8 @@ public class Attaque
                     if (caseMemoire != null)
                     // cas : Le perso a posé un TP
                     {
+                        if (caseMemoire == perso.myCase) // cas : Le perso est sur son TP
+                            return false;
                         Perso? persoSurCaseMemoire = caseMemoire.perso();
                         if (
                             persoSurCaseMemoire != null
@@ -608,7 +610,7 @@ public class Attaque
                 else if (cible is Pierre)
                 {
                     Pierre pierre = (Pierre)cible;
-                    if (pierre.lumiere && pierre.isHost == !perso.isHost) // Cas : La cible est une pierre lumière adverse
+                    if (pierre.lumiere && pierre.isHost != perso.isHost) // Cas : La cible est une pierre lumière adverse
                         return true;
                 }
                 return false;
@@ -626,7 +628,7 @@ public class Attaque
                 else if (cible is Pierre)
                 {
                     Pierre pierre = (Pierre)cible;
-                    if (!pierre.lumiere && pierre.isHost == !perso.isHost) // Cas : La cible est une pierre ombre adverse
+                    if (!pierre.lumiere && pierre.isHost != perso.isHost) // Cas : La cible est une pierre ombre adverse
                         return true;
                 }
                 return false;
@@ -786,7 +788,6 @@ public class Attaque
                     if (
                         ciblePerso.isHost == perso.isHost
                         && !ciblePerso.getAncre()
-                        && !ciblePerso.enVol
                     )
                         return true;
                 }

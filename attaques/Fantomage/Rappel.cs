@@ -1,9 +1,10 @@
 public class Rappel : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
-    public Rappel(Perso perso) : base(perso)
+    public Rappel(Perso perso)
+        : base(perso)
     {
         cout = 2;
         porteeMin = 0;
@@ -14,9 +15,11 @@ public class Rappel : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
-        // TODO
+        Perso? persoCible = (Perso?)cible;
+        if (persoCible != null)
+            persoCible.rappelSpawn();
     }
 }

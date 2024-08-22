@@ -4,7 +4,8 @@ public class CaseDeRapatriement : Attaque
     private Case? myCase;
 
     // Constructeur // DONE
-    public CaseDeRapatriement(Perso perso) : base(perso)
+    public CaseDeRapatriement(Perso perso)
+        : base(perso)
     {
         cout = 1;
         porteeMin = 1;
@@ -16,21 +17,18 @@ public class CaseDeRapatriement : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public void lancerAttaque(Case myCase, Object? cible)  // DONE
     {
         uses();
-        // TODO
-    }
-
-    public void activer(Perso perso)
-    {
-        // TODO
+        if (!missAndReveal(myCase))
+            this.myCase = myCase;
     }
 
     public Case? getCase() // DONE
     {
         return myCase;
     }
+
     public void detruire() // DONE
     {
         myCase = null;

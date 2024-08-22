@@ -512,6 +512,12 @@ public class Perso
             coffreLePlusPres.activerCoffre(pierre);
         else if (caseCible.containsTrou)
             Jeu.PierreToTable(pierre);
+        else if (
+            caseCible.containsSimpleObstacle
+            || caseCible.containsDoubleObstacle
+            || caseCible.obstacleSpawn != -1
+        )
+            caseCible.tryToAddAround(pierre);
         else
             caseCible.addPierre(pierre);
 
@@ -838,7 +844,9 @@ public class Perso
 
         if (attaques.ContainsKey((int)Jeu.AttaqueType.espritElfique))
         {
-            candidate = ((EspritElfique)attaques[(int)Jeu.AttaqueType.espritElfique]).getEspritElfique();
+            candidate = (
+                (EspritElfique)attaques[(int)Jeu.AttaqueType.espritElfique]
+            ).getEspritElfique();
             if (candidate != null)
             {
                 entitesInvoquees.Add((int)Jeu.InvocationType.EspritElfique, candidate);
@@ -921,11 +929,15 @@ public class Perso
         if (
             (
                 Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-                && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
+                && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre])
+                    .getTargets()
+                    .Contains(this)
             )
             || (
                 Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-                && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
+                && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre])
+                    .getTargets()
+                    .Contains(this)
             )
         )
             return true;
@@ -937,11 +949,13 @@ public class Perso
         if (
             (
                 Jeu.elfeeClient.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
+                && ((Altruisme)Jeu.elfeeClient.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
             )
             || (
                 Jeu.elfeeHost.attaques.ContainsKey((int)Jeu.AttaqueType.altruisme)
-                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget() == this
+                && ((Altruisme)Jeu.elfeeHost.attaques[(int)Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
             )
         )
             return true;
@@ -970,6 +984,12 @@ public class Perso
         }
     }
 
+    public void rappelSpawn() // DONE
+    {
+        if (myCase == null)
+            return;
+    }
+
     // Méthodes private
 
     private bool sousInvisibilite() // DONE
@@ -983,7 +1003,9 @@ public class Perso
     private void desactiverInvisibiliteIfOnMe(bool revealPerso = true) // DONE
     {
         if (sousInvisibilite())
-            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invincibilite]).desactiver(reveal: revealPerso);
+            ((Invisibilite)attaques[(int)Jeu.AttaqueType.invincibilite]).desactiver(
+                reveal: revealPerso
+            );
     }
 
     private bool sousVoileDInvisibilite() // DONE
@@ -994,9 +1016,12 @@ public class Perso
         else
             candidatVoileDInvisibilite = Jeu.fantomageClient;
 
-        return candidatVoileDInvisibilite.attaques.ContainsKey((int)Jeu.AttaqueType.voileDInvisibilite)
+        return candidatVoileDInvisibilite.attaques.ContainsKey(
+                (int)Jeu.AttaqueType.voileDInvisibilite
+            )
             && (
-                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
+                (VoileDInvisibilite)
+                    candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
             ).getPersoCible() == this;
     }
 
@@ -1011,7 +1036,8 @@ public class Perso
                 candidatVoileDInvisibilite = Jeu.fantomageClient;
 
             (
-                (VoileDInvisibilite)candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
+                (VoileDInvisibilite)
+                    candidatVoileDInvisibilite.attaques[(int)Jeu.AttaqueType.voileDInvisibilite]
             ).desactiver(reveal: revealPerso);
         }
     }
@@ -1024,7 +1050,9 @@ public class Perso
         else
             candidatElixirAgressif = Jeu.elfeeClient;
         if (candidatElixirAgressif.attaques.ContainsKey((int)Jeu.AttaqueType.elixirAgressif))
-            ((ElixirAgressif)candidatElixirAgressif.attaques[(int)Jeu.AttaqueType.elixirAgressif]).desactiver(this);
+            (
+                (ElixirAgressif)candidatElixirAgressif.attaques[(int)Jeu.AttaqueType.elixirAgressif]
+            ).desactiver(this);
     }
 
     private List<InvocationSimpleBloquante> grossesPotionsAActiver() // DONE
@@ -1258,12 +1286,16 @@ public class Perso
     {
         if (
             Jeu.piratitanClient.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-            && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
+            && ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre])
+                .getTargets()
+                .Contains(this)
         )
             ((Ancre)Jeu.piratitanClient.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
         if (
             Jeu.piratitanHost.attaques.ContainsKey((int)Jeu.AttaqueType.ancre)
-            && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).getTargets().Contains(this)
+            && ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre])
+                .getTargets()
+                .Contains(this)
         )
             ((Ancre)Jeu.piratitanHost.attaques[(int)Jeu.AttaqueType.ancre]).desactiverAncre(this);
     }

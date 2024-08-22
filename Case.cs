@@ -286,10 +286,7 @@ public class Case
             && !byPerso.getAncre()
         )
         {
-            (
-                (CaseDeRapatriement)
-                    Jeu.fantomageHost.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
-            ).activer(byPerso);
+            byPerso.rappelSpawn();
         }
 
         if (
@@ -299,10 +296,7 @@ public class Case
             && !byPerso.getAncre()
         )
         {
-            (
-                (CaseDeRapatriement)
-                    Jeu.fantomageClient.attaques[(int)Jeu.AttaqueType.caseDeRapatriement]
-            ).activer(byPerso);
+            byPerso.rappelSpawn();
         }
 
         if (
@@ -732,6 +726,25 @@ public class Case
             Jeu.EncaissePierre(pierre);
         else
             pierre.myCases.Add(this);
+    }
+
+    public bool pierreAddable() // DONE
+    {
+        return !containsSimpleObstacle && !containsDoubleObstacle && (obstacleSpawn != -1);
+    }
+
+    public void tryToAddAround(Pierre pierre) // DONE
+    {
+        List<Case> candidates = getVoisins();
+        foreach (Case c in candidates)
+        {
+            if (face == c.face && c.pierreAddable())
+            {
+                c.addPierre(pierre);
+                return;
+            }
+        }
+        Jeu.PierreToTable(pierre);
     }
 
     public void removePierre(Pierre pierre) // DONE

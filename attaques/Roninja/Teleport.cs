@@ -3,7 +3,8 @@ public class Teleport : Attaque
     // Attributs // DONE
 
     // Constructeur // DONE
-    public Teleport(Perso perso) : base(perso)
+    public Teleport(Perso perso)
+        : base(perso)
     {
         cout = 3;
         porteeMin = 0;
@@ -21,13 +22,15 @@ public class Teleport : Attaque
         if (caseMemoire == null || perso.myCase == null)
             return;
 
-        if (caseMemoire.containsSimpleObstacle
-         || caseMemoire.containsDoubleObstacle
-         || caseMemoire.invocationSimpleBloquante != null
-         || caseMemoire.invocationDoubleBloquante != null
-         || caseMemoire.containsTableClient
-         || caseMemoire.containsTableHost
-         || caseMemoire.obstacleSpawn != -1) // Cas : Le tp est bloqué par un obstacle
+        if (
+            caseMemoire.containsSimpleObstacle
+            || caseMemoire.containsDoubleObstacle
+            || caseMemoire.invocationSimpleBloquante != null
+            || caseMemoire.invocationDoubleBloquante != null
+            || caseMemoire.containsTableClient
+            || caseMemoire.containsTableHost
+            || caseMemoire.obstacleSpawn != -1
+        ) // Cas : Le tp est bloqué par un obstacle
         {
             perso.energieActive += cout - 1;
             perso.miss();
@@ -41,10 +44,11 @@ public class Teleport : Attaque
             perso.energieActive += cout - 1;
             perso.miss();
 
-            bool containsBrumeAdverse = perso.isHost ? caseMemoire.containsBrumeRoninjaClient : caseMemoire.containsBrumeRoninjaHost;
+            bool containsBrumeAdverse = perso.isHost
+                ? caseMemoire.containsBrumeRoninjaClient
+                : caseMemoire.containsBrumeRoninjaHost;
             if (caseMemoire.face.faceVisible(persoSurCaseMemoire.isHost) && !containsBrumeAdverse) // Cas : Le perso est visible si reveal
                 persoSurCaseMemoire.reveal();
-
             else // Cas : Le perso sera toujours invisible si reveal
                 persoSurCaseMemoire.temoinDePosition = caseMemoire;
 
@@ -55,6 +59,10 @@ public class Teleport : Attaque
 
         if (perso.pierre != null)
             perso.dropPierre();
+
+        Perso? persoPorteur = perso.estPortePar();
+        if (persoPorteur != null)
+            persoPorteur.porte = null;
 
         Face facePrecedente = perso.myCase.face;
         Face nouvelleFace = caseMemoire.face;
