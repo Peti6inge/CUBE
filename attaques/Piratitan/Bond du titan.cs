@@ -69,7 +69,7 @@ public class BondDuTitan : Attaque
 
     private void pousser(Perso? persoCible, int direction) // DONE
     {
-        if (persoCible != null && persoCible.canMoveDirection(direction) && !persoCible.getAncre())
+        if (persoCible != null && persoCible.canMoveDirection(direction) && !persoCible.isAncre())
             persoCible.moveDirection(direction, bondDuTitan: true);
     }
 }

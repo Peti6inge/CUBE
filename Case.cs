@@ -283,7 +283,7 @@ public class Case
             containsCaseRappatriementFantomageHost()
             && byPerso.isHost
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
         )
         {
             byPerso.rappelSpawn();
@@ -293,7 +293,7 @@ public class Case
             containsCaseRappatriementFantomageClient()
             && !byPerso.isHost
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
         )
         {
             byPerso.rappelSpawn();
@@ -306,7 +306,7 @@ public class Case
                 || face.grid[row - 1, col].containsGraviteFantomageClient
             )
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
             && !respawn
         )
         {
@@ -320,7 +320,7 @@ public class Case
                 || face.grid[row + 1, col].containsGraviteFantomageClient
             )
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
             && !respawn
         )
         {
@@ -334,7 +334,7 @@ public class Case
                 || face.grid[row, col - 1].containsGraviteFantomageClient
             )
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
             && !respawn
         )
         {
@@ -348,7 +348,7 @@ public class Case
                 || face.grid[row, col + 1].containsGraviteFantomageClient
             )
             && !byPerso.enVol
-            && !byPerso.getAncre()
+            && !byPerso.isAncre()
             && !respawn
         )
         {
@@ -377,7 +377,7 @@ public class Case
         }
         if (containsGlissante && !byPerso.enVol && direction != -1)
         {
-            if (!byPerso.getAncre() && byPerso.canMoveDirection(direction))
+            if (!byPerso.isAncre() && byPerso.canMoveDirection(direction))
             {
                 byPerso.moveDirection(direction, glissade: true);
             }
@@ -488,7 +488,7 @@ public class Case
     {
         foreach (Perso myPerso in Jeu.Persos())
         {
-            if (myPerso.myCase == this && myPerso.enVol == false && myPerso.estPortePar() == null)
+            if (myPerso.myCase == this && !myPerso.isover())
             {
                 return myPerso;
             }

@@ -24,25 +24,25 @@ public class Gravite : Attaque
             myCase.containsGraviteFantomageClient = true;
 
         Perso? persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Up).perso();
-        if (persoToAttract != null && !persoToAttract.getAncre())
+        if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
         persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Down).perso();
-        if (persoToAttract != null && !persoToAttract.getAncre())
+        if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
         persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Left).perso();
-        if (persoToAttract != null && !persoToAttract.getAncre())
+        if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
         if (!myCase.containsGraviteFantomageHost && !myCase.containsGraviteFantomageClient)
             return;
 
         persoToAttract = myCase.nextCaseDirection((int)Jeu.DirectionType.Right).perso();
-        if (persoToAttract != null && !persoToAttract.getAncre())
+        if (persoToAttract != null && !persoToAttract.isAncre())
             myCase.activerGravite(persoToAttract);
     }
 }

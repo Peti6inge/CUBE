@@ -201,7 +201,7 @@ public class Attaque
                     return true;
                 return false;
             case (int)Jeu.CibleType.teleport: // DONE
-                if (perso.getAncre()) // cas : Le perso est ancré
+                if (perso.isAncre()) // cas : Le perso est ancré
                     return false;
 
                 if (
@@ -280,7 +280,7 @@ public class Attaque
                         return false;
                     if (ciblePerso.isHost != perso.isHost) // Perso ennemi
                         return true;
-                    else if (!ciblePerso.getAncre()) // Perso allié non ancré
+                    else if (!ciblePerso.isAncre()) // Perso allié non ancré
                         return true;
                 }
                 return false;
@@ -303,7 +303,7 @@ public class Attaque
                     Perso ciblePerso = (Perso)cible;
                     if (ciblePerso.isHost != perso.isHost) // Perso ennemi
                         return true;
-                    else if (!ciblePerso.getAncre()) // Perso allié non ancré
+                    else if (!ciblePerso.isAncre()) // Perso allié non ancré
                         return true;
                 }
                 return false;
@@ -491,7 +491,7 @@ public class Attaque
                     Perso ciblePerso = (Perso)cible;
                     if (
                         ciblePerso.isHost == perso.isHost
-                        && !ciblePerso.getAncre()
+                        && !ciblePerso.isAncre()
                         && !ciblePerso.enVol
                     ) // Cas : Cible est un allié portable
                         return true;
@@ -689,7 +689,7 @@ public class Attaque
                 }
                 return false;
             case (int)Jeu.CibleType.transposition: // DONE
-                if (perso.getAncre()) // Je suis ancré
+                if (perso.isAncre()) // Je suis ancré
                     return false;
 
                 if (cible is Perso)
@@ -697,9 +697,10 @@ public class Attaque
                     Perso ciblePerso = (Perso)cible;
                     if (
                         ciblePerso.isHost == perso.isHost
-                        && !ciblePerso.getAncre()
+                        && !ciblePerso.isAncre()
                         && !ciblePerso.enVol
-                    ) // La cible est un allié non ancré et non en vol
+                        && ciblePerso.porte == null
+                    ) // La cible est un allié non ancré, non porteur et non en vol
                         return true;
                 }
                 else if (
@@ -716,34 +717,43 @@ public class Attaque
                 if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
                     return false;
 
-                if (perso.getAncre()) // Je suis ancré
+                { // Génération de bloc pour éviter les erreurs de compilation
+                    Perso? persoOver = myCase.persoOver();
+                    if (
+                        persoOver != null
+                        && persoOver.estPortePar() == null
+                        && persoOver.isVisibleForMe(perso.isHost)
+                    ) // La case contient un perso porté visible : Il y a un porteur dessous
+                        return false;
+                }
+                if (perso.isAncre()) // Je suis ancré
                     return false;
                 if (cible is Perso)
                 {
                     Perso ciblePerso = (Perso)cible;
                     if (
                         ciblePerso.isHost != perso.isHost
-                        && !ciblePerso.enVol
+                        && !ciblePerso.isover()
                         && ciblePerso.pierre == null
-                    ) // La cible est un ennemi non ancré et non en vol
+                    ) // La cible est un ennemi non ancré et non over
                         return true;
                 }
                 else if (
                     cible is InvocationSimpleBloquante
                     && ((InvocationSimpleBloquante)cible).type == (int)Jeu.InvocationType.Clone
                     && ((InvocationSimpleBloquante)cible).isHost != perso.isHost
-                )
+                ) // La cible est un clone ennemi
                 {
                     return true;
                 }
-                else if (cible is bool)
+                else if (cible is bool && !(bool)cible) // La cible est un perso invisible au sol
                 {
-                    Perso? ciblePerso = (bool)cible ? myCase.persoOver() : myCase.perso();
+                    Perso? ciblePerso = myCase.perso();
                     if (
                         ciblePerso != null
                         && ciblePerso.isHost != perso.isHost
                         && ciblePerso.pierre != null
-                    )
+                    ) // La cible est un ennemi qui possède une pierre
                         return false;
                     return true;
                 }
@@ -785,10 +795,7 @@ public class Attaque
                 else
                 {
                     Perso ciblePerso = (Perso)cible;
-                    if (
-                        ciblePerso.isHost == perso.isHost
-                        && !ciblePerso.getAncre()
-                    )
+                    if (ciblePerso.isHost == perso.isHost && !ciblePerso.isAncre())
                         return true;
                 }
                 return false;

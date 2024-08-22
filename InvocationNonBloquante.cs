@@ -102,7 +102,7 @@ public class InvocationNonBloquante
             missCrapeauObstacle(perso);
             return;
         }
-        if (perso.getAncre())
+        if (perso.isAncre())
         {
             missCrapeauAncre(perso);
             return;

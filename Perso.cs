@@ -341,10 +341,9 @@ public class Perso
         hp = 0;
         hpMax = 10;
         miniaturisation = false;
+
         if (attaques.ContainsKey((int)Jeu.AttaqueType.longueVue))
-        {
             ((LongueVue)attaques[(int)Jeu.AttaqueType.longueVue]).desactiver();
-        }
 
         desactiverPoudre();
 
@@ -361,9 +360,7 @@ public class Perso
         reveal();
 
         if (attaques.ContainsKey((int)Jeu.AttaqueType.altruisme))
-        {
             ((Altruisme)attaques[(int)Jeu.AttaqueType.altruisme]).desactiver();
-        }
 
         if (sousAltruisme())
         {
@@ -407,19 +404,18 @@ public class Perso
         buffBoostDegats.Clear();
 
         if (pierre != null)
-        {
             dropPierre();
-        }
 
         Perso? piratitanCandidat = estPortePar();
         if (piratitanCandidat != null)
-        {
             piratitanCandidat.porte = null;
-        }
+
         if (porte != null)
         {
             Perso persoTombant = porte;
             porte = null;
+            if (myCase != null)
+                myCase.persoLeaveCase(this);
             persoTombant.persoPorteTombe();
         }
 
@@ -584,7 +580,7 @@ public class Perso
 
         reveal();
 
-        if (!ignoreFeinte && feinte && !getAncre() && estPortePar() != null)
+        if (!ignoreFeinte && feinte && !isAncre() && estPortePar() != null)
         {
             recoitDegats(degats, ignoreFeinte: true);
             ((Feinte)attaques[(int)Jeu.AttaqueType.feinte]).activerFeinte();
@@ -816,7 +812,7 @@ public class Perso
 
     public void tombeDansTrou() // DONE
     {
-        if (!getAncre() && pirouette)
+        if (!isAncre() && pirouette)
         {
             dropPierre();
             pirouette = false;
@@ -924,7 +920,7 @@ public class Perso
             desactiverHarpons();
     }
 
-    public bool getAncre() // DONE
+    public bool isAncre() // DONE
     {
         if (
             (
@@ -988,6 +984,66 @@ public class Perso
     {
         if (myCase == null)
             return;
+
+        if (isAncre())
+            return;
+
+        bool nouvelleFace =
+            isHost && myCase.face != Jeu.host || !isHost && myCase.face != Jeu.client;
+
+        if (nouvelleFace)
+            desactiverHarpons();
+
+        if (pierre != null)
+            dropPierre();
+
+        Perso? piratitanCandidat = estPortePar();
+        if (piratitanCandidat != null)
+            piratitanCandidat.porte = null;
+
+        if (porte != null)
+        {
+            Perso persoTombant = porte;
+            porte = null;
+            if (myCase != null)
+                myCase.persoLeaveCase(this);
+            persoTombant.persoPorteTombe();
+        }
+
+        if (myCase != null)
+            myCase.persoLeaveCase(this);
+
+        enVol = false;
+
+        switch (type)
+        {
+            case (int)Jeu.PersoType.Roninja:
+                if (isHost)
+                    Jeu.host.grid[2, 2].persoEnterCase(this, newFace: nouvelleFace);
+                else
+                    Jeu.client.grid[2, 2].persoEnterCase(this, newFace: nouvelleFace);
+                break;
+            case (int)Jeu.PersoType.Elfee:
+                if (isHost)
+                    Jeu.host.grid[2, 5].persoEnterCase(this, newFace: nouvelleFace);
+                else
+                    Jeu.client.grid[2, 5].persoEnterCase(this, newFace: nouvelleFace);
+                break;
+            case (int)Jeu.PersoType.Fantomage:
+                if (isHost)
+                    Jeu.host.grid[5, 2].persoEnterCase(this, newFace: nouvelleFace);
+                else
+                    Jeu.client.grid[5, 2].persoEnterCase(this, newFace: nouvelleFace);
+                break;
+            case (int)Jeu.PersoType.Piratitan:
+                if (isHost)
+                    Jeu.host.grid[5, 5].persoEnterCase(this, newFace: nouvelleFace);
+                else
+                    Jeu.client.grid[5, 5].persoEnterCase(this, newFace: nouvelleFace);
+                break;
+            default:
+                break;
+        }
     }
 
     // Méthodes private
