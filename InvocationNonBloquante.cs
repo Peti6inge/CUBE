@@ -30,27 +30,11 @@ public class InvocationNonBloquante
         }
     }
 
-    public void activer(Perso? perso = null, bool crapeauHost = false, bool crapeauClient = false) // DONE
-    {
-        switch (type)
-        {
-            case Jeu.InvocationType.Bombe:
-                activerBombe();
-                break;
-            case Jeu.InvocationType.EspritElfique:
-                activerEspritElfique(perso);
-                break;
-            case Jeu.InvocationType.Crapeau:
-                activerCrapeau(perso, crapeauHost, crapeauClient);
-                break;
-        }
-    }
-
     public void activerBombe(int poudre = 0) // DONE
     {
         Perso piratitanProprietaire = isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
 
-        hp = 0;
+        estKO(bombeExplose: false);
 
         int portee = 1 + poudre / 2;
 
@@ -58,10 +42,10 @@ public class InvocationNonBloquante
         foreach (Case c in myCase.face.grid)
         {
             if (c.distance(myCase) <= portee)
-            {
                 cases.Add(c);
-            }
         }
+
+        cases.Sort((c1, c2) => c1.distance(myCase).CompareTo(c2.distance(myCase))); // tri par distance
 
         foreach (Case c in cases)
         {
@@ -74,8 +58,10 @@ public class InvocationNonBloquante
                 piratitanProprietaire.infligeDegats(degats, c.persoOver());
 
             foreach (InvocationNonBloquante i in c.invocationsNonBloquantes())
-                piratitanProprietaire.infligeDegats(degats, i);
-
+            {
+                if (i.hp > 0)
+                    piratitanProprietaire.infligeDegats(degats, i);
+            }
             if (c.invocationDoubleBloquante != null)
                 piratitanProprietaire.infligeDegats(degats, c.invocationDoubleBloquante);
             else if (c.invocationSimpleBloquante != null)
@@ -91,28 +77,32 @@ public class InvocationNonBloquante
         }
     }
 
-    public void activerCrapeau(Perso? perso, bool crapeauHost, bool crapeauClient) // DONE
+    public Jeu.EtatType activerCrapeau(Perso? perso, bool crapeauHost, bool crapeauClient) // DONE
     {
         if (perso == null)
-            return;
+            return Jeu.EtatType.ko;
         if (perso.myCase == null)
-            return;
+            return Jeu.EtatType.ko;
+
         if (!myCase.accessibleFrom(perso.myCase))
         {
             missCrapeauObstacle(perso);
-            return;
+            return Jeu.EtatType.normal;
         }
+
         if (perso.isAncre())
         {
             missCrapeauAncre(perso);
-            return;
+            return Jeu.EtatType.normal;
         }
+
         if (isHost)
             crapeauHost = true;
         else
             crapeauClient = true;
+
         Jeu.DirectionType direction = perso.myCase.directionTo(myCase);
-        perso.moveDirection(
+        return perso.moveDirection(
             direction,
             attiranceCrapeau: true,
             crapeauHost: crapeauHost,
@@ -120,23 +110,24 @@ public class InvocationNonBloquante
         );
     }
 
-    public void recoitDegats(int degats) // DONE
+    public Jeu.EtatType recoitDegats(int degats) // DONE
     {
         if (sousAltruisme())
         {
             if (isHost)
-            {
                 Jeu.elfeeHost.recoitDegats(degats);
-            }
             else
-            {
                 Jeu.elfeeClient.recoitDegats(degats);
-            }
-            return;
+
+            return Jeu.EtatType.normal;
         }
         hp -= Math.Min(hp, degats);
         if (hp <= 0)
+        {
             estKO();
+            return Jeu.EtatType.ko;
+        }
+        return Jeu.EtatType.normal;
     }
 
     public void recoitSoin(int soin) // DONE
@@ -146,12 +137,12 @@ public class InvocationNonBloquante
 
     public void estKO(bool bombeExplose = true) // DONE
     {
+        hp = 0;
         if (sousAltruisme())
         {
             Perso elfeeAlliee;
             if (isHost)
                 elfeeAlliee = Jeu.elfeeHost;
-
             else
                 elfeeAlliee = Jeu.elfeeClient;
 
@@ -169,7 +160,9 @@ public class InvocationNonBloquante
                 break;
             case Jeu.InvocationType.EspritElfique:
                 proprietaire = isHost ? Jeu.elfeeHost : Jeu.elfeeClient;
-                ((EspritElfique)proprietaire.attaques[Jeu.AttaqueType.espritElfique]).setEspritElfiqueNull();
+                (
+                    (EspritElfique)proprietaire.attaques[Jeu.AttaqueType.espritElfique]
+                ).setEspritElfiqueNull();
                 break;
             case Jeu.InvocationType.Mouette:
                 proprietaire = isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
@@ -182,28 +175,30 @@ public class InvocationNonBloquante
         }
     }
 
-    public void missCrapeauObstacle(Perso perso) // TODO
-    {
+    public void missCrapeauObstacle(
+        Perso perso
+    ) // TODO
+    { }
 
-    }
-
-    public void missCrapeauAncre(Perso perso) // TODO
-    {
-
-    }
+    public void missCrapeauAncre(
+        Perso perso
+    ) // TODO
+    { }
 
     public bool sousAltruisme() // DONE
     {
         if (
-           (
-               Jeu.elfeeClient.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
-               && ((Altruisme)Jeu.elfeeClient.attaques[Jeu.AttaqueType.altruisme]).getTarget() == this
-           )
-           || (
-               Jeu.elfeeHost.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
-               && ((Altruisme)Jeu.elfeeHost.attaques[Jeu.AttaqueType.altruisme]).getTarget() == this
-           )
-       )
+            (
+                Jeu.elfeeClient.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeClient.attaques[Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
+            )
+            || (
+                Jeu.elfeeHost.attaques.ContainsKey(Jeu.AttaqueType.altruisme)
+                && ((Altruisme)Jeu.elfeeHost.attaques[Jeu.AttaqueType.altruisme]).getTarget()
+                    == this
+            )
+        )
             return true;
         return false;
     }

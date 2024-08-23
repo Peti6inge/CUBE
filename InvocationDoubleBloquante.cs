@@ -9,7 +9,12 @@ public class InvocationDoubleBloquante
     public Case myCase2 { get; set; }
 
     // Constructeur // DONE
-    public InvocationDoubleBloquante(Jeu.InvocationType type, bool isHost, Case myCase1, Case myCase2)
+    public InvocationDoubleBloquante(
+        Jeu.InvocationType type,
+        bool isHost,
+        Case myCase1,
+        Case myCase2
+    )
     {
         this.type = type;
         this.isHost = isHost;
@@ -41,24 +46,25 @@ public class InvocationDoubleBloquante
         }
     }
 
-    public void recoitDegats(int degats) // DONE
+    public Jeu.EtatType recoitDegats(int degats) // DONE
     {
         if (sousAltruisme())
         {
             if (isHost)
-            {
                 Jeu.elfeeHost.recoitDegats(degats);
-            }
             else
-            {
                 Jeu.elfeeClient.recoitDegats(degats);
-            }
-            return;
+
+            return Jeu.EtatType.normal;
         }
 
         hp -= Math.Min(hp, degats);
         if (hp <= 0)
+        {
             estKO();
+            return Jeu.EtatType.ko;
+        }
+        return Jeu.EtatType.normal;
     }
 
     public void recoitSoin(int soin) // DONE

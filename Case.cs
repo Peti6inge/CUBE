@@ -184,9 +184,7 @@ public class Case
                 || containsTableHost
                 || containsTableClient
             )
-            {
                 return false;
-            }
         }
         else if (
             containsSimpleObstacle
@@ -204,24 +202,26 @@ public class Case
         else
         {
             if (byPerso.porte != null && persoOverCandidat != null)
-            {
                 return false;
-            }
         }
         return true;
     }
 
-    public void persoLeaveCase(Perso byPerso) // DONE
+    public bool persoLeaveCase(Perso byPerso) // DONE : renvoie true si le perso a quitté un camouflage et est désormais visible
     {
-        if (containsCamouflage && !byPerso.enVol)
-            quitteCamouflage(byPerso);
+        bool leaveCamouflage =
+            containsCamouflage
+            && !byPerso.enVol
+            && byPerso.invisibilite > 0
+            && !byPerso.sousInvisibilite()
+            && !byPerso.sousVoileDInvisibilite();
 
         face.maJEmbrumage();
-
         byPerso.myCase = null;
+        return leaveCamouflage;
     }
 
-    public void persoEnterCase(
+    public Jeu.EtatType persoEnterCase(
         Perso byPerso,
         bool crapeauHost = false,
         bool crapeauClient = false,
@@ -265,7 +265,8 @@ public class Case
             )
                 byPerso.porte.activerFlechesPatientes();
             else if (byPerso.isVisibleForMe(true, caseDoitEtreOffBrume: true))
-                byPerso.activerFlechesPatientes();
+                if (byPerso.activerFlechesPatientes() == Jeu.EtatType.ko)
+                    return Jeu.EtatType.ko;
         }
         else if (face.flechesPatientesClient > 0 && byPerso.isHost && newFace)
         {
@@ -275,7 +276,8 @@ public class Case
             )
                 byPerso.porte.activerFlechesPatientes();
             else if (byPerso.isVisibleForMe(false, caseDoitEtreOffBrume: true))
-                byPerso.activerFlechesPatientes();
+                if (byPerso.activerFlechesPatientes() == Jeu.EtatType.ko)
+                    return Jeu.EtatType.ko;
         }
 
         if (
@@ -284,9 +286,7 @@ public class Case
             && !byPerso.enVol
             && !byPerso.isAncre()
         )
-        {
             byPerso.rappelSpawn();
-        }
 
         if (
             containsCaseRappatriementFantomageClient()
@@ -294,9 +294,7 @@ public class Case
             && !byPerso.enVol
             && !byPerso.isAncre()
         )
-        {
             byPerso.rappelSpawn();
-        }
 
         if (
             row != 0
@@ -356,31 +354,32 @@ public class Case
 
         if (!crapeauHost && !respawn)
         {
-            InvocationNonBloquante? crapeau = activerCrapeau(byPerso, true);
+            InvocationNonBloquante? crapeau = crapeauAActiver(byPerso, true);
             if (crapeau != null)
-            {
-                crapeau.activer(byPerso);
-            }
+                crapeau.activerCrapeau(byPerso, crapeauHost: true, crapeauClient: crapeauClient);
         }
         if (!crapeauClient && !respawn)
         {
-            InvocationNonBloquante? crapeau = activerCrapeau(byPerso, false);
+            InvocationNonBloquante? crapeau = crapeauAActiver(byPerso, false);
             if (crapeau != null)
-            {
-                crapeau.activer(byPerso);
-            }
+                crapeau.activerCrapeau(byPerso, crapeauHost: crapeauHost, crapeauClient: true);
         }
         if (containsTrou && !byPerso.enVol)
-        {
-            byPerso.tombeDansTrou();
-        }
+            return byPerso.tombeDansTrou();
+
         if (containsGlissante && !byPerso.enVol && direction != Jeu.DirectionType.none)
         {
             if (!byPerso.isAncre() && byPerso.canMoveDirection(direction))
             {
-                byPerso.moveDirection(direction, glissade: true);
+                return byPerso.moveDirection(
+                    direction,
+                    glissade: true,
+                    crapeauHost: crapeauHost,
+                    crapeauClient: crapeauClient
+                );
             }
         }
+        return Jeu.EtatType.normal;
     }
 
     public bool accessibleFrom(Case myCase) // DONE : Renvoie si une case est accessible depuis une autre case
@@ -949,32 +948,28 @@ public class Case
         }
     }
 
-    public void activerGravite(Perso p)
+    public Jeu.EtatType activerGravite(Perso p)
     {
         if (p.myCase == null)
-            return;
+            return Jeu.EtatType.ko;
 
         Jeu.DirectionType direction = p.myCase.directionTo(this);
         if (p.canMoveDirection(direction))
         {
             containsGraviteFantomageHost = false;
             containsGraviteFantomageClient = false;
-            p.moveDirection(direction, gravite: true);
+            return p.moveDirection(direction, gravite: true);
         }
+        return Jeu.EtatType.normal;
     }
 
     // Méthodes private
 
-    private InvocationNonBloquante? activerCrapeau(Perso byPerso, bool crapeauHost) // DONE : Renvoie le crapeau invoqué par le fantomage si le perso est sur la case
+    private InvocationNonBloquante? crapeauAActiver(Perso byPerso, bool crapeauHost) // DONE : Renvoie le crapeau invoqué par le fantomage si le perso est sur la case
     {
         Perso? fantomageCrapeau = crapeauHost ? Jeu.fantomageHost : Jeu.fantomageClient;
-        if (
-            (byPerso.type == Jeu.PersoType.Fantomage && byPerso.isHost == crapeauHost)
-            || !fantomageCrapeau.entitesInvoquees().ContainsKey(Jeu.InvocationType.Crapeau)
-        )
-        {
+        if (!fantomageCrapeau.entitesInvoquees().ContainsKey(Jeu.InvocationType.Crapeau))
             return null;
-        }
         else
         {
             InvocationNonBloquante crapeau = fantomageCrapeau.entitesInvoquees()[

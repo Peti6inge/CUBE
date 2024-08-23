@@ -3,7 +3,8 @@ public class FrappeDuPirate : Attaque
     // Attributs // DONE
 
     // Constructeur // DONE
-    public FrappeDuPirate(Perso perso) : base(perso)
+    public FrappeDuPirate(Perso perso)
+        : base(perso)
     {
         cout = 4;
         porteeMin = 1;
@@ -28,7 +29,10 @@ public class FrappeDuPirate : Attaque
                 myCase.invocationDoubleBloquante.estKO();
 
             foreach (InvocationNonBloquante invoc in myCase.invocationsNonBloquantes())
-                invoc.estKO();
+            {
+                if (invoc.hp > 0)
+                    invoc.estKO();
+            }
         }
     }
 }

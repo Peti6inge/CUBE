@@ -37,63 +37,60 @@ public class Piege
     }
 
     // Méthodes publiques
-    public void activer(Object cible) // DONE
+    public Jeu.EtatType activer(Object cible) // DONE
     {
         switch (type)
         {
             case Jeu.PiegeType.PiegeLineaire:
-                activerPiegeLineaire(cible);
-                break;
+                return activerPiegeLineaire(cible);
             case Jeu.PiegeType.PiegeALoup:
-                activerPiegeALoup(cible);
-                break;
+                return activerPiegeALoup(cible);
             case Jeu.PiegeType.CaseTerrifiante:
-                activerCaseTerrifiante(cible);
-                break;
+                return activerCaseTerrifiante(cible);
+            default:
+                return Jeu.EtatType.normal;
         }
     }
 
-    public void activerPiegeLineaire(Object cible) // DONE
+    public Jeu.EtatType activerPiegeLineaire(Object cible) // DONE
     {
         if (myCaseFinale == null)
-            return;
+            return Jeu.EtatType.normal;
         if (isHost)
         {
-            Jeu.roninjaHost.infligeDegats(1, cible);
             myCase.piegeHost = null;
             myCaseFinale.piegeHost = null;
             foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
-            {
                 c.piegeHost = null;
-            }
+
+            return Jeu.roninjaHost.infligeDegats(1, cible);
         }
         else
         {
-            Jeu.roninjaClient.infligeDegats(1, cible);
             myCase.piegeClient = null;
             myCaseFinale.piegeClient = null;
             foreach (Case c in myCase.GetLine(myCase.face, myCase, myCaseFinale))
-            {
                 c.piegeClient = null;
-            }
+
+            return Jeu.roninjaClient.infligeDegats(1, cible);
         }
     }
 
-    public void activerPiegeALoup(Object cible) // DONE
+    public Jeu.EtatType activerPiegeALoup(Object cible) // DONE
     {
         if (isHost)
         {
-            Jeu.roninjaHost.infligeDegats(3, cible);
             myCase.piegeHost = null;
+           return Jeu.roninjaHost.infligeDegats(3, cible);
         }
         else
         {
-            Jeu.roninjaClient.infligeDegats(3, cible);
             myCase.piegeClient = null;
+           return Jeu.roninjaClient.infligeDegats(3, cible);
         }
     }
 
-    public void activerCaseTerrifiante(Object cible) // DONE
+    public Jeu.EtatType activerCaseTerrifiante(Object cible) // DONE
     {
         if (cible is Perso)
             ((Perso)cible).passeTour = true;
@@ -102,6 +99,7 @@ public class Piege
             myCase.piegeHost = null;
         else
             myCase.piegeClient = null;
+        return Jeu.EtatType.normal;
     }
 
     public void estDetruit() // DONE

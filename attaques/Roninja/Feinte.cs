@@ -21,10 +21,10 @@ public class Feinte : Attaque
         perso.feinte = true;
     }
 
-    public void activerFeinte() // DONE
+    public Jeu.EtatType activerFeinte() // DONE
     {
         if (perso.myCase == null)
-            return;
+            return Jeu.EtatType.ko;
 
         if (perso.attaques.ContainsKey(Jeu.AttaqueType.clone))
         {
@@ -33,7 +33,7 @@ public class Feinte : Attaque
             ).getClone();
 
             if (clone == null)
-                return;
+                return Jeu.EtatType.normal;
 
             perso.feinte = false;
 
@@ -45,7 +45,8 @@ public class Feinte : Attaque
             casePerso.persoLeaveCase(perso);
             perso.desactiverHarpons(caseClone.face, casePerso.face);
             clone.myCase = casePerso;
-            caseClone.persoEnterCase(perso);
+            return caseClone.persoEnterCase(perso);
         }
+        return Jeu.EtatType.normal;
     }
 }

@@ -3,7 +3,8 @@ public class Pirouette : Attaque
     // Attributs // DONE
 
     // Constructeur // DONE
-    public Pirouette(Perso perso) : base(perso)
+    public Pirouette(Perso perso)
+        : base(perso)
     {
         cout = 1;
         porteeMin = 0;
@@ -21,10 +22,10 @@ public class Pirouette : Attaque
         perso.pirouette = true;
     }
 
-    public void activer() // DONE
+    public Jeu.EtatType activer() // DONE
     {
         if (perso.myCase == null)
-            return;
+            return Jeu.EtatType.ko;
 
         Face facePrecedente = perso.myCase.face;
 
@@ -33,12 +34,14 @@ public class Pirouette : Attaque
         if (perso.isHost)
         {
             perso.desactiverHarpons(facePrecedente, Jeu.host);
-            Jeu.host.grid[2, 2].persoEnterCase(perso, newFace: facePrecedente != Jeu.host);
+            return Jeu.host.grid[2, 2].persoEnterCase(perso, newFace: facePrecedente != Jeu.host);
         }
         else
         {
             perso.desactiverHarpons(facePrecedente, Jeu.client);
-            Jeu.client.grid[2, 2].persoEnterCase(perso, newFace: facePrecedente != Jeu.client);
+            return Jeu
+                .client.grid[2, 2]
+                .persoEnterCase(perso, newFace: facePrecedente != Jeu.client);
         }
     }
 }

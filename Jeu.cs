@@ -263,12 +263,27 @@ public class Jeu
     {
         List<AttaqueType>? roninjaHostAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
         List<AttaqueType>? elfeeHostAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
-        List<AttaqueType>? fantomageHostAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
-        List<AttaqueType>? piratitanHostAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
-        List<AttaqueType>? roninjaClientAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
+        List<AttaqueType>? fantomageHostAttaques = new List<AttaqueType>
+        {
+            AttaqueType.dragAndDrop
+        };
+        List<AttaqueType>? piratitanHostAttaques = new List<AttaqueType>
+        {
+            AttaqueType.dragAndDrop
+        };
+        List<AttaqueType>? roninjaClientAttaques = new List<AttaqueType>
+        {
+            AttaqueType.dragAndDrop
+        };
         List<AttaqueType>? elfeeClientAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
-        List<AttaqueType>? fantomageClientAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
-        List<AttaqueType>? piratitanClientAttaques = new List<AttaqueType> { AttaqueType.dragAndDrop };
+        List<AttaqueType>? fantomageClientAttaques = new List<AttaqueType>
+        {
+            AttaqueType.dragAndDrop
+        };
+        List<AttaqueType>? piratitanClientAttaques = new List<AttaqueType>
+        {
+            AttaqueType.dragAndDrop
+        };
 
         north = new Face(FaceType.North);
         south = new Face(FaceType.South);
@@ -371,18 +386,14 @@ public class Jeu
         {
             candidate = ((Bombe)piratitanHost.attaques[AttaqueType.bombe]).getBombe();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (piratitanClient.attaques.ContainsKey(AttaqueType.bombe))
         {
             candidate = ((Bombe)piratitanClient.attaques[AttaqueType.bombe]).getBombe();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (elfeeHost.attaques.ContainsKey(AttaqueType.espritElfique))
@@ -391,9 +402,7 @@ public class Jeu
                 (EspritElfique)elfeeHost.attaques[AttaqueType.espritElfique]
             ).getEspritElfique();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (elfeeClient.attaques.ContainsKey(AttaqueType.espritElfique))
@@ -402,49 +411,35 @@ public class Jeu
                 (EspritElfique)elfeeClient.attaques[AttaqueType.espritElfique]
             ).getEspritElfique();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (piratitanHost.attaques.ContainsKey(AttaqueType.mouette))
         {
             candidate = ((Mouette)piratitanHost.attaques[AttaqueType.mouette]).getMouette();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (piratitanClient.attaques.ContainsKey(AttaqueType.mouette))
         {
-            candidate = (
-                (Mouette)piratitanClient.attaques[AttaqueType.mouette]
-            ).getMouette();
+            candidate = ((Mouette)piratitanClient.attaques[AttaqueType.mouette]).getMouette();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (fantomageHost.attaques.ContainsKey(AttaqueType.crapeau))
         {
             candidate = ((Crapeau)fantomageHost.attaques[AttaqueType.crapeau]).getCrapeau();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         if (fantomageClient.attaques.ContainsKey(AttaqueType.crapeau))
         {
-            candidate = (
-                (Crapeau)fantomageClient.attaques[AttaqueType.crapeau]
-            ).getCrapeau();
+            candidate = ((Crapeau)fantomageClient.attaques[AttaqueType.crapeau]).getCrapeau();
             if (candidate != null)
-            {
                 res.Add(candidate);
-            }
         }
 
         return res;
@@ -493,7 +488,7 @@ public class Jeu
         return new List<Face> { north, south, east, west, host, client };
     }
 
-    // Méthodes private 
+    // Méthodes private
 
     private static void Shuffle<T>(List<T> list, Random rng) // DONE
     {

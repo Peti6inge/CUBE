@@ -210,9 +210,7 @@ public class Attaque
                     && perso.attaques.ContainsKey(Jeu.AttaqueType.memoire)
                 )
                 {
-                    Case? caseMemoire = (
-                        (Memoire)perso.attaques[Jeu.AttaqueType.memoire]
-                    ).getTp();
+                    Case? caseMemoire = ((Memoire)perso.attaques[Jeu.AttaqueType.memoire]).getTp();
                     if (caseMemoire != null)
                     // cas : Le perso a posé un TP
                     {
@@ -921,7 +919,7 @@ public class Attaque
         return false;
     }
 
-    protected void attaqueBasiqueDegats(Case myCase, Object? cible, int degats) // DONE
+    protected void attaqueBasiqueDegats(Case myCase, Object? cible, int degats) // DONE : retourne l'état de la cible
     {
         if (cible == null)
             return;

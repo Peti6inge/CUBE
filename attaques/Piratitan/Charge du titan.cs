@@ -1,7 +1,10 @@
 public class ChargeDuTitan : Attaque
 {
     // Attributs // DONE
-    private Dictionary<Face, Dictionary<Jeu.DirectionType, Jeu.DirectionType>> directionsAbsoluesToRelatives;
+    private Dictionary<
+        Face,
+        Dictionary<Jeu.DirectionType, Jeu.DirectionType>
+    > directionsAbsoluesToRelatives;
 
     // Constructeur // DONE
     public ChargeDuTitan(Perso perso)
@@ -11,7 +14,10 @@ public class ChargeDuTitan : Attaque
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.chargeDuTitan;
-        directionsAbsoluesToRelatives = new Dictionary<Face, Dictionary<Jeu.DirectionType, Jeu.DirectionType>>()
+        directionsAbsoluesToRelatives = new Dictionary<
+            Face,
+            Dictionary<Jeu.DirectionType, Jeu.DirectionType>
+        >()
         {
             {
                 Jeu.host,
@@ -104,19 +110,22 @@ public class ChargeDuTitan : Attaque
 
                 if (perso.canMoveDirection(relativeDirection))
                 {
-                    perso.moveDirection(relativeDirection, chargeDuTitan: true);
+                    if (
+                        perso.moveDirection(relativeDirection, chargeDuTitan: true)
+                        == Jeu.EtatType.ko
+                    )
+                        break;
                     casesParcourues++;
                     if (perso.myCase.obstacleSpawn == Jeu.SpawnType.Piratitan)
                         break;
                 }
                 else
                 {
-                    perso.recoitDegats(casesParcourues);
-
                     Object? obstacleRencontre = perso.nextObstacleDirection(relativeDirection);
                     if (obstacleRencontre != null)
                         perso.infligeDegats(casesParcourues / 2, obstacleRencontre);
 
+                    perso.recoitDegats(casesParcourues);
                     break;
                 }
             }
