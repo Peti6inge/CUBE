@@ -1,11 +1,11 @@
 public class HautesHerbes : Attaque
 {
     // Attributs // DONE
-    
+
     // Constructeur // DONE
     public HautesHerbes(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = true;
@@ -18,5 +18,8 @@ public class HautesHerbes : Attaque
     {
         uses();
         myCase.containsCamouflage = true;
+        Perso? persoACamoufler = myCase.perso();
+        if (persoACamoufler != null)
+            persoACamoufler.invisibilite++;
     }
 }

@@ -6,7 +6,7 @@ public class DerobadeDeLOmbre : Attaque
     public DerobadeDeLOmbre(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = true;

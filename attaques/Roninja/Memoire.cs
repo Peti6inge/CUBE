@@ -6,7 +6,7 @@ public class Memoire : Attaque
     // Constructeur // DONE
     public Memoire(Perso perso) : base(perso)
     {
-        cout = 1;
+        cout = 0;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.memoire;

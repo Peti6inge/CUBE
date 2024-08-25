@@ -7,7 +7,7 @@ public class EspritElfique : Attaque
     public EspritElfique(Perso perso)
         : base(perso)
     {
-        cout = 5;
+        cout = 3;
         porteeMin = 0;
         porteeMax = 1;
         typeCible = Jeu.CibleType.invocationNonBloquante;

@@ -6,7 +6,7 @@ public class BondDuTitan : Attaque
     public BondDuTitan(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.freeOnCase;
@@ -23,8 +23,9 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row - 1, myCase.col];
             persoCible = caseCible.perso();
-            pousser(persoCible, Jeu.DirectionType.Up);
-            if (
+            if (persoCible != null)
+                pousser(persoCible, Jeu.DirectionType.Up);
+            else if (
                 caseCible.invocationSimpleBloquante != null
                 && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
@@ -34,8 +35,9 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row + 1, myCase.col];
             persoCible = caseCible.perso();
-            pousser(persoCible, Jeu.DirectionType.Down);
-            if (
+            if (persoCible != null)
+                pousser(persoCible, Jeu.DirectionType.Up);
+            else if (
                 caseCible.invocationSimpleBloquante != null
                 && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
@@ -45,8 +47,9 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row, myCase.col - 1];
             persoCible = caseCible.perso();
-            pousser(persoCible, Jeu.DirectionType.Left);
-            if (
+            if (persoCible != null)
+                pousser(persoCible, Jeu.DirectionType.Up);
+            else if (
                 caseCible.invocationSimpleBloquante != null
                 && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
@@ -56,8 +59,9 @@ public class BondDuTitan : Attaque
         {
             caseCible = myCase.face.grid[myCase.row, myCase.col + 1];
             persoCible = caseCible.perso();
-            pousser(persoCible, Jeu.DirectionType.Right);
-            if (
+            if (persoCible != null)
+                pousser(persoCible, Jeu.DirectionType.Up);
+            else if (
                 caseCible.invocationSimpleBloquante != null
                 && caseCible.invocationSimpleBloquante.type == Jeu.InvocationType.Clone
             )
@@ -71,6 +75,6 @@ public class BondDuTitan : Attaque
     {
         if (persoCible != null && persoCible.canMoveDirection(direction) && !persoCible.isAncre())
             return persoCible.moveDirection(direction, bondDuTitan: true);
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 }

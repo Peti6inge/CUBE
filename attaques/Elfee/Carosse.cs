@@ -6,7 +6,7 @@ public class Carosse : Attaque
     public Carosse(Perso perso)
         : base(perso)
     {
-        cout = 5;
+        cout = 3;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;

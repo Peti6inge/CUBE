@@ -43,12 +43,15 @@ public class PorterDeposer : Attaque
         if (p.myCase == null || perso.myCase == null)
             return;
 
-        p.myCase.persoLeaveCase(p);
+        Jeu.EtatType etat = Jeu.EtatType.ok;
+        if (p.myCase.persoLeaveCase(p))
+            etat = p.reveal();
+
+        if (etat == Jeu.EtatType.ko)
+            return;
+
         perso.porte = p;
         p.myCase = perso.myCase;
-
-        if (p.myCase.containsCamouflage)
-            p.invisibilite++;
 
         p.myCase.face.maJEmbrumage();
     }

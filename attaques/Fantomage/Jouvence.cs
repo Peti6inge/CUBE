@@ -6,11 +6,12 @@ public class Jouvence : Attaque
     public Jouvence(Perso perso)
         : base(perso)
     {
-        cout = 2;
+        cout = 1;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
         typeCible = Jeu.CibleType.soin;
+        limitParCible = 2;
     }
 
     // Méthodes public

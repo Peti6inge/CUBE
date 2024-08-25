@@ -5,7 +5,7 @@ public class Esquive : Attaque
     // Constructeur // DONE
     public Esquive(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.esquive;

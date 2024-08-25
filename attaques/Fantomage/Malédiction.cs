@@ -11,7 +11,7 @@ public class Malediction : Attaque
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;
-        typeCible = Jeu.CibleType.persoEnnemy;
+        typeCible = Jeu.CibleType.malediction;
         persoCible = null;
     }
 

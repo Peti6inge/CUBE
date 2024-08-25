@@ -5,7 +5,7 @@ public class SoinTotal : Attaque
     // Constructeur // DONE
     public SoinTotal(Perso perso) : base(perso)
     {
-        cout = 6;
+        cout = 3;
         porteeMin = 0;
         porteeMax = 2;
         ligneDeVue = true;

@@ -6,7 +6,7 @@ public class Gravite : Attaque
     public Gravite(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 3;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;

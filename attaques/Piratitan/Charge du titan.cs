@@ -10,7 +10,7 @@ public class ChargeDuTitan : Attaque
     public ChargeDuTitan(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 3;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.chargeDuTitan;

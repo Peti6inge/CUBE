@@ -81,19 +81,20 @@ public class InvocationNonBloquante
     {
         if (perso == null)
             return Jeu.EtatType.ko;
+
         if (perso.myCase == null)
             return Jeu.EtatType.ko;
 
         if (!myCase.accessibleFrom(perso.myCase))
         {
             missCrapeauObstacle(perso);
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         }
 
         if (perso.isAncre())
         {
             missCrapeauAncre(perso);
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         }
 
         if (isHost)
@@ -119,7 +120,7 @@ public class InvocationNonBloquante
             else
                 Jeu.elfeeClient.recoitDegats(degats);
 
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         }
         hp -= Math.Min(hp, degats);
         if (hp <= 0)
@@ -127,7 +128,7 @@ public class InvocationNonBloquante
             estKO();
             return Jeu.EtatType.ko;
         }
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 
     public void recoitSoin(int soin) // DONE
@@ -165,6 +166,7 @@ public class InvocationNonBloquante
                 ).setEspritElfiqueNull();
                 break;
             case Jeu.InvocationType.Mouette:
+                myCase.face.maJEmbrumage();
                 proprietaire = isHost ? Jeu.piratitanHost : Jeu.piratitanClient;
                 ((Mouette)proprietaire.attaques[Jeu.AttaqueType.mouette]).setMouetteNull();
                 break;
@@ -177,12 +179,12 @@ public class InvocationNonBloquante
 
     public void missCrapeauObstacle(
         Perso perso
-    ) // TODO
+    ) // DONE
     { }
 
     public void missCrapeauAncre(
         Perso perso
-    ) // TODO
+    ) // DONE
     { }
 
     public bool sousAltruisme() // DONE

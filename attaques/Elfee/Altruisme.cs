@@ -8,7 +8,7 @@ public class Altruisme : Attaque
     public Altruisme(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 1;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = false;
@@ -27,13 +27,13 @@ public class Altruisme : Attaque
 
     public override void debutTour() // DONE
     {
+        base.debutTour();
+
         if (toursRestants > 0)
         {
             toursRestants--;
             if (toursRestants == 0)
-            {
                 desactiver();
-            }
         }
     }
 

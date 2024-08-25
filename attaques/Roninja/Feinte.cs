@@ -6,7 +6,7 @@ public class Feinte : Attaque
     public Feinte(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.freeOnPerso;
@@ -33,7 +33,7 @@ public class Feinte : Attaque
             ).getClone();
 
             if (clone == null)
-                return Jeu.EtatType.normal;
+                return Jeu.EtatType.ok;
 
             perso.feinte = false;
 
@@ -42,11 +42,14 @@ public class Feinte : Attaque
 
             Case caseClone = clone.myCase;
             Case casePerso = perso.myCase;
-            casePerso.persoLeaveCase(perso);
+            bool leaveCamouflage = casePerso.persoLeaveCase(perso);
             perso.desactiverHarpons(caseClone.face, casePerso.face);
+            caseClone.invocationSimpleBloquante = null;
             clone.myCase = casePerso;
-            return caseClone.persoEnterCase(perso);
+            clone.myCase.invocationSimpleBloquante = clone;
+            caseClone.persoEnterCase(perso, leaveCamouflage: leaveCamouflage);
+            return Jeu.EtatType.caseLeaved;
         }
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 }

@@ -5,7 +5,7 @@ public class Coffre : Attaque
     // Constructeur // DONE
     public Coffre(Perso perso) : base(perso)
     {
-        cout = 4;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = true;

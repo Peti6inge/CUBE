@@ -6,7 +6,7 @@ public class Crapeau : Attaque
     // Constructeur // DONE
     public Crapeau(Perso perso) : base(perso)
     {
-        cout = 4;
+        cout = 3;
         porteeMin = 0;
         porteeMax = 3;
         ligneDeVue = false;

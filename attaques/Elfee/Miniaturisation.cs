@@ -5,7 +5,7 @@ public class Miniaturisation : Attaque
     // Constructeur // DONE
     public Miniaturisation(Perso perso) : base(perso)
     {
-        cout = 1;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.miniaturisation;

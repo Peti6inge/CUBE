@@ -5,7 +5,7 @@ public class Fleche : Attaque
     // Constructeur // DONE
     public Fleche(Perso perso) : base(perso)
     {
-        cout = 2;
+        cout = 1;
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;

@@ -6,7 +6,7 @@ public class CaseTerrifiante : Attaque
     public CaseTerrifiante(Perso perso)
         : base(perso)
     {
-        cout = 6;
+        cout = 4;
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;

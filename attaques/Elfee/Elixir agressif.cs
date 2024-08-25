@@ -6,7 +6,7 @@ public class ElixirAgressif : Attaque
     // Constructeur // DONE
     public ElixirAgressif(Perso perso) : base(perso)
     {
-        cout = 2;
+        cout = 1;
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 3;

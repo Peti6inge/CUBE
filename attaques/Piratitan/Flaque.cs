@@ -5,7 +5,7 @@ public class Flaque : Attaque
     // Constructeur // DONE
     public Flaque(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 4;
         ligneDeVue = true;

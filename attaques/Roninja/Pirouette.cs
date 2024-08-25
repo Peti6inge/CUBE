@@ -29,19 +29,20 @@ public class Pirouette : Attaque
 
         Face facePrecedente = perso.myCase.face;
 
-        perso.myCase.persoLeaveCase(perso);
+        bool leaveCamouflage = perso.myCase.persoLeaveCase(perso);
 
         if (perso.isHost)
         {
             perso.desactiverHarpons(facePrecedente, Jeu.host);
-            return Jeu.host.grid[2, 2].persoEnterCase(perso, newFace: facePrecedente != Jeu.host);
+            Jeu.host.grid[2, 2].persoEnterCase(perso, newFace: facePrecedente != Jeu.host, leaveCamouflage: leaveCamouflage);
         }
         else
         {
             perso.desactiverHarpons(facePrecedente, Jeu.client);
-            return Jeu
+            Jeu
                 .client.grid[2, 2]
-                .persoEnterCase(perso, newFace: facePrecedente != Jeu.client);
+                .persoEnterCase(perso, newFace: facePrecedente != Jeu.client, leaveCamouflage: leaveCamouflage);
         }
+        return Jeu.EtatType.caseLeaved;
     }
 }

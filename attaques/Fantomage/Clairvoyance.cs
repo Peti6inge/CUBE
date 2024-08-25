@@ -5,7 +5,7 @@ public class Clairvoyance : Attaque
     // Constructeur // DONE
     public Clairvoyance(Perso perso) : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.freeOnPerso;
@@ -28,7 +28,18 @@ public class Clairvoyance : Attaque
         {
             if (p.myCase != null
                 && !p.isVisibleForMe(perso.isHost, faceDoitEtreVisible: true, caseDoitEtreOffBrume: true))
-                p.temoinDePosition = p.myCase;
+                p.temoinDePositionClairvoyance = p.myCase;
         }
+    }
+    public void desactiverClairvoyance()
+    {
+        List<Perso> persosAdverses;
+        if (perso.isHost)
+            persosAdverses = Jeu.PersosClient();
+        else
+            persosAdverses = Jeu.PersosHost();
+
+        foreach (Perso p in persosAdverses)
+            p.temoinDePositionClairvoyance = null;
     }
 }

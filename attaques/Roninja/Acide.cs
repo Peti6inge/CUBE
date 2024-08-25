@@ -6,7 +6,7 @@ public class Acide : Attaque
     public Acide(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.acide;

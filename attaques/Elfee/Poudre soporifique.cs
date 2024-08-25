@@ -6,7 +6,7 @@ public class PoudreSoporifique : Attaque
     public PoudreSoporifique(Perso perso)
         : base(perso)
     {
-        cout = 7;
+        cout = 4;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.persoEnnemy;
@@ -24,8 +24,8 @@ public class PoudreSoporifique : Attaque
             Perso? persoCible = (bool)cible ? myCase.persoOver() : myCase.perso();
             if (persoCible != null)
             {
-                persoCible.reveal();
                 persoCible.passeTour = true;
+                persoCible.reveal();
             }
         }
     }

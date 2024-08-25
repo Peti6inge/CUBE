@@ -6,7 +6,7 @@ public class CoupDeBaguette : Attaque
     public CoupDeBaguette(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 5;
         ligneDeVue = true;

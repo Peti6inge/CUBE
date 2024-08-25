@@ -6,7 +6,7 @@ public class Inversion : Attaque
     public Inversion(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;
@@ -29,9 +29,11 @@ public class Inversion : Attaque
             InvocationSimpleBloquante clone = (InvocationSimpleBloquante)cible;
             Case caseClone = clone.myCase;
             Case casePerso = perso.myCase;
-            casePerso.persoLeaveCase(perso);
+            bool leaveCamouflage = casePerso.persoLeaveCase(perso);
+            caseClone.invocationSimpleBloquante = null;
             clone.myCase = casePerso;
-            caseClone.persoEnterCase(perso);
+            clone.myCase.invocationSimpleBloquante = clone;
+            caseClone.persoEnterCase(perso, leaveCamouflage: leaveCamouflage);
         }
         else
         {
@@ -49,7 +51,28 @@ public class Inversion : Attaque
                 return;
 
             if (ciblePerso.invisibilite > 0) // Cas : Cible est invisible
-                ciblePerso.reveal();
+            {
+                if (ciblePerso.reveal() == Jeu.EtatType.ko) // Cas : Cible est révélée et KO
+                    return;
+            }
+
+            InvocationSimpleBloquante? clone = myCase.invocationSimpleBloquante;
+
+            if (clone != null) // Cas : Le reveal a activé Feinte, ce qui a fait pop un clone
+            {
+                if (perso.pierre != null)
+                    perso.dropPierre();
+
+                Case myCaseClone = clone.myCase;
+                Case myCasePerso = perso.myCase;
+                bool leaveCamouflage = myCasePerso.persoLeaveCase(perso);
+                myCaseClone.invocationSimpleBloquante = null;
+                clone.myCase = myCasePerso;
+                clone.myCase.invocationSimpleBloquante = clone;
+                myCaseClone.persoEnterCase(perso, leaveCamouflage: leaveCamouflage);
+                
+                return;
+            }
 
             if (ciblePerso.isAncre()) // Cas : Cible est ancrée
             {
@@ -77,11 +100,11 @@ public class Inversion : Attaque
             Case casePerso = perso.myCase;
             Case caseCible = ciblePerso.myCase;
 
-            casePerso.persoLeaveCase(perso);
-            caseCible.persoLeaveCase(ciblePerso);
+            bool persoLeaveCamouflage = casePerso.persoLeaveCase(perso);
+            bool cibleLeaveCamouflage = caseCible.persoLeaveCase(ciblePerso);
 
-            casePerso.persoEnterCase(ciblePerso);
-            caseCible.persoEnterCase(perso);
+            casePerso.persoEnterCase(ciblePerso, leaveCamouflage: cibleLeaveCamouflage);
+            caseCible.persoEnterCase(perso, leaveCamouflage: persoLeaveCamouflage);
         }
     }
 }

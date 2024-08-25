@@ -6,7 +6,7 @@ public class FrappeDuTitan : Attaque
     public FrappeDuTitan(Perso perso)
         : base(perso)
     {
-        cout = 8;
+        cout = 3;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.frappeDuTitan;

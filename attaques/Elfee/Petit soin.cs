@@ -5,7 +5,7 @@ public class PetitSoin : Attaque
     // Constructeur // DONE
     public PetitSoin(Perso perso) : base(perso)
     {
-        cout = 2;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 5;
         ligneDeVue = true;

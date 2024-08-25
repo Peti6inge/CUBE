@@ -7,7 +7,7 @@ public class Harpon : Attaque
     public Harpon(Perso perso)
         : base(perso)
     {
-        cout = 4;
+        cout = 2;
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 5;
@@ -36,10 +36,10 @@ public class Harpon : Attaque
 
             if (persoCible != null)
             {
-                persoCible.reveal();
                 cibleHarponnee = persoCible;
                 cibleHarponnee.harponne.Add(perso);
                 perso.harponne.Add(cibleHarponnee);
+                persoCible.reveal();
             }
         }
     }

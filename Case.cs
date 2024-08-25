@@ -223,6 +223,7 @@ public class Case
 
     public Jeu.EtatType persoEnterCase(
         Perso byPerso,
+        bool leaveCamouflage = false,
         bool crapeauHost = false,
         bool crapeauClient = false,
         bool newFace = false,
@@ -234,51 +235,65 @@ public class Case
         if (byPerso.porte != null)
             byPerso.porte.myCase = this;
 
-        if (containsCamouflage && !byPerso.enVol)
-            entreCamouflage(byPerso);
-
         face.maJEmbrumage();
 
-        if (
-            byPerso.isVisibleForMe(
-                !byPerso.isHost,
-                faceDoitEtreVisible: true,
-                caseDoitEtreOffBrume: true
-            )
-        )
-            byPerso.temoinDePosition = null;
+        if (leaveCamouflage)
+        {
+            if (containsCamouflage && !byPerso.enVol)
+                entreCamouflage(byPerso);
+            else
+                byPerso.invisibilite = Math.Max(0, byPerso.invisibilite - 1);
+        }
+        else
+        {
+            if (containsCamouflage && !byPerso.enVol)
+            {
+                byPerso.invisibilite++;
+                entreCamouflage(byPerso);
+            }
+        }
 
         if (byPerso.poudre)
             depotPoudre();
 
-        if (piegeHost != null && !byPerso.enVol)
-            piegeHost.activer(byPerso);
+        Piege? piege1 = byPerso.isHost ? piegeClient : piegeHost;
+        Piege? piege2 = byPerso.isHost ? piegeHost : piegeClient;
 
-        if (piegeClient != null && !byPerso.enVol)
-            piegeClient.activer(byPerso);
+        if (piege1 != null && !byPerso.enVol)
+        {
+            Jeu.EtatType etatApresPiege = piege1.activer(byPerso);
+            if (etatApresPiege != Jeu.EtatType.ok)
+                return etatApresPiege;
+        }
+        if (piege2 != null && !byPerso.enVol)
+        {
+            Jeu.EtatType etatApresPiege = piege2.activer(byPerso);
+            if (etatApresPiege != Jeu.EtatType.ok)
+                return etatApresPiege;
+        }
 
-        if (face.flechesPatientesHost > 0 && !byPerso.isHost && newFace)
+        if (newFace)
         {
             if (
                 byPerso.porte != null
-                && byPerso.porte.isVisibleForMe(true, caseDoitEtreOffBrume: true)
+                && byPerso.porte.isVisibleForMe(!byPerso.isHost, caseDoitEtreOffBrume: true)
             )
                 byPerso.porte.activerFlechesPatientes();
-            else if (byPerso.isVisibleForMe(true, caseDoitEtreOffBrume: true))
-                if (byPerso.activerFlechesPatientes() == Jeu.EtatType.ko)
-                    return Jeu.EtatType.ko;
+            else if (byPerso.isVisibleForMe(!byPerso.isHost, caseDoitEtreOffBrume: true))
+            {
+                Jeu.EtatType etatApresFlechesPatientes = byPerso.activerFlechesPatientes();
+                if (etatApresFlechesPatientes != Jeu.EtatType.ok)
+                    return etatApresFlechesPatientes;
+            }
         }
-        else if (face.flechesPatientesClient > 0 && byPerso.isHost && newFace)
+
+        if (leaveCamouflage && byPerso.isVisibleForMe(!byPerso.isHost, caseDoitEtreOffBrume: true))
         {
-            if (
-                byPerso.porte != null
-                && byPerso.porte.isVisibleForMe(false, caseDoitEtreOffBrume: true)
-            )
-                byPerso.porte.activerFlechesPatientes();
-            else if (byPerso.isVisibleForMe(false, caseDoitEtreOffBrume: true))
-                if (byPerso.activerFlechesPatientes() == Jeu.EtatType.ko)
-                    return Jeu.EtatType.ko;
+            Jeu.EtatType etatApresFlechesPatientes = byPerso.activerFlechesPatientes();
+            if (etatApresFlechesPatientes != Jeu.EtatType.ok)
+                return etatApresFlechesPatientes;
         }
+
 
         if (
             containsCaseRappatriementFantomageHost()
@@ -286,7 +301,11 @@ public class Case
             && !byPerso.enVol
             && !byPerso.isAncre()
         )
-            byPerso.rappelSpawn();
+        {
+            Jeu.EtatType etatApresRappatriement = byPerso.rappelSpawn();
+            if (etatApresRappatriement != Jeu.EtatType.ok)
+                return etatApresRappatriement;
+        }
 
         if (
             containsCaseRappatriementFantomageClient()
@@ -294,7 +313,11 @@ public class Case
             && !byPerso.enVol
             && !byPerso.isAncre()
         )
-            byPerso.rappelSpawn();
+        {
+            Jeu.EtatType etatApresRappatriement = byPerso.rappelSpawn();
+            if (etatApresRappatriement != Jeu.EtatType.ok)
+                return etatApresRappatriement;
+        }
 
         if (
             row != 0
@@ -307,7 +330,9 @@ public class Case
             && !respawn
         )
         {
-            face.grid[row - 1, col].activerGravite(byPerso);
+            Jeu.EtatType etatApresGravite = face.grid[row - 1, col].activerGravite(byPerso);
+            if (etatApresGravite != Jeu.EtatType.ok)
+                return etatApresGravite;
         }
 
         if (
@@ -321,7 +346,9 @@ public class Case
             && !respawn
         )
         {
-            face.grid[row + 1, col].activerGravite(byPerso);
+            Jeu.EtatType etatApresGravite = face.grid[row + 1, col].activerGravite(byPerso);
+            if (etatApresGravite != Jeu.EtatType.ok)
+                return etatApresGravite;
         }
 
         if (
@@ -335,7 +362,9 @@ public class Case
             && !respawn
         )
         {
-            face.grid[row, col - 1].activerGravite(byPerso);
+            Jeu.EtatType etatApresGravite = face.grid[row, col - 1].activerGravite(byPerso);
+            if (etatApresGravite != Jeu.EtatType.ok)
+                return etatApresGravite;
         }
 
         if (
@@ -349,20 +378,30 @@ public class Case
             && !respawn
         )
         {
-            face.grid[row, col + 1].activerGravite(byPerso);
+            Jeu.EtatType etatApresGravite = face.grid[row, col + 1].activerGravite(byPerso);
+            if (etatApresGravite != Jeu.EtatType.ok)
+                return etatApresGravite;
         }
 
         if (!crapeauHost && !respawn)
         {
             InvocationNonBloquante? crapeau = crapeauAActiver(byPerso, true);
             if (crapeau != null)
-                crapeau.activerCrapeau(byPerso, crapeauHost: true, crapeauClient: crapeauClient);
+            {
+                Jeu.EtatType etatApresCrapeau = crapeau.activerCrapeau(byPerso, crapeauHost: true, crapeauClient: crapeauClient);
+                if (etatApresCrapeau != Jeu.EtatType.ok)
+                    return etatApresCrapeau;
+            }
         }
         if (!crapeauClient && !respawn)
         {
             InvocationNonBloquante? crapeau = crapeauAActiver(byPerso, false);
             if (crapeau != null)
-                crapeau.activerCrapeau(byPerso, crapeauHost: crapeauHost, crapeauClient: true);
+            {
+                Jeu.EtatType etatApresCrapeau = crapeau.activerCrapeau(byPerso, crapeauHost: crapeauHost, crapeauClient: true);
+                if (etatApresCrapeau != Jeu.EtatType.ok)
+                    return etatApresCrapeau;
+            }
         }
         if (containsTrou && !byPerso.enVol)
             return byPerso.tombeDansTrou();
@@ -379,7 +418,7 @@ public class Case
                 );
             }
         }
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 
     public bool accessibleFrom(Case myCase) // DONE : Renvoie si une case est accessible depuis une autre case
@@ -390,9 +429,8 @@ public class Case
     public bool seemsAccessibleFrom(Case myCase, bool isHost) // DONE : Renvoie si une case semble accessible depuis une autre case pour l'hôte / le client
     {
         if (face != myCase.face)
-        {
             return false;
-        }
+
         foreach (Case c in GetLine(face, this, myCase))
         {
             if (
@@ -960,7 +998,7 @@ public class Case
             containsGraviteFantomageClient = false;
             return p.moveDirection(direction, gravite: true);
         }
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 
     // Méthodes private
@@ -978,34 +1016,19 @@ public class Case
             if (
                 byPerso.myCase != null
                 && crapeau.myCase.face == byPerso.myCase.face
-                && (crapeau.myCase.row == row || crapeau.myCase.col == col)
-                && (
-                    Math.Abs(crapeau.myCase.row - byPerso.myCase.row) >= 2
-                    || Math.Abs(crapeau.myCase.col - byPerso.myCase.col) >= 2
-                )
+                && isAlignedWith(crapeau.myCase)
+                && distance(crapeau.myCase) >= 1
                 && crapeau.myCase.seemsAccessibleFrom(byPerso.myCase, crapeau.isHost)
             )
-            {
                 return crapeau;
-            }
+
             return null;
         }
     }
 
-    private void quitteCamouflage(Perso byPerso) // DONE
-    {
-        byPerso.invisibilite = Math.Max(0, byPerso.invisibilite - 1);
-        if (byPerso.invisibilite == 0)
-            byPerso.reveal();
-    }
-
     private void entreCamouflage(Perso byPerso) // DONE
     {
-        byPerso.invisibilite++;
-        if (byPerso.porte != null)
-        {
-            byPerso.porte.invisibilite++;
-        }
+
     }
 
     private void depotPoudre() // DONE
