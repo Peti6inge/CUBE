@@ -35,7 +35,7 @@ public class DragNDrop : Attaque
                 perso.pierre = ciblePerso.pierre;
                 ciblePerso.pierre = null;
             }
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         }
     }
 }

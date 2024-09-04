@@ -6,7 +6,7 @@ public class Buff : Attaque
     public Buff(Perso perso)
         : base(perso)
     {
-        cout = 2;
+        cout = 1;
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 3;

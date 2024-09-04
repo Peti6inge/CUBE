@@ -6,12 +6,13 @@ public class CouteauDeLancee : Attaque
     public CouteauDeLancee(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 1;
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = true;
         aligne = true;
         typeCible = Jeu.CibleType.persoEtInvocEnnemy;
+        limitParCible = 2;
     }
 
     // Méthodes public

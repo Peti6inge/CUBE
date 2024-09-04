@@ -24,15 +24,16 @@ public class Invisibilite : Attaque
         perso.invisibilite++;
     }
 
-    public void desactiver(bool reveal = true) // DONE
+    public Jeu.EtatType desactiver(bool reveal = true) // DONE
     {
         if (actif)
         {
             actif = false;
             perso.invisibilite = Math.Max(0, perso.invisibilite - 1);
             if (perso.invisibilite == 0 && reveal)
-                perso.reveal();
+                return perso.reveal();
         }
+        return Jeu.EtatType.ok;
     }
 
     public bool estActif() // DONE

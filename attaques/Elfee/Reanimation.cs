@@ -6,7 +6,7 @@ public class Reanimation : Attaque
     public Reanimation(Perso perso)
         : base(perso)
     {
-        cout = 8;
+        cout = 4;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.reanimation;

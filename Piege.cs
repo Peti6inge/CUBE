@@ -48,14 +48,14 @@ public class Piege
             case Jeu.PiegeType.CaseTerrifiante:
                 return activerCaseTerrifiante(cible);
             default:
-                return Jeu.EtatType.normal;
+                return Jeu.EtatType.ok;
         }
     }
 
     public Jeu.EtatType activerPiegeLineaire(Object cible) // DONE
     {
         if (myCaseFinale == null)
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         if (isHost)
         {
             myCase.piegeHost = null;
@@ -81,12 +81,12 @@ public class Piege
         if (isHost)
         {
             myCase.piegeHost = null;
-           return Jeu.roninjaHost.infligeDegats(3, cible);
+            return Jeu.roninjaHost.infligeDegats(3, cible);
         }
         else
         {
             myCase.piegeClient = null;
-           return Jeu.roninjaClient.infligeDegats(3, cible);
+            return Jeu.roninjaClient.infligeDegats(3, cible);
         }
     }
 
@@ -99,7 +99,7 @@ public class Piege
             myCase.piegeHost = null;
         else
             myCase.piegeClient = null;
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 
     public void estDetruit() // DONE

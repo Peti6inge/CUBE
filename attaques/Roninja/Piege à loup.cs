@@ -6,7 +6,7 @@ public class PiegeALoup : Attaque
     public PiegeALoup(Perso perso)
         : base(perso)
     {
-        cout = 5;
+        cout = 3;
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = true;

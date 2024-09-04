@@ -6,7 +6,7 @@ public class Mouette : Attaque
     // Constructeur // DONE
     public Mouette(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.invocationNonBloquante;

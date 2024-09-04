@@ -5,7 +5,7 @@ public class EauVaseuse : Attaque
     // Constructeur // DONE
     public EauVaseuse(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 100;
         ligneDeVue = false;

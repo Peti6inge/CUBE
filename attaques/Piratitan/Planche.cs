@@ -5,7 +5,7 @@ public class Planche : Attaque
     // Constructeur // DONE
     public Planche(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 0;
         porteeMax = 2;
         ligneDeVue = true;

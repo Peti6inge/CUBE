@@ -6,7 +6,7 @@ public class Teleport : Attaque
     public Teleport(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 1;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.teleport;
@@ -50,7 +50,7 @@ public class Teleport : Attaque
             if (caseMemoire.face.faceVisible(persoSurCaseMemoire.isHost) && !containsBrumeAdverse) // Cas : Le perso est visible si reveal
                 persoSurCaseMemoire.reveal();
             else // Cas : Le perso sera toujours invisible si reveal
-                persoSurCaseMemoire.temoinDePosition = caseMemoire;
+                persoSurCaseMemoire.temoinDePositionMissTeleport = caseMemoire;
 
             return;
         }
@@ -69,8 +69,8 @@ public class Teleport : Attaque
 
         ((Memoire)perso.attaques[Jeu.AttaqueType.memoire]).setTp(perso.myCase);
 
-        perso.myCase.persoLeaveCase(perso);
+        bool leaveCamouflage = perso.myCase.persoLeaveCase(perso);
         perso.desactiverHarpons(facePrecedente, nouvelleFace);
-        caseMemoire.persoEnterCase(perso, newFace: facePrecedente != nouvelleFace);
+        caseMemoire.persoEnterCase(perso, newFace: facePrecedente != nouvelleFace, leaveCamouflage: leaveCamouflage);
     }
 }

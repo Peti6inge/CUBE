@@ -5,7 +5,7 @@ public class LongueVue : Attaque
     // Constructeur // DONE
     public LongueVue(Perso perso) : base(perso)
     {
-        cout = 2;
+        cout = 1;
         cooldown = 0;
         porteeMin = 0;
         porteeMax = 0;

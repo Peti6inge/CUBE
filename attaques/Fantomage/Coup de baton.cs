@@ -5,7 +5,7 @@ public class CoupDeBaton : Attaque
     // Constructeur // DONE
     public CoupDeBaton(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.persoEtInvocEnnemy;

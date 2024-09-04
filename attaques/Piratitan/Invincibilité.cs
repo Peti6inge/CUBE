@@ -5,7 +5,7 @@ public class Invincibilite : Attaque
     // Constructeur // DONE
     public Invincibilite(Perso perso) : base(perso)
     {
-        cout = 6;
+        cout = 4;
         limitParTour = 1;
         porteeMin = 0;
         porteeMax = 0;

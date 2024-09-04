@@ -5,8 +5,8 @@ public class CoupDeFeu : Attaque
     // Constructeur // DONE
     public CoupDeFeu(Perso perso) : base(perso)
     {
-        cout = 2;
-        limitParCible = 3;
+        cout = 1;
+        limitParCible = 2;
         porteeMin = 1;
         porteeMax = 4;
         ligneDeVue = true;

@@ -6,7 +6,7 @@ public class PoudreBienfaisante : Attaque
     public PoudreBienfaisante(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = true;

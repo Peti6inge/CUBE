@@ -6,7 +6,7 @@ public class SortDeProtection : Attaque
     public SortDeProtection(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 3;
         ligneDeVue = false;

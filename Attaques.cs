@@ -31,7 +31,7 @@ public class Attaque
     ancre : Ancre
     attireRepousse : Attire, Repousse
     persoFriendly : Poudre stimulante, Poudre bienfaisante, Elixir agressif, Voile d'invisibilité, Buff
-    persoEnnemy : Harpon, Poudre soporifique, Poison, Entrave, Mains maudites, Malédiction, Boulet fantomatique
+    persoEnnemy : Harpon, Poudre soporifique, Poison, Entrave, Mains maudites, Boulet fantomatique
     soin : Petit soin, Soin total, Jouvence
     altruisme : Altruisme
     persoEtInvocEnnemy : Sabre, Coup de feu, Flèche, Katana, Couteau de lancée, Kunaï, Coup de bâton, Boule de feu
@@ -60,6 +60,7 @@ public class Attaque
     envolAtterissage: Envol / Atterrissage
     esquive : Esquive
     sortDeProtection : Sort de protection
+    malediction : Malédiction
     */
 
     // Constructeur
@@ -315,6 +316,21 @@ public class Attaque
 
                 if (
                     (cible is Perso && ((Perso)cible).isHost == !perso.isHost)
+                    || cible is bool
+                    || (
+                        cible is InvocationSimpleBloquante
+                        && ((InvocationSimpleBloquante)cible).type == Jeu.InvocationType.Clone
+                        && ((InvocationSimpleBloquante)cible).isHost == !perso.isHost
+                    )
+                )
+                    return true;
+                return false;
+            case Jeu.CibleType.malediction: // DONE
+                if (cible is bool && !(bool)cible && myCase.containsTrou) // cas : on ne peut pas tenter d'attaquer une cible sur un trou
+                    return false;
+
+                if (
+                    (cible is Perso && ((Perso)cible).isHost == !perso.isHost && !((Perso)cible).malediction)
                     || cible is bool
                     || (
                         cible is InvocationSimpleBloquante
@@ -987,9 +1003,7 @@ public class Attaque
         nbLancesParCible = new Dictionary<Object, int>();
 
         if (cooldownRestant > 0)
-        {
             cooldownRestant--;
-        }
 
         facesLances.Clear();
     }

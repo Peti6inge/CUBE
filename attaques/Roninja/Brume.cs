@@ -6,7 +6,7 @@ public class Brume : Attaque
     public Brume(Perso perso)
         : base(perso)
     {
-        cout = 7;
+        cout = 4;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.freeOnFace;

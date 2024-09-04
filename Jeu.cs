@@ -36,8 +36,8 @@ public class Jeu
     public static Face client { get; set; }
 
     public static int nbTours { get; set; }
-    public static bool pierrelumierehostobtenue { get; set; }
-    public static bool pierrelumiereclientobtenue { get; set; }
+    public static int scoreClient { get; set; }
+    public static int scoreHost { get; set; }
 
     public enum CibleType
     {
@@ -83,6 +83,7 @@ public class Jeu
         envolAtterissage,
         esquive,
         sortDeProtection,
+        malediction,
         none
     }
 
@@ -251,10 +252,9 @@ public class Jeu
 
     public enum EtatType
     {
-        normal,
+        ok,
         ko,
-        winClient,
-        winHost
+        caseLeaved
     }
 
     // Méthodes public
@@ -308,11 +308,11 @@ public class Jeu
 
         nbTours = 0;
 
-        pierrelumiereclientobtenue = false;
-        pierrelumierehostobtenue = false;
+        scoreHost = 0;
+        scoreClient = 0;
     }
 
-    public static void LancerPartie() // TODO
+    public static void LancerPartie() // TODO : Endgame
     {
         List<Perso> hosts = new List<Perso>
         {
@@ -333,19 +333,12 @@ public class Jeu
         Shuffle(hosts, rng);
         Shuffle(clients, rng);
 
-        while (true)
+        while (nbTours <= 20)
         {
             for (int i = 0; i < 4; i++)
             {
-                if (i < hosts.Count)
-                {
-                    // hosts[i].play();
-                }
-
-                if (i < clients.Count)
-                {
-                    // clients[i].play();
-                }
+                hosts[i].play();
+                clients[i].play();
             }
             nbTours++;
         }
@@ -467,19 +460,21 @@ public class Jeu
     {
         if (pierre.isHost)
         {
+            scoreClient++;
+
             if (pierre.lumiere)
-            {
-                pierrelumierehostobtenue = true;
                 PierreToTable(pierreombrehost);
-            }
+            else
+                PierreToTable(pierrelumierehost);
         }
         else
         {
+            scoreHost++;
+
             if (pierre.lumiere)
-            {
-                pierrelumiereclientobtenue = true;
                 PierreToTable(pierreombreclient);
-            }
+            else
+                PierreToTable(pierrelumiereclient);
         }
     }
 

@@ -5,7 +5,7 @@ public class FeuFollet : Attaque
     // Constructeur // DONE
     public FeuFollet(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;

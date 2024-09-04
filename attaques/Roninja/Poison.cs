@@ -6,7 +6,7 @@ public class Poison : Attaque
     public Poison(Perso perso)
         : base(perso)
     {
-        cout = 2;
+        cout = 1;
         porteeMin = 1;
         porteeMax = 2;
         ligneDeVue = true;
@@ -36,7 +36,6 @@ public class Poison : Attaque
             persoCible = (bool)cible ? myCase.persoOver() : myCase.perso();
             if (persoCible != null)
             {
-                persoCible.reveal();
                 for (int i = 1; i <= 5; i++)
                 {
                     if (persoCible.buffHp.ContainsKey(i))
@@ -44,6 +43,7 @@ public class Poison : Attaque
                     else
                         persoCible.buffHp.Add(i, -1);
                 }
+                persoCible.reveal();
             }
         }
     }

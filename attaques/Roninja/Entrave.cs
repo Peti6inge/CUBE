@@ -6,7 +6,7 @@ public class Entrave : Attaque
     public Entrave(Perso perso)
         : base(perso)
     {
-        cout = 2;
+        cout = 1;
         limitParCible = 2;
         porteeMin = 1;
         porteeMax = 2;
@@ -33,11 +33,12 @@ public class Entrave : Attaque
             persoCible = (bool)cible ? myCase.persoOver() : myCase.perso();
             if (persoCible != null)
             {
-                persoCible.reveal();
                 if (persoCible.buffHp.ContainsKey(1))
                     persoCible.buffHp[1] -= 2;
                 else
                     persoCible.buffHp.Add(1, -2);
+                
+                persoCible.reveal();
             }
         }
     }

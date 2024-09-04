@@ -6,12 +6,13 @@ public class Attire : Attaque
     public Attire(Perso perso)
         : base(perso)
     {
-        cout = 2;
+        cout = 1;
         porteeMin = 2;
         porteeMax = 5;
         ligneDeVue = true;
         aligne = true;
         typeCible = Jeu.CibleType.attireRepousse;
+        limitParCible = 2;
     }
 
     // Méthodes public
@@ -34,7 +35,19 @@ public class Attire : Attaque
             {
                 ciblePerso = (bool)cible ? myCase.persoOver() : myCase.perso();
                 if (ciblePerso != null)
-                    ciblePerso.reveal();
+                {
+                    Jeu.EtatType etatApresReveal = ciblePerso.reveal();
+                    if (etatApresReveal == Jeu.EtatType.ko) // Cas : Cible est révélée et KO
+                        return;
+
+                    InvocationSimpleBloquante? clone = myCase.invocationSimpleBloquante;
+
+                    if (clone != null) // Cas : Le reveal a activé Feinte, ce qui a fait pop un clone
+                    {
+                        clone.estKO();
+                        return;
+                    }
+                }
             }
             if (ciblePerso == null || ciblePerso.myCase == null) // Cas : Cible est absente
                 return;

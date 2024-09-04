@@ -5,7 +5,7 @@ public class Poudre : Attaque
     // Constructeur // DONE
     public Poudre(Perso perso) : base(perso)
     {
-        cout = 1;
+        cout = 0;
         porteeMin = 0;
         porteeMax = 0;
         typeCible = Jeu.CibleType.freeOnPerso;

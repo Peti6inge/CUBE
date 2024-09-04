@@ -64,7 +64,7 @@ public class InvocationSimpleBloquante
             else
                 Jeu.elfeeClient.recoitDegats(degats);
 
-            return Jeu.EtatType.normal;
+            return Jeu.EtatType.ok;
         }
         hp -= Math.Min(hp, degats);
         if (hp <= 0)
@@ -72,7 +72,7 @@ public class InvocationSimpleBloquante
             estKO();
             return Jeu.EtatType.ko;
         }
-        return Jeu.EtatType.normal;
+        return Jeu.EtatType.ok;
     }
 
     public void recoitSoin(int soin) // DONE

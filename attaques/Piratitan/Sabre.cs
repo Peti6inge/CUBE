@@ -5,7 +5,7 @@ public class Sabre : Attaque
     // Constructeur // DONE
     public Sabre(Perso perso) : base(perso)
     {
-        cout = 4;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 1;
         typeCible = Jeu.CibleType.persoEtInvocEnnemy;

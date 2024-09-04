@@ -33,11 +33,12 @@ public class BouletFantomatique : Attaque
             persoCible = (bool)cible ? myCase.persoOver() : myCase.perso();
             if (persoCible != null)
             {
-                persoCible.reveal();
                 if (persoCible.buffHp.ContainsKey(1))
                     persoCible.buffHp[1] -= 1;
                 else
                     persoCible.buffHp.Add(1, -1);
+
+                persoCible.reveal();
             }
         }
     }

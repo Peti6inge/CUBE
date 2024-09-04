@@ -6,7 +6,7 @@ public class Transposition : Attaque
     public Transposition(Perso perso)
         : base(perso)
     {
-        cout = 3;
+        cout = 2;
         porteeMin = 1;
         porteeMax = 100;
         ligneDeVue = false;
@@ -29,9 +29,9 @@ public class Transposition : Attaque
             InvocationSimpleBloquante clone = (InvocationSimpleBloquante)cible;
             Case caseClone = clone.myCase;
             Case casePerso = perso.myCase;
-            casePerso.persoLeaveCase(perso);
+            bool leaveCamouflage = casePerso.persoLeaveCase(perso);
             clone.myCase = casePerso;
-            caseClone.persoEnterCase(perso);
+            caseClone.persoEnterCase(perso, leaveCamouflage: leaveCamouflage);
         }
         else if (cible is Perso) // Cas : Transposition avec un allié
         {
@@ -49,8 +49,8 @@ public class Transposition : Attaque
             Perso? persoQuiPorteFantomage = perso.estPortePar();
             Perso? persoQuiPorteCible = ciblePerso.estPortePar();
 
-            casePerso.persoLeaveCase(perso);
-            caseCible.persoLeaveCase(ciblePerso);
+            bool persoLeaveCamouflage = casePerso.persoLeaveCase(perso);
+            bool cibleLeaveCamouflage = caseCible.persoLeaveCase(ciblePerso);
 
             if (persoQuiPorteFantomage != null)
             {
@@ -58,13 +58,13 @@ public class Transposition : Attaque
 
                 ciblePerso.myCase = casePerso;
 
-                if (casePerso.containsCamouflage)
-                    ciblePerso.invisibilite++;
+                if (cibleLeaveCamouflage)
+                    ciblePerso.reveal();
 
                 casePerso.face.maJEmbrumage();
             }
             else
-                casePerso.persoEnterCase(ciblePerso);
+                casePerso.persoEnterCase(ciblePerso, cibleLeaveCamouflage);
 
             if (persoQuiPorteCible != null)
             {
@@ -72,13 +72,13 @@ public class Transposition : Attaque
 
                 perso.myCase = caseCible;
 
-                if (caseCible.containsCamouflage)
-                    perso.invisibilite++;
+                if (persoLeaveCamouflage)
+                    perso.reveal();
 
                 caseCible.face.maJEmbrumage();
             }
             else
-                caseCible.persoEnterCase(perso);
+                caseCible.persoEnterCase(perso, persoLeaveCamouflage);
         }
     }
 }

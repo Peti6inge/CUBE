@@ -5,7 +5,7 @@ public class Katana : Attaque
     // Constructeur // DONE
     public Katana(Perso perso) : base(perso)
     {
-        cout = 3;
+        cout = 1;
         limitParCible = 1;
         porteeMin = 1;
         porteeMax = 1;
