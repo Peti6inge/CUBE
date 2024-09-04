@@ -1,5 +1,7 @@
 #pragma warning disable CS8618
 
+using System.Security.Cryptography.X509Certificates;
+
 public class Jeu
 {
     // Attributs // DONE
@@ -38,6 +40,8 @@ public class Jeu
     public static int nbTours { get; set; }
     public static int scoreClient { get; set; }
     public static int scoreHost { get; set; }
+
+    public static int etatJeu { get; set; }
 
     public enum CibleType
     {
@@ -310,6 +314,8 @@ public class Jeu
 
         scoreHost = 0;
         scoreClient = 0;
+
+        etatJeu = 0;
     }
 
     public static void LancerPartie() // TODO : Endgame
@@ -481,6 +487,96 @@ public class Jeu
     public static List<Face> getFaces() // DONE
     {
         return new List<Face> { north, south, east, west, host, client };
+    }
+
+    public List<Object?> sendEtatJeu() // DONE
+    {
+        return
+        [
+            pierrelumierehost,
+            pierrelumiereclient,
+            pierreombrehost,
+            pierreombreclient,
+            joueurHost1,
+            joueurHost2,
+            joueurHost3,
+            joueurHost4,
+            joueurClient1,
+            joueurClient2,
+            joueurClient3,
+            joueurClient4,
+            roninjaHost,
+            elfeeHost,
+            fantomageHost,
+            piratitanHost,
+            roninjaClient,
+            elfeeClient,
+            fantomageClient,
+            piratitanClient,
+            north,
+            south,
+            east,
+            west,
+            host,
+            client,
+            nbTours,
+            scoreClient,
+            scoreHost,
+            etatJeu
+        ];
+    }
+
+    public static void setEtatJeu(List<Object?> etat) // DONE
+    {
+        pierrelumierehost = (Pierre?)etat[0] ?? pierrelumierehost;
+        pierrelumiereclient = (Pierre?)etat[1] ?? pierrelumiereclient;
+        pierreombrehost = (Pierre?)etat[2] ?? pierreombrehost;
+        pierreombreclient = (Pierre?)etat[3] ?? pierreombreclient;
+        joueurHost1 = (Joueur?)etat[4] ?? joueurHost1;
+        joueurHost2 = (Joueur?)etat[5] ?? joueurHost2;
+        joueurHost3 = (Joueur?)etat[6] ?? joueurHost3;
+        joueurHost4 = (Joueur?)etat[7] ?? joueurHost4;
+        joueurClient1 = (Joueur?)etat[8] ?? joueurClient1;
+        joueurClient2 = (Joueur?)etat[9] ?? joueurClient2;
+        joueurClient3 = (Joueur?)etat[10] ?? joueurClient3;
+        joueurClient4 = (Joueur?)etat[11] ?? joueurClient4;
+        roninjaHost = (Perso?)etat[12] ?? roninjaHost;
+        elfeeHost = (Perso?)etat[13] ?? elfeeHost;
+        fantomageHost = (Perso?)etat[14] ?? fantomageHost;
+        piratitanHost = (Perso?)etat[15] ?? piratitanHost;
+        roninjaClient = (Perso?)etat[16] ?? roninjaClient;
+        elfeeClient = (Perso?)etat[17] ?? elfeeClient;
+        fantomageClient = (Perso?)etat[18] ?? fantomageClient;
+        piratitanClient = (Perso?)etat[19] ?? piratitanClient;
+        north = (Face?)etat[20] ?? north;
+        south = (Face?)etat[21] ?? south;
+        east = (Face?)etat[22] ?? east;
+        west = (Face?)etat[23] ?? west;
+        host = (Face?)etat[24] ?? host;
+        client = (Face?)etat[25] ?? client;
+        nbTours = (int?)etat[26] ?? nbTours;
+        scoreClient = (int?)etat[27] ?? scoreClient;
+        scoreHost = (int?)etat[28] ?? scoreHost;
+        etatJeu = (int?)etat[29] ?? etatJeu;
+    }
+
+    public static Object?[] sendMove(Perso perso, Case? myCase = null, Object? cible = null)
+    {
+        return [perso, myCase, cible];
+    }
+
+    public static void receiveMove(Object?[] move)
+    {
+        Perso? perso = (Perso?)move[0];
+        Case? myCase = (Case?)move[1];
+        Object? cible = move[2];
+
+        if (perso == null)
+            return;
+
+        if (myCase == null)
+            perso.passeTour();
+
     }
 
     // Méthodes private

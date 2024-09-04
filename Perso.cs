@@ -308,6 +308,18 @@ public class Perso
         }
     }
 
+    public void playerPasseSonTour() // TODO : Tester la connexion puis communiquer aux autres joueurs
+    {
+        Jeu.etatJeu++;
+        finTour();
+    }
+
+    public void playerMoveDirection(Jeu.DirectionType direction) // TODO : Tester la connexion puis communiquer aux autres joueurs
+    {
+        Jeu.etatJeu++;
+        tryMoveDirection(direction);
+    }
+
     public void estKO(bool roninjaPortePierre = false, bool tombeDansTrou = false) // DONE
     {
         temoinDePositionClairvoyance = null;
@@ -510,11 +522,10 @@ public class Perso
         invisibilite = 0;
 
         bool containsBrumeAdverse = isHost
-              ? myCase.containsBrumeRoninjaClient
-              : myCase.containsBrumeRoninjaHost;
+            ? myCase.containsBrumeRoninjaClient
+            : myCase.containsBrumeRoninjaHost;
 
-        if (activeFlechesPatientes
-            && !containsBrumeAdverse)
+        if (activeFlechesPatientes && !containsBrumeAdverse)
             return activerFlechesPatientes();
         return Jeu.EtatType.ok;
     }
@@ -597,8 +608,8 @@ public class Perso
         if (invincible)
         {
             containsBrumeAdverse = isHost
-                                        ? myCase.containsBrumeRoninjaClient
-                                        : myCase.containsBrumeRoninjaHost;
+                ? myCase.containsBrumeRoninjaClient
+                : myCase.containsBrumeRoninjaHost;
             if (!containsBrumeAdverse && !ignoreFeinteEtFlechesPatientes)
                 return activerFlechesPatientes();
 
@@ -608,8 +619,8 @@ public class Perso
         {
             esquive = false;
             containsBrumeAdverse = isHost
-                                        ? myCase.containsBrumeRoninjaClient
-                                        : myCase.containsBrumeRoninjaHost;
+                ? myCase.containsBrumeRoninjaClient
+                : myCase.containsBrumeRoninjaHost;
             if (!containsBrumeAdverse && !ignoreFeinteEtFlechesPatientes)
                 return activerFlechesPatientes();
 
@@ -624,8 +635,8 @@ public class Perso
                 Jeu.elfeeClient.recoitDegats(degats);
 
             containsBrumeAdverse = isHost
-                                   ? myCase.containsBrumeRoninjaClient
-                                   : myCase.containsBrumeRoninjaHost;
+                ? myCase.containsBrumeRoninjaClient
+                : myCase.containsBrumeRoninjaHost;
             if (!containsBrumeAdverse && !ignoreFeinteEtFlechesPatientes)
                 return activerFlechesPatientes();
 
@@ -646,8 +657,8 @@ public class Perso
         }
 
         containsBrumeAdverse = isHost
-                                       ? myCase.containsBrumeRoninjaClient
-                                       : myCase.containsBrumeRoninjaHost;
+            ? myCase.containsBrumeRoninjaClient
+            : myCase.containsBrumeRoninjaHost;
         if (!containsBrumeAdverse && !ignoreFeinteEtFlechesPatientes)
             return activerFlechesPatientes();
 
@@ -1179,7 +1190,9 @@ public class Perso
     private Jeu.EtatType desactiverInvisibiliteIfOnMe(bool revealPerso = true) // DONE
     {
         if (sousInvisibilite())
-            return ((Invisibilite)attaques[Jeu.AttaqueType.invincibilite]).desactiver(reveal: revealPerso);
+            return ((Invisibilite)attaques[Jeu.AttaqueType.invincibilite]).desactiver(
+                reveal: revealPerso
+            );
         return Jeu.EtatType.ok;
     }
 
@@ -1193,9 +1206,9 @@ public class Perso
             else
                 candidatVoileDInvisibilite = Jeu.fantomageClient;
             return (
-                   (VoileDInvisibilite)
-                       candidatVoileDInvisibilite.attaques[Jeu.AttaqueType.voileDInvisibilite]
-               ).desactiver(reveal: revealPerso);
+                (VoileDInvisibilite)
+                    candidatVoileDInvisibilite.attaques[Jeu.AttaqueType.voileDInvisibilite]
+            ).desactiver(reveal: revealPerso);
         }
         return Jeu.EtatType.ok;
     }
