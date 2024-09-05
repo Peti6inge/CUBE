@@ -18,7 +18,7 @@ public class Ancre : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         if (cible is Perso)

@@ -14,7 +14,7 @@ public class Reanimation : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public override void lancerAttaque(Case myCase, Object? cible)
     {
         uses();
 

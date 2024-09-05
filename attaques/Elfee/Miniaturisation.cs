@@ -13,7 +13,7 @@ public class Miniaturisation : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         perso.miniaturisation = true;

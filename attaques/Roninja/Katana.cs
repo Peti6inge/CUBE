@@ -14,7 +14,7 @@ public class Katana : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         attaqueBasiqueDegats(myCase, cible, 3);

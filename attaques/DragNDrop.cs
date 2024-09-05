@@ -14,12 +14,12 @@ public class DragNDrop : Attaque
 
     // Méthodes public
 
-    public Jeu.EtatType lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         if (perso.pierre != null) // Le perso dépose la pierre
         {
-            return perso.dropPierre(myCase);
+            return;
         }
         else // Le perso récupère la pierre
         {
@@ -35,7 +35,7 @@ public class DragNDrop : Attaque
                 perso.pierre = ciblePerso.pierre;
                 ciblePerso.pierre = null;
             }
-            return Jeu.EtatType.ok;
+            return;
         }
     }
 }

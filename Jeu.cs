@@ -1,7 +1,5 @@
 #pragma warning disable CS8618
 
-using System.Security.Cryptography.X509Certificates;
-
 public class Jeu
 {
     // Attributs // DONE
@@ -489,7 +487,7 @@ public class Jeu
         return new List<Face> { north, south, east, west, host, client };
     }
 
-    public List<Object?> sendEtatJeu() // DONE
+    public List<object?> sendEtatJeu() // DONE
     {
         return
         [
@@ -526,7 +524,7 @@ public class Jeu
         ];
     }
 
-    public static void setEtatJeu(List<Object?> etat) // DONE
+    public static void setEtatJeu(List<object?> etat) // DONE
     {
         pierrelumierehost = (Pierre?)etat[0] ?? pierrelumierehost;
         pierrelumiereclient = (Pierre?)etat[1] ?? pierrelumiereclient;
@@ -560,23 +558,31 @@ public class Jeu
         etatJeu = (int?)etat[29] ?? etatJeu;
     }
 
-    public static Object?[] sendMove(Perso perso, Case? myCase = null, Object? cible = null)
+    public static object?[] sendMove(
+        Perso perso,
+        object? cibleOrDirection = null,
+        Case? myCase = null,
+        Attaque? attaque = null
+    )
     {
-        return [perso, myCase, cible];
+        return [perso, myCase, cibleOrDirection, attaque];
     }
 
-    public static void receiveMove(Object?[] move)
+    public static void receiveMove(object?[] move)
     {
         Perso? perso = (Perso?)move[0];
-        Case? myCase = (Case?)move[1];
-        Object? cible = move[2];
+        object? cibleOrDirection = move[1];
+        Case? myCase = (Case?)move[2];
+        Attaque? attaque = (Attaque?)move[3];
 
         if (perso == null)
             return;
-
-        if (myCase == null)
-            perso.passeTour();
-
+        if (cibleOrDirection == null)
+            perso.playerPasseSonTour();
+        else if (myCase == null)
+            perso.playerMoveDirection((DirectionType)cibleOrDirection);
+        else if (attaque != null)
+            perso.playerAttaque(attaque, myCase, cibleOrDirection);
     }
 
     // Méthodes private

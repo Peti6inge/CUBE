@@ -14,7 +14,7 @@ public class HautesHerbes : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible)
+    public override void lancerAttaque(Case myCase, Object? cible)
     {
         uses();
         myCase.containsCamouflage = true;

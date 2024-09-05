@@ -13,7 +13,7 @@ public class EnvolAtterissage : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         if (perso.enVol) // L'Elfée tente d'atterrir

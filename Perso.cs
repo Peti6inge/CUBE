@@ -308,16 +308,25 @@ public class Perso
         }
     }
 
-    public void playerPasseSonTour() // TODO : Tester la connexion puis communiquer aux autres joueurs
+    public void playerPasseSonTour() // TODO : Tester la connexion avant d'effectuer l'action
     {
         Jeu.etatJeu++;
+        Jeu.sendMove(this);
         finTour();
     }
 
-    public void playerMoveDirection(Jeu.DirectionType direction) // TODO : Tester la connexion puis communiquer aux autres joueurs
+    public void playerMoveDirection(Jeu.DirectionType direction) // TODO : Tester la connexion avant d'effectuer l'action
     {
         Jeu.etatJeu++;
+        Jeu.sendMove(this, cibleOrDirection: direction);
         tryMoveDirection(direction);
+    }
+
+    public void playerAttaque(Attaque attaqueType, Case myCase, Object? cible) // TODO : Tester la connexion avant d'effectuer l'action
+    {
+        Jeu.etatJeu++;
+        Jeu.sendMove(this, cibleOrDirection: cible, myCase: myCase, attaque: attaqueType);
+        attaqueType.lancerAttaque(myCase, cible);
     }
 
     public void estKO(bool roninjaPortePierre = false, bool tombeDansTrou = false) // DONE

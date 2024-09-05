@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Romain\\.nuget\\packages\\": {}
+    "C:\\Users\\GEL02\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CUBE\\DOSSIER_DE_TRAVAIL\\CUBE\\Classes_Cube.csproj",
+      "projectUniqueName": "C:\\Users\\GEL02\\Documents\\CUBE\\Classes_Cube\\CUBE\\Classes_Cube.csproj",
       "projectName": "Classes_Cube",
-      "projectPath": "D:\\CUBE\\DOSSIER_DE_TRAVAIL\\CUBE\\Classes_Cube.csproj",
-      "packagesPath": "C:\\Users\\Romain\\.nuget\\packages\\",
-      "outputPath": "D:\\CUBE\\DOSSIER_DE_TRAVAIL\\CUBE\\obj\\",
+      "projectPath": "C:\\Users\\GEL02\\Documents\\CUBE\\Classes_Cube\\CUBE\\Classes_Cube.csproj",
+      "packagesPath": "C:\\Users\\GEL02\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\GEL02\\Documents\\CUBE\\Classes_Cube\\CUBE\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Romain\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\GEL02\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

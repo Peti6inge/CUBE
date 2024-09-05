@@ -330,7 +330,11 @@ public class Attaque
                     return false;
 
                 if (
-                    (cible is Perso && ((Perso)cible).isHost == !perso.isHost && !((Perso)cible).malediction)
+                    (
+                        cible is Perso
+                        && ((Perso)cible).isHost == !perso.isHost
+                        && !((Perso)cible).malediction
+                    )
                     || cible is bool
                     || (
                         cible is InvocationSimpleBloquante
@@ -898,6 +902,20 @@ public class Attaque
         }
     }
 
+    public virtual void lancerAttaque(Case myCase, Object? cible) { }
+
+    public virtual void debutTour() // DONE
+    {
+        nbLances = 0;
+
+        nbLancesParCible = new Dictionary<Object, int>();
+
+        if (cooldownRestant > 0)
+            cooldownRestant--;
+
+        facesLances.Clear();
+    }
+
     // Méthodes protégées
 
     protected void uses(Object? cible = null) // DONE
@@ -996,15 +1014,4 @@ public class Attaque
         return true;
     }
 
-    public virtual void debutTour() // DONE
-    {
-        nbLances = 0;
-
-        nbLancesParCible = new Dictionary<Object, int>();
-
-        if (cooldownRestant > 0)
-            cooldownRestant--;
-
-        facesLances.Clear();
-    }
 }

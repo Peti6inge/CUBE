@@ -14,7 +14,7 @@ public class PorterDeposer : Attaque
 
     // Méthodes public
 
-    public void lancerAttaque(Case myCase, Object? cible) // DONE
+    public override void lancerAttaque(Case myCase, Object? cible) // DONE
     {
         uses();
         if (perso.porte != null && perso.porte.myCase != null) // Déposer
