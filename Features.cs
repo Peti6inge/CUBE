@@ -2,100 +2,142 @@
 
 class Tests
 {
-    static void Main()
+    public static void Main()
     {
-        algoChiffrementSort();
+        
     }
 
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de codage des sorts ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    
-    public enum AttaqueType
+
+    private static Dictionary<Jeu.AttaqueType, bool>? attaquesRoninja;
+    private static Dictionary<Jeu.AttaqueType, bool>? attaquesPiratitan;
+    private static Dictionary<Jeu.AttaqueType, bool>? attaquesFantomage;
+    private static Dictionary<Jeu.AttaqueType, bool>? attaquesElfee;
+
+    public static void algoCodageSort() // TODO : Récupérer les sorts en BDD
     {
-        carosse,
-        bombe,
-        espritElfique,
-        crapeau,
-        mouette,
-        tonneau,
-        coffre,
-        clone,
-        dragAndDrop,
-        ancre,
-        bondDuTitan,
-        chargeDuTitan,
-        coupDeFeu,
-        etincelle,
-        flaque,
-        frappeDuPirate,
-        frappeDuTitan,
-        harpon,
-        invincibilite,
-        longueVue,
-        planche,
-        porterDeposer,
-        poudre,
-        sabre,
-        altruisme,
-        coupDeBaguette,
-        derniereVolontee,
-        elixirAgressif,
-        envolAtterissage,
-        esquive,
-        fleche,
-        flecheDeLumiere,
-        flechePatiente,
-        hautesHerbes,
-        miniaturisation,
-        petitSoin,
-        poudreBienfaisante,
-        poudreSoporifique,
-        poudreStimulante,
-        reanimation,
-        soinTotal,
-        acide,
-        attire,
-        brume,
-        couteauDeLancee,
-        derobadeDeLOmbre,
-        derobade,
-        entrave,
-        feinte,
-        invisibilite,
-        katana,
-        kunai,
-        memoire,
-        piegeALoup,
-        piegeLineaire,
-        pirouette,
-        poison,
-        repousse,
-        teleport,
-        bouleDeFeu,
-        bouletFantomatique,
-        buff,
-        caseDeRapatriement,
-        caseTerrifiante,
-        clairvoyance,
-        coupDeBaton,
-        eauVaseuse,
-        feuFollet,
-        gravite,
-        inversion,
-        jouvence,
-        mainsMaudites,
-        malediction,
-        rappel,
-        sortDeProtection,
-        transposition,
-        voileDInvisibilite,
-        none
+        attaquesPiratitan = new Dictionary<Jeu.AttaqueType, bool>
+        {
+            { Jeu.AttaqueType.ancre, false },
+            { Jeu.AttaqueType.bombe, false },
+            { Jeu.AttaqueType.bondDuTitan, false },
+            { Jeu.AttaqueType.chargeDuTitan, false },
+            { Jeu.AttaqueType.coffre, false },
+            { Jeu.AttaqueType.coupDeFeu, false },
+            { Jeu.AttaqueType.etincelle, false },
+            { Jeu.AttaqueType.flaque, false },
+            { Jeu.AttaqueType.frappeDuPirate, false },
+            { Jeu.AttaqueType.frappeDuTitan, false },
+            { Jeu.AttaqueType.harpon, false },
+            { Jeu.AttaqueType.invincibilite, false },
+            { Jeu.AttaqueType.longueVue, false },
+            { Jeu.AttaqueType.mouette, false },
+            { Jeu.AttaqueType.planche, false },
+            { Jeu.AttaqueType.porterDeposer, false },
+            { Jeu.AttaqueType.poudre, false },
+            { Jeu.AttaqueType.sabre, false },
+            { Jeu.AttaqueType.tonneau, false }
+        };
+        attaquesRoninja = new Dictionary<Jeu.AttaqueType, bool>
+        {
+            { Jeu.AttaqueType.acide, false },
+            { Jeu.AttaqueType.attire, false },
+            { Jeu.AttaqueType.brume, false },
+            { Jeu.AttaqueType.clone, false },
+            { Jeu.AttaqueType.couteauDeLancee, false },
+            { Jeu.AttaqueType.derobadeDeLOmbre, false },
+            { Jeu.AttaqueType.derobade, false },
+            { Jeu.AttaqueType.entrave, false },
+            { Jeu.AttaqueType.feinte, false },
+            { Jeu.AttaqueType.invisibilite, false },
+            { Jeu.AttaqueType.katana, false },
+            { Jeu.AttaqueType.kunai, false },
+            { Jeu.AttaqueType.memoire, false },
+            { Jeu.AttaqueType.piegeALoup, false },
+            { Jeu.AttaqueType.piegeLineaire, false },
+            { Jeu.AttaqueType.pirouette, false },
+            { Jeu.AttaqueType.poison, false },
+            { Jeu.AttaqueType.repousse, false },
+            { Jeu.AttaqueType.teleport, false }
+        };
+        attaquesFantomage = new Dictionary<Jeu.AttaqueType, bool>
+        {
+            { Jeu.AttaqueType.bouleDeFeu, false },
+            { Jeu.AttaqueType.bouletFantomatique, false },
+            { Jeu.AttaqueType.buff, false },
+            { Jeu.AttaqueType.caseDeRapatriement, false },
+            { Jeu.AttaqueType.caseTerrifiante, false },
+            { Jeu.AttaqueType.clairvoyance, false },
+            { Jeu.AttaqueType.coupDeBaton, false },
+            { Jeu.AttaqueType.crapeau, false },
+            { Jeu.AttaqueType.eauVaseuse, false },
+            { Jeu.AttaqueType.feuFollet, false },
+            { Jeu.AttaqueType.gravite, false },
+            { Jeu.AttaqueType.inversion, false },
+            { Jeu.AttaqueType.jouvence, false },
+            { Jeu.AttaqueType.mainsMaudites, false },
+            { Jeu.AttaqueType.malediction, false },
+            { Jeu.AttaqueType.rappel, false },
+            { Jeu.AttaqueType.sortDeProtection, false },
+            { Jeu.AttaqueType.transposition, false },
+            { Jeu.AttaqueType.voileDInvisibilite, false }
+        };
+        attaquesElfee = new Dictionary<Jeu.AttaqueType, bool>
+        {
+            { Jeu.AttaqueType.altruisme, false },
+            { Jeu.AttaqueType.carosse, false },
+            { Jeu.AttaqueType.coupDeBaguette, false },
+            { Jeu.AttaqueType.derniereVolontee, false },
+            { Jeu.AttaqueType.elixirAgressif, false },
+            { Jeu.AttaqueType.envolAtterissage, false },
+            { Jeu.AttaqueType.espritElfique, false },
+            { Jeu.AttaqueType.esquive, false },
+            { Jeu.AttaqueType.fleche, false },
+            { Jeu.AttaqueType.flecheDeLumiere, false },
+            { Jeu.AttaqueType.flechePatiente, false },
+            { Jeu.AttaqueType.hautesHerbes, false },
+            { Jeu.AttaqueType.miniaturisation, false },
+            { Jeu.AttaqueType.petitSoin, false },
+            { Jeu.AttaqueType.poudreBienfaisante, false },
+            { Jeu.AttaqueType.poudreSoporifique, false },
+            { Jeu.AttaqueType.poudreStimulante, false },
+            { Jeu.AttaqueType.reanimation, false },
+            { Jeu.AttaqueType.soinTotal, false }
+        };
+
+        // Codage d'un sort
+        long sort = codageSort(attaquesRoninja);
+
+        // Décodage d'un sort (stockage dans les variables statiques)
+        decodageSort(attaquesRoninja, sort);
     }
 
-    public static void algoCodageSort() { }
+    public static long codageSort(Dictionary<Jeu.AttaqueType, bool> attaques)
+    {
+        long res = 0;
+        long i = 1;
+        foreach (bool attaque in attaques.Values)
+        {
+            res += attaque ? i : 0;
+            i *= 2;
+        }
+        return res;
+    }
 
-    public static int codageSort(List<AttaqueType>) { }
+    public static void decodageSort(Dictionary<Jeu.AttaqueType, bool> attaques, long sort)
+    {
+        int i = 1;
+        foreach (Jeu.AttaqueType attaque in attaques.Keys)
+        {
+            attaques[attaque] = IsBitSet(sort, i);
+            i++;
+        }
+    }
 
-    public static List<AttaqueType> decodageSort(int sort) { }
+    private static bool IsBitSet(long number, int bitPosition)
+    {
+        return (number & (1L << (bitPosition - 1))) != 0;
+    }
 
     // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de codage des sorts ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
