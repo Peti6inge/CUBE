@@ -1,22 +1,95 @@
 ﻿using System.Security.Cryptography;
+using System.Text;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
 
 class Tests
 {
-    public static void Main()
+    public static async Task Main()
     {
-        
+        var awsCredentials = new Amazon.Runtime.BasicAWSCredentials(
+            "AKIAQKPILYLME7VMUU6F",
+            "fkT1A+kfBdaAMeIkqyAfpn5HS+JZol+4ISHPs99I"
+        );
+        dynamoDBClient = new AmazonDynamoDBClient(awsCredentials, Amazon.RegionEndpoint.EUWest3); // Remplacez par votre région
+        var request = new GetItemRequest
+        {
+            TableName = "CubePlayers",
+            Key = new Dictionary<string, AttributeValue>
+            {
+                {
+                    "username",
+                    new AttributeValue
+                    {
+                        S =
+                            "6BuTNY00Elc7/ssapRuJs0kgnh6FZkNpP3uKYGAAT8s=@JcFCInELc8gAgu7BxMYY4/rd9x6it7rva97PlmJ4O2Y="
+                    }
+                }
+            }
+        };
+
+        var response = await dynamoDBClient.GetItemAsync(request);
+        if (response.Item != null)
+        {
+            Console.WriteLine(Dechiffrer(response.Item["score"].S));
+        }
     }
 
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de codage des sorts ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de communication en BDD ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
-    private static Dictionary<Jeu.AttaqueType, bool>? attaquesRoninja;
-    private static Dictionary<Jeu.AttaqueType, bool>? attaquesPiratitan;
-    private static Dictionary<Jeu.AttaqueType, bool>? attaquesFantomage;
-    private static Dictionary<Jeu.AttaqueType, bool>? attaquesElfee;
+    private static IAmazonDynamoDB dynamoDBClient;
 
-    public static void algoCodageSort() // TODO : Récupérer les sorts en BDD
+    public static async Task creerJoueur(string username, string password)
     {
-        attaquesPiratitan = new Dictionary<Jeu.AttaqueType, bool>
+        username = Chiffrer(username);
+        password = Chiffrer(password);
+        var awsCredentials = new Amazon.Runtime.BasicAWSCredentials(
+            "AKIAQKPILYLME7VMUU6F",
+            "fkT1A+kfBdaAMeIkqyAfpn5HS+JZol+4ISHPs99I"
+        );
+        dynamoDBClient = new AmazonDynamoDBClient(awsCredentials, Amazon.RegionEndpoint.EUWest3); // Remplacez par votre région
+        var request = new UpdateItemRequest
+        {
+            TableName = "CubePlayers",
+            Key = new Dictionary<string, AttributeValue>
+            {
+                {
+                    "username",
+                    new AttributeValue { S = username + "@" + password }
+                }
+            },
+            AttributeUpdates = new Dictionary<string, AttributeValueUpdate>
+            {
+                {
+                    "Age",
+                    new AttributeValueUpdate
+                    {
+                        Action = "PUT",
+                        Value = new AttributeValue { N = "30" }
+                    }
+                }
+            }
+        };
+
+        var response = await dynamoDBClient.UpdateItemAsync(request);
+    }
+
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de communication en BDD ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de codage des sortsSkins ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+    private static Dictionary<Enum, bool>? attaquesRoninja;
+    private static Dictionary<Enum, bool>? attaquesPiratitan;
+    private static Dictionary<Enum, bool>? attaquesFantomage;
+    private static Dictionary<Enum, bool>? attaquesElfee;
+    private static Dictionary<Enum, bool>? skinsRoninja;
+    private static Dictionary<Enum, bool>? skinsPiratitan;
+    private static Dictionary<Enum, bool>? skinsFantomage;
+    private static Dictionary<Enum, bool>? skinsElfee;
+
+    public static void algoCodageSort() // TODO : Récupérer les sortsSkins en BDD
+    {
+        attaquesPiratitan = new Dictionary<Enum, bool>
         {
             { Jeu.AttaqueType.ancre, false },
             { Jeu.AttaqueType.bombe, false },
@@ -38,7 +111,7 @@ class Tests
             { Jeu.AttaqueType.sabre, false },
             { Jeu.AttaqueType.tonneau, false }
         };
-        attaquesRoninja = new Dictionary<Jeu.AttaqueType, bool>
+        attaquesRoninja = new Dictionary<Enum, bool>
         {
             { Jeu.AttaqueType.acide, false },
             { Jeu.AttaqueType.attire, false },
@@ -60,7 +133,7 @@ class Tests
             { Jeu.AttaqueType.repousse, false },
             { Jeu.AttaqueType.teleport, false }
         };
-        attaquesFantomage = new Dictionary<Jeu.AttaqueType, bool>
+        attaquesFantomage = new Dictionary<Enum, bool>
         {
             { Jeu.AttaqueType.bouleDeFeu, false },
             { Jeu.AttaqueType.bouletFantomatique, false },
@@ -82,7 +155,7 @@ class Tests
             { Jeu.AttaqueType.transposition, false },
             { Jeu.AttaqueType.voileDInvisibilite, false }
         };
-        attaquesElfee = new Dictionary<Jeu.AttaqueType, bool>
+        attaquesElfee = new Dictionary<Enum, bool>
         {
             { Jeu.AttaqueType.altruisme, false },
             { Jeu.AttaqueType.carosse, false },
@@ -106,30 +179,30 @@ class Tests
         };
 
         // Codage d'un sort
-        long sort = codageSort(attaquesRoninja);
+        long sort = codageSortSkins(attaquesRoninja);
 
         // Décodage d'un sort (stockage dans les variables statiques)
-        decodageSort(attaquesRoninja, sort);
+        decodageSortSkins(attaquesRoninja, sort);
     }
 
-    public static long codageSort(Dictionary<Jeu.AttaqueType, bool> attaques)
+    public static long codageSortSkins(Dictionary<Enum, bool> sortSkin)
     {
         long res = 0;
         long i = 1;
-        foreach (bool attaque in attaques.Values)
+        foreach (bool val in sortSkin.Values)
         {
-            res += attaque ? i : 0;
+            res += val ? i : 0;
             i *= 2;
         }
         return res;
     }
 
-    public static void decodageSort(Dictionary<Jeu.AttaqueType, bool> attaques, long sort)
+    public static void decodageSortSkins(Dictionary<Enum, bool> sortSkin, long sort)
     {
         int i = 1;
-        foreach (Jeu.AttaqueType attaque in attaques.Keys)
+        foreach (Jeu.AttaqueType val in sortSkin.Keys)
         {
-            attaques[attaque] = IsBitSet(sort, i);
+            sortSkin[val] = IsBitSet(sort, i);
             i++;
         }
     }
@@ -139,149 +212,91 @@ class Tests
         return (number & (1L << (bitPosition - 1))) != 0;
     }
 
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de codage des sorts ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de codage des sortsSkins ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
-    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de chiffrement d'un int ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    public static void algoChiffrement()
+    // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ Algorithme de chiffrement ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+    private static string cle = "64ry1h6r1sdt6gh1st6gh1se6tg1sdth!";
+
+    private static string Chiffrer(long valeurClair)
     {
-        byte[] key = new byte[]
-        {
-            0x2F,
-            0x3C,
-            0x6E,
-            0x7A,
-            0x9C,
-            0x1A,
-            0xA4,
-            0xB2,
-            0xE5,
-            0x10,
-            0x5D,
-            0xD1,
-            0xDA,
-            0xEB,
-            0xF0,
-            0x21,
-            0x32,
-            0x8F,
-            0xC3,
-            0xFC,
-            0x0D,
-            0xA9,
-            0xB8,
-            0xC9,
-            0x43,
-            0x54,
-            0x65,
-            0x76,
-            0x87,
-            0x98,
-            0x4B,
-            0x1F
-        };
-
-        // Valeur à chiffrer
-        int valeur = 123456789;
-
-        // Chiffrement de valeur dans encryptedValue
-        string encryptedValue = EncryptValue(valeur, key);
-
-        // Déchiffrement de encryptedValue dans decryptedValue
-        int decryptedValue = DecryptValue(encryptedValue, key);
+        return Chiffrer(valeurClair.ToString());
     }
 
-    public static string EncryptValue(int value, byte[] key)
+    private static string Chiffrer(string texteClair)
     {
-        using (Aes aes = Aes.Create())
+        using (Aes aesAlg = Aes.Create())
         {
-            aes.Key = key;
-            aes.GenerateIV();
-            byte[] iv = aes.IV;
-            Console.WriteLine("IV : " + BitConverter.ToString(iv).Replace("-", ""));
+            // Convertir la clé et le vecteur d'initialisation (IV) en bytes
+            byte[] cleBytes = Encoding.UTF8.GetBytes(cle);
+            Array.Resize(ref cleBytes, 32); // Ajuster la taille de la clé à 256 bits (32 octets)
 
-            using (ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, iv))
+            aesAlg.Key = cleBytes;
+            aesAlg.GenerateIV(); // Génère un IV aléatoire
+
+            ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+            using (MemoryStream msEncrypt = new MemoryStream())
             {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    using (
-                        CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write)
+                // Ecriture de l'IV d'abord pour le récupérer lors du déchiffrement
+                msEncrypt.Write(aesAlg.IV, 0, aesAlg.IV.Length);
+
+                using (
+                    CryptoStream csEncrypt = new CryptoStream(
+                        msEncrypt,
+                        encryptor,
+                        CryptoStreamMode.Write
                     )
-                    {
-                        byte[] valueBytes = BitConverter.GetBytes(value);
-                        if (BitConverter.IsLittleEndian)
-                            Array.Reverse(valueBytes); // Assurer l'ordre des octets pour BigEndian
-
-                        // Ajouter du padding pour correspondre à la taille du bloc AES (16 octets)
-                        byte[] paddedValue = PadData(valueBytes, aes.BlockSize / 8);
-
-                        cs.Write(paddedValue, 0, paddedValue.Length);
-                        cs.FlushFinalBlock();
-                    }
-
-                    byte[] encrypted = ms.ToArray();
-                    byte[] result = new byte[iv.Length + encrypted.Length];
-                    Buffer.BlockCopy(iv, 0, result, 0, iv.Length);
-                    Buffer.BlockCopy(encrypted, 0, result, iv.Length, encrypted.Length);
-
-                    return Convert.ToBase64String(result);
+                )
+                using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                {
+                    // Ecrire les données chiffrées dans le flux
+                    swEncrypt.Write(texteClair);
                 }
+
+                return Convert.ToBase64String(msEncrypt.ToArray());
             }
         }
     }
 
-    public static int DecryptValue(string encryptedText, byte[] key)
+    private static string Dechiffrer(string texteChiffre)
     {
-        byte[] fullCipher = Convert.FromBase64String(encryptedText);
+        byte[] fullCipher = Convert.FromBase64String(texteChiffre);
 
-        using (Aes aes = Aes.Create())
+        using (Aes aesAlg = Aes.Create())
         {
-            aes.Key = key;
-            byte[] iv = new byte[aes.BlockSize / 8];
+            byte[] iv = new byte[aesAlg.BlockSize / 8];
             byte[] cipherText = new byte[fullCipher.Length - iv.Length];
 
-            Buffer.BlockCopy(fullCipher, 0, iv, 0, iv.Length);
-            Buffer.BlockCopy(fullCipher, iv.Length, cipherText, 0, cipherText.Length);
+            // Séparer l'IV du texte chiffré
+            Array.Copy(fullCipher, iv, iv.Length);
+            Array.Copy(fullCipher, iv.Length, cipherText, 0, cipherText.Length);
 
-            using (ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, iv))
+            byte[] cleBytes = Encoding.UTF8.GetBytes(cle);
+            Array.Resize(ref cleBytes, 32); // Ajuster la taille de la clé à 256 bits (32 octets)
+
+            aesAlg.Key = cleBytes;
+            aesAlg.IV = iv;
+
+            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+            using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+            using (
+                CryptoStream csDecrypt = new CryptoStream(
+                    msDecrypt,
+                    decryptor,
+                    CryptoStreamMode.Read
+                )
+            )
+            using (StreamReader srDecrypt = new StreamReader(csDecrypt))
             {
-                using (MemoryStream ms = new MemoryStream(cipherText))
-                {
-                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
-                    {
-                        byte[] paddedValue = new byte[aes.BlockSize / 8];
-                        cs.Read(paddedValue, 0, paddedValue.Length);
-
-                        byte[] valueBytes = UnpadData(paddedValue, aes.BlockSize / 8);
-
-                        if (BitConverter.IsLittleEndian)
-                            Array.Reverse(valueBytes);
-
-                        return BitConverter.ToInt32(valueBytes, 0);
-                    }
-                }
+                // Lire les données déchiffrées du flux
+                return srDecrypt.ReadToEnd();
             }
         }
     }
 
-    private static byte[] PadData(byte[] data, int blockSize)
-    {
-        int paddingSize = blockSize - data.Length % blockSize;
-        byte[] paddedData = new byte[data.Length + paddingSize];
-        Array.Copy(data, paddedData, data.Length);
-        for (int i = data.Length; i < paddedData.Length; i++)
-            paddedData[i] = (byte)paddingSize;
-        return paddedData;
-    }
-
-    private static byte[] UnpadData(byte[] data, int blockSize)
-    {
-        int paddingSize = data[data.Length - 1];
-        byte[] unpaddedData = new byte[data.Length - paddingSize];
-        Array.Copy(data, unpaddedData, unpaddedData.Length);
-        return unpaddedData;
-    }
-
-    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de chiffrement d'un int ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ Algorithme de chiffrement ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ POUR DEBOGAGE ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
