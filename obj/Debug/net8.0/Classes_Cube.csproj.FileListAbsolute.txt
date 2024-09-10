@@ -71,3 +71,7 @@ D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\refint\Classes_Cube.dll
 D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\Classes_Cube.pdb
 D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\Classes_Cube.genruntimeconfig.cache
 D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\ref\Classes_Cube.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\Classes_Cube.csproj.AssemblyReference.cache
+D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\bin\Debug\net8.0\AWSSDK.Core.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\bin\Debug\net8.0\AWSSDK.DynamoDBv2.dll
+D:\CUBE\DOSSIER_DE_TRAVAIL\CUBE\obj\Debug\net8.0\Classes_.19E54E20.Up2Date

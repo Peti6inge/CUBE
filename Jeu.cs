@@ -250,6 +250,15 @@ public class Jeu
         none
     }
 
+    public enum SkinType
+    {
+        roninjaBasique,
+        elfeeBasique,
+        fantomageBasique,
+        piratitanBasique,
+        none
+    }
+
     public enum EtatType
     {
         ok,
