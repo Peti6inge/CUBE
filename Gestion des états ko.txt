@@ -1,0 +1,138 @@
+Niveau 1 :
+
+Perso.estKO => Perso.finTour (FINAL)                                         OK
+Perso.estKO => Perso.recoitDegats                                            OK
+Perso.estKO => Perso.tombeDansTrou                                           OK
+Perso.estKO => Perso.elfeeTombe                                              OK
+
+---------------------------------------------------------------------------
+
+Niveau 2 :
+
+Perso.recoitDegats => InvocationDoubleBloquante.recoitDegats                 OK
+Perso.recoitDegats => InvocationNonBloquante.recoitDegats                    OK
+Perso.recoitDegats => InvocationSimpleBloquante.recoitDegats                 OK
+Perso.recoitDegats => Perso.infligeDegatsPerso                               OK
+Perso.recoitDegats => Perso.recoitDegats (DONE)                              OK
+Perso.recoitDegats => Perso.elfeeTombe (DONE)                                OK
+Perso.recoitDegats => ChargeDuTitan.lancerAttaque (FINAL)                    OK
+
+Perso.tombeDansTrou => Case.persoEnterCase                                   OK
+Perso.tombeDansTrou => Acide.lancerAttaque (FINAL)                           OK
+
+Perso.elfeeTombe => Perso.elfeeTombe (DONE)                                  OK
+
+---------------------------------------------------------------------------
+
+Niveau 3 :
+
+InvocationDoubleBloquante.recoitDegats => Perso.infligeDegats                OK
+InvocationNonBloquante.recoitDegats => Perso.infligeDegats (DONE)            OK
+InvocationSimpleBloquante.recoitDegats => Perso.infligeDegats (DONE)         OK
+
+Perso.infligeDegatsPerso => Perso.infligeDegats (DONE)                       OK
+
+Case.persoEnterCase => Perso.respawn (FINAL)                                 OK
+Case.persoEnterCase => Perso.moveDirection                                   OK
+Case.persoEnterCase => Perso.rappelSpawn                                     OK
+Case.persoEnterCase => Perso.persoPorteTombe                                 OK
+Case.persoEnterCase => Perso.elfeeTombe (DONE)                               OK
+Case.persoEnterCase => EnvolAtterissage.lancerAttaque (FINAL)                OK
+Case.persoEnterCase => Inversion.lancerAttaque (FINAL)                       OK
+Case.persoEnterCase => Transposition.lancerAttaque (FINAL)                   OK
+Case.persoEnterCase => Feinte.activerFeinte                                  OK
+Case.persoEnterCase => Pirouette.activer                                     OK
+Case.persoEnterCase => Teleport.lancerAttaque (FINAL)
+
+---------------------------------------------------------------------------
+
+Niveau 4 :
+
+Perso.infligeDegats => Perso.infligeDegats (DONE)                           OK
+Perso.infligeDegats => InvocationNonBloquante.activerBombe (FINAL)          OK
+Perso.infligeDegats => Attaque.attaqueBasiqueDegats (FINAL)                 OK
+Perso.infligeDegats => Perso.activerFlechesPatientes                        OK
+Perso.infligeDegats => Piege.activerPiegeLineaire                           OK
+Perso.infligeDegats => Piege.activerPiegeALoup                              OK
+Perso.infligeDegats => ChargeDuTitan.lancerAttaque (FINAL)                  OK
+
+Perso.moveDirection => Case.persoEnterCase (DONE)                           OK
+Perso.moveDirection => Case.activerGravite                                  OK
+Perso.moveDirection => InvocationNonBloquante.activerCrapeau                OK
+Perso.moveDirection => Perso.tryMoveDirection (FINAL)                       OK
+Perso.moveDirection => BondDuTitan.pousser                                  OK
+Perso.moveDirection => ChargeDuTitan.lancerAttaque (FINAL)                  OK
+Perso.moveDirection => PorterDeposer.lancerAttaque (FINAL)                  OK
+Perso.moveDirection => Attire.lancerAttaque (FINAL)                         OK
+Perso.moveDirection => Repousse.lancerAttaque (FINAL)                       OK
+
+Perso.rappelSpawn => Case.persoEnterCase (DONE)                             OK
+Perso.rappelSpawn => Rappel.lancerAttaque (FINAL)                           OK
+
+Perso.persoPorteTombe => Perso.estKO (DONE)                                 OK
+Perso.persoPorteTombe => Perso.rappelSpawn (DONE)                           OK
+
+Feinte.activerFeinte => Perso.recoitDegats (DONE)                           OK
+
+Pirouette.activer => Perso.tombeDansTrou (DONE)                             OK
+
+--------------------------------------------------------------------------
+
+Niveau 5 :
+
+Perso.activerFlechesPatientes => Perso.reveal                               OK
+Perso.activerFlechesPatientes => Case.persoEnterCase (DONE)                 OK
+
+Piege.activerPiegeLineaire => Piege.activer                                 OK
+
+Piege.activerPiegeALoup => Piege.activer                                    OK
+
+Case.activerGravite => Case.persoEnterCase (DONE)                           OK
+Case.activerGravite => Gravite.lancerAttaque (FINAL)                        OK
+
+InvocationNonBloquante.activerCrapeau => Case.persoEnterCase (DONE)         OK
+
+BondDuTitan.pousser => BondDuTitan.lancerAttaque (FINAL)                    OK
+
+--------------------------------------------------------------------------
+
+Niveau 6 :
+
+Perso.reveal => Perso.estKO (DONE)                                          OK
+Perso.reveal => Perso.recoitDegats (DONE)                                   OK
+Perso.reveal => Attaque.missAndReveal (FINAL)                               OK
+Perso.reveal => EnvolAtterissage.lancerAttaque (FINAL)                      OK
+Perso.reveal => PoudreSoporifique.lancerAttaque (FINAL)                     OK
+Perso.reveal => BouletFantomatique.lancerAttaque (FINAL)                    OK
+Perso.reveal => Inversion.lancerAttaque (FINAL)                             OK
+Perso.reveal => VoileDInvisibilite.desactiver                               OK
+Perso.reveal => Harpon.lancerAttaque (FINAL)                                OK
+Perso.reveal => PorterDeposer.lancerAttaque (FINAL)                         OK
+Perso.reveal => Attire.lancerAttaque (FINAL)                                OK
+Perso.reveal => Entrave.lancerAttaque (FINAL)                               OK
+Perso.reveal => Invisibilite.desactiver                                     OK
+Perso.reveal => Poison.lancerAttaque (FINAL)                                OK
+Perso.reveal => Repousse.lancerAttaque (FINAL)                              OK
+Perso.reveal => Teleport.lancerAttaque (FINAL)                              OK
+
+Piege.activer => Case.persoEnterCase (DONE)                                 OK
+Piege.activer => Tonneau.lancerAttaque (FINAL)                              OK
+Piege.activer => Clone.lancerAttaque (FINAL)                                OK
+
+--------------------------------------------------------------------------
+
+Niveau 7 :
+
+VoileDInvisibilite.desactiver => Perso.debutTour (FINAL)                    OK
+VoileDInvisibilite.desactiver => Perso.desactiverVoileDInvisibiliteIfOnMe   OK
+
+Invisibilite.desactiver => Perso.debutTour (FINAL)                          OK
+Invisibilite.desactiver => Perso.desactiverInvisibiliteIfOnMe               OK
+
+--------------------------------------------------------------------------
+
+Niveau 8 :
+
+Perso.desactiverVoileDInvisibiliteIfOnMe => Perso.reveal (DONE)             OK
+
+Perso.desactiverInvisibiliteIfOnMe => Perso.reveal (DONE)                   OK
