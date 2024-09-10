@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ImqAOhGRRYQ=",
+  "success": true,
+  "projectFilePath": "/workspaces/CUBE/CUBE-master-main/Classes_Cube.csproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/awssdk.core/3.5.0/awssdk.core.3.5.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/awssdk.dynamodbv2/3.5.0/awssdk.dynamodbv2.3.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
