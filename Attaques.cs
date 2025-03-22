@@ -212,7 +212,6 @@ public class Attaque
                 )
                 {
                     Case? caseMemoire = ((Memoire)perso.attaques[Features.AttaqueType.memoire]).getTp();
-                    
                     if (caseMemoire != null)
                     // cas : Le perso a posé un TP
                     {
