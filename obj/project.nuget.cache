@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "ImqAOhGRRYQ=",
+  "dgSpecHash": "wjl5J8QUPt8=",
   "success": true,
-  "projectFilePath": "/workspaces/CUBE/CUBE-master-main/Classes_Cube.csproj",
+  "projectFilePath": "D:\\tout_et_rien\\Scam repos Github\\CUBE\\Classes_Cube.csproj",
   "expectedPackageFiles": [
-    "/home/codespace/.nuget/packages/awssdk.core/3.5.0/awssdk.core.3.5.0.nupkg.sha512",
-    "/home/codespace/.nuget/packages/awssdk.dynamodbv2/3.5.0/awssdk.dynamodbv2.3.5.0.nupkg.sha512"
+    "C:\\Users\\Romain\\.nuget\\packages\\awssdk.core\\3.5.0\\awssdk.core.3.5.0.nupkg.sha512",
+    "C:\\Users\\Romain\\.nuget\\packages\\awssdk.dynamodbv2\\3.5.0\\awssdk.dynamodbv2.3.5.0.nupkg.sha512",
+    "C:\\Users\\Romain\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.11\\microsoft.netcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Romain\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.11\\microsoft.windowsdesktop.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Romain\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.11\\microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512",
+    "C:\\Users\\Romain\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.11\\microsoft.netcore.app.host.win-x64.8.0.11.nupkg.sha512"
   ],
   "logs": []
 }
